@@ -11,10 +11,9 @@
 }
 
 .floralHeader h1 {
-    @apply sticky top-3/4;
-    @apply text-6xl;
+    @apply text-4xl md:text-8xl pt-8 md:pt-0;
 }
 
 .floralHeader h1 small {
-    @apply font-light text-base block pt-4;
+    @apply font-light text-base md:text-3xl block pt-4 leading-6;
 }
