@@ -19,12 +19,10 @@ export default function Header() {
     return (
         <header className={styles.floralHeader}>
             <Image src="/img/bg-top.png" className={styles.image} width={1250} height={356} alt=""/>
-            <div>
-                <h1>
-                    {title}
-                    <small>{subtitle}</small>
-                </h1>
-            </div>
+            <h1>
+                {title}
+                <small>{subtitle}</small>
+            </h1>
         </header>
     )
 }
