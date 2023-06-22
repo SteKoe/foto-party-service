@@ -1,0 +1,20 @@
+.floralHeader {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.flor alHeader .image {
+}
+
+.floralHeader h1 {
+    @apply sticky top-3/4;
+    @apply text-6xl;
+}
+
+.floralHeader h1 small {
+    @apply font-light text-base block pt-4;
+}
