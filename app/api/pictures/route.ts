@@ -19,7 +19,7 @@ export async function GET(
         while (isTruncated) {
             const {Contents, IsTruncated, NextContinuationToken} = await client.send(command);
             if (Contents) {
-                isTruncated = IsTruncated;
+                isTruncated = !!IsTruncated;
                 command.input.ContinuationToken = NextContinuationToken;
 
                 let map = Contents

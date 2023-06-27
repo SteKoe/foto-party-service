@@ -4,23 +4,35 @@ import React, {useState} from "react";
 
 export default function ToggleFullscreenButton() {
     const [isFullscreen, setIsFullscreen] = useState(false);
+
     const onClick = () => {
-        if (!document.fullscreenElement &&    // alternative standard method
-            !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+        if (!document.fullscreenElement &&
+            // @ts-ignore
+            !document.mozFullScreenElement && !document.webkitFullscreenElement) {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
+                // @ts-ignore
             } else if (document.documentElement.mozRequestFullScreen) {
+                // @ts-ignore
                 document.documentElement.mozRequestFullScreen();
+                // @ts-ignore
             } else if (document.documentElement.webkitRequestFullscreen) {
+                // @ts-ignore
                 document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
             }
             setIsFullscreen(true);
         } else {
+            // @ts-ignore
             if (document.cancelFullScreen) {
+                // @ts-ignore
                 document.cancelFullScreen();
+                // @ts-ignore
             } else if (document.mozCancelFullScreen) {
+                // @ts-ignore
                 document.mozCancelFullScreen();
+                // @ts-ignore
             } else if (document.webkitCancelFullScreen) {
+                // @ts-ignore
                 document.webkitCancelFullScreen();
             }
             setIsFullscreen(false);

@@ -33,6 +33,8 @@
     "@types/react-responsive-masonry": "^2.1.0",
     "aws-crt": "^1.15.18",
     "encoding": "^0.1.13",
+    "eslint": "8.43.0",
+    "eslint-config-next": "13.4.7",
     "formidable": "^3.4.0"
   }
 }

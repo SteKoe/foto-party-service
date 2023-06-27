@@ -3,6 +3,7 @@
 import React, {useEffect, useState} from "react";
 import {PictureGalleryComponent} from "@/components/PictureGalleryComponent";
 import ToggleFullscreenButton from "@/components/ToggleFullscreen";
+import {usePathname, useSearchParams} from "next/navigation";
 
 const POLLING_INTERVAL = 60;
 
@@ -10,8 +11,9 @@ export default function PollingPictureGalleryComponent() {
     const [images, setImages] = useState([]);
     const [countDown, setCountDown] = useState(POLLING_INTERVAL);
     const [isLoading, setIsLoading] = useState(false);
-
-    const galleryColumns = Number(new URL(location.href).searchParams.get("columns") ?? 4);
+    const searchParams = useSearchParams();
+    
+    const galleryColumns = Number(searchParams.get("columns") ?? 4);
     
     async function getData() {
         const res = await fetch(`/api/pictures?count=${galleryColumns * 10}`)
