@@ -10,8 +10,8 @@ type PicturesComponentProps = {
 
 export function PictureGalleryComponent({images, columnsCount = 4}: PicturesComponentProps) {
     return (
-        <div className="text-center">
-            <Masonry columnsCount={columnsCount} gutter="0.6rem" className={"m-2"}>
+        <div className="text-center text-xs md:text-base">
+            <Masonry columnsCount={columnsCount} gutter="0.6em" className={"p-2"}>
                 {images.map((img) => (
                     <Image key={img} src={"/api/pictures/" + img} alt={""} width={500} height={250} className={"rounded"} />
                 ))}
