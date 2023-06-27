@@ -6,7 +6,7 @@ export async function GET(
     request: Request,
 ) {
     const searchParams = new URL(request.url).searchParams;
-    const count = Number(searchParams.get("count") ?? 2);
+    const count = Number(searchParams.get("count") ?? 100);
     
     const command = new ListObjectsV2Command({
         Bucket: process.env.BUCKET
