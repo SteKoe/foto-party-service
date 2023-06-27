@@ -1,6 +1,8 @@
 import './globals.css'
 import './fonts/Marcellus/index.css'
-import Header from "@/components/Header";
+import FloralHeader from "@/components/FloralHeader";
+import React from "react";
+import Navigation from "@/components/Navigation";
 
 export const metadata = {
     title: 'Kim & Stephan',
@@ -13,7 +15,8 @@ export default function RootLayout({children}: {
     return (
         <html lang="en">
         <body>
-        <Header/>
+        <FloralHeader/>
+        <Navigation />
         <main>
             {children}
         </main>

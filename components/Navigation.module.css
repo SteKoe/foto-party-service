@@ -1,0 +1,12 @@
+.navigation {
+    @apply list-none text-center flex justify-center my-6 md:my-12 gap-3;
+}
+
+.navigationItem {
+    @apply py-1 px-1 md:py-2 md:px-2.5 hover:border-b-2;
+    border-color: rgb(var(--color-rgb));
+}
+
+.isActive {
+    @apply font-bold border-b-2;
+}

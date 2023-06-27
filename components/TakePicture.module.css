@@ -1,0 +1,29 @@
+.cameraButton {
+    @apply flex mx-5 px-2 py-36 border-2 border-dashed justify-center items-center rounded-xl bg-cover bg-no-repeat bg-center aspect-[3/4];
+    border-color: rgb(var(--color-rgb));
+}
+
+.cameraButtonLabel {
+    @apply flex flex-col;
+}
+.cameraButtonLabel svg {
+    @apply fill-white w-20 h-auto mx-auto mb-10;
+}
+
+/* This is the part that actually hides the 'Choose file' text box for camera inputs */
+.cameraButton input[type="file"] {
+    display: none;
+}
+
+.controls {
+    @apply mx-5 py-5 flex justify-around;
+}
+.controls .btn {
+    @apply bg-white bg-opacity-50 p-8 rounded-xl;
+}
+
+.controls .btn svg {
+    fill: #fff;
+    height: 1.5rem;
+}
+
