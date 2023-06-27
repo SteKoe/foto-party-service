@@ -71,7 +71,7 @@ export function TakePicture() {
         <form>
             <label className={styles.cameraButton} id="preview">
                 {image ? '' : labelText}
-                <input type="file" accept="image/*" capture
+                <input type="file" accept="image/*"
                        onChange={previewImage}/>
             </label>
             {image ? (
