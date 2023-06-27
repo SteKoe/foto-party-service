@@ -1,5 +1,5 @@
-import './globals.css'
-import './fonts/Marcellus/index.css'
+import '../globals.css'
+import '../fonts/Marcellus/index.css'
 import FloralHeader from "@/components/FloralHeader";
 import React from "react";
 import Navigation from "@/components/Navigation";

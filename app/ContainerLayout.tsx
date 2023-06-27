@@ -1,10 +1,11 @@
 import React from "react";
 
-export default function ContainerLayout({children}: {
-    children: React.ReactNode
+export default function ContainerLayout({children, size = "max-w-xl"}: {
+    children: React.ReactNode,
+    size?: string
 }) {
     return (
-        <main className="max-w-xl mx-auto">
+        <main className={"mx-auto " + size}>
             {children}
         </main>
     )

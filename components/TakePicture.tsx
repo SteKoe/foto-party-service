@@ -2,6 +2,8 @@
 
 import styles from "./TakePicture.module.css";
 import {ChangeEvent, useState} from "react";
+import {Simulate} from "react-dom/test-utils";
+import durationChange = Simulate.durationChange;
 
 export function TakePicture() {
     const [image, setImage] = useState<File | null>(null);
@@ -11,17 +13,17 @@ export function TakePicture() {
             const filename = encodeURIComponent(image.name)
             const fileType = encodeURIComponent(image.type)
 
+            let dimension = await getImageDimensions(image);
+
             const res = await fetch(
-                `/api/upload-url?file=${filename}&fileType=${fileType}`
+                `/api/upload-url?file=${filename}&fileType=${fileType}&width=${dimension.width}&height=${dimension.height}`
             )
             const {url, fields} = await res.json()
-            console.log(url, fields);
             
             const formData = new FormData()
             Object.entries({...fields, file: image}).forEach(([key, value]) => {
                 formData.append(key, value as string)
             })
-            
 
             const upload = await fetch(url, {
                 method: 'POST',
@@ -91,4 +93,16 @@ export function TakePicture() {
             ) : ''}
         </form>
     )
+}
+
+async function getImageDimensions(file: File) {
+    let img = new Image();
+    img.src = URL.createObjectURL(file);
+    await img.decode();
+    let width = img.width;
+    let height = img.height;
+    return {
+        width,
+        height,
+    }
 }

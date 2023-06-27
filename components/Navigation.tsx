@@ -7,7 +7,8 @@ import classNames from "classnames";
 
 const links = [
     {name: "Start", href: "/"},
-    {name: "Fotos", href: "/pictures"}
+    {name: "Wann & Wo", href: "/location"},
+    {name: "Story", href: "/story"},
 ]
 
 export default function Navigation() {

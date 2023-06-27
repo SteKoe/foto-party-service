@@ -1,7 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 
 export function middleware(req: NextRequest) {
-    if (req.nextUrl.pathname.startsWith('/pictures/take')) {
+    if (req.nextUrl.pathname.startsWith('/pictures')) {
         const authToken = new URL(req.url).searchParams.get("token")
 
         if (authToken) {
@@ -12,7 +12,7 @@ export function middleware(req: NextRequest) {
 
         const url = req.nextUrl
         url.pathname = '/'
-        url.search = 'error=401'
+        url.search = ''
         return NextResponse.redirect(url)
     }
 }
