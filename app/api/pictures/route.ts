@@ -5,10 +5,12 @@ import {client} from "@/app/api/S3Client";
 export async function GET(
     request: Request,
 ) {
+    const searchParams = new URL(request.url).searchParams;
+    const count = Number(searchParams.get("count") ?? 2);
+    
     const command = new ListObjectsV2Command({
         Bucket: process.env.BUCKET
     });
-
 
     try {
         let contents: any[] = [];
@@ -29,7 +31,7 @@ export async function GET(
                 contents = [...contents, ...map];
             }
         }
-        return NextResponse.json(contents);
+        return NextResponse.json(contents.splice(0, count));
     } catch (err) {
         console.error(err);
         return NextResponse.json({error: 404}, {status: 404})
