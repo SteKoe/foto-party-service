@@ -1,5 +1,5 @@
 .cameraButton {
-    @apply relative overflow-hidden flex mx-5 px-2 py-36 border-2 border-dashed justify-center items-center rounded-xl bg-cover bg-no-repeat bg-center aspect-[3/4];
+    @apply relative overflow-hidden flex mx-5 px-2 py-36 border-2 border-dashed justify-center items-center rounded-xl bg-cover bg-no-repeat bg-center aspect-[3/4] text-sm md:text-base;
     border-color: rgb(var(--color-rgb));
 }
 
@@ -7,7 +7,7 @@
     @apply flex flex-col;
 }
 .cameraButtonLabel svg {
-    @apply fill-white w-20 h-auto mx-auto mb-10;
+    @apply fill-white w-12 md:w-20 h-auto mx-auto mb-4 md:mb-10;
 }
 
 /* This is the part that actually hides the 'Choose file' text box for camera inputs */
@@ -24,14 +24,15 @@
 }
 
 .controls {
-    @apply mx-5 py-5 flex justify-around;
+    @apply mx-5 py-5 flex gap-2;
 }
+
 .controls .btn {
-    @apply bg-white bg-opacity-50 p-8 rounded-xl disabled:bg-opacity-10;
+    @apply flex flex-1 bg-white bg-opacity-50 p-4 md:p-8 rounded-xl disabled:bg-opacity-10 justify-center;
 }
 
 .controls .btn svg {
     fill: #fff;
-    height: 1.5rem;
+    @apply h-5 md:h-10; 
 }
 

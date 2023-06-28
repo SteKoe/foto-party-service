@@ -1,13 +1,16 @@
 'use client'
 
-import ContainerLayout from "@/app/ContainerLayout";
 import {PictureGalleryComponent} from "@/components/PictureGalleryComponent";
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
+import { useCurrentWidth } from 'react-breakpoints-hook';
 
 export default function PicturesPageComponent() {
     const [images, setImages] = useState([]);
 
+    const width = useCurrentWidth();
+    const columnsCount = width >= 800 ? 4 : width >= 550 ? 3 : 2;
+    
     useEffect(() => {
         async function getData() {
             const res = await fetch(`/api/pictures`)
@@ -23,9 +26,9 @@ export default function PicturesPageComponent() {
     }, []);
 
     return (
-        <ContainerLayout size={"max-w-5xl"}>
+        <>
             {images.length === 0 ? '' : (
-                <PictureGalleryComponent images={images}>
+                <PictureGalleryComponent images={images} columnsCount={columnsCount}>
                     <Link href={"/pictures/take"} className="h-40 flex flex-col gap-1 text-xs justify-center items-center border border-dashed rounded">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="white" height="1em" viewBox="0 0 512 512">
                             <path
@@ -35,6 +38,6 @@ export default function PicturesPageComponent() {
                     </Link>
                 </PictureGalleryComponent>
             )}
-        </ContainerLayout>
+        </>
     )
 }

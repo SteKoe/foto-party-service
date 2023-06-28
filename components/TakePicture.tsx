@@ -2,14 +2,15 @@
 
 import styles from "./TakePicture.module.css";
 import React, {ChangeEvent, useState} from "react";
-import { ToastContainer, toast } from 'react-toastify';
+import {toast, ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {ToastOptions} from "react-toastify/dist/types";
+import {useRouter} from "next/navigation";
 
 export function TakePicture() {
+    const router = useRouter();
+
     const [image, setImage] = useState<File | null>(null);
     const [isUploading, setIsUploading] = useState(false);
-    
 
     async function submitForm() {
         if (image) {
@@ -27,7 +28,6 @@ export function TakePicture() {
                 const {url, fields} = await res.json()
 
                 const formData = new FormData()
-                formData.append("asd", "asd")
                 Object.entries({...fields, file: image}).forEach(([key, value]) => {
                     formData.append(key, value as string)
                 })
@@ -39,13 +39,14 @@ export function TakePicture() {
 
                 if (upload.ok) {
                     resetForm();
-                    toast("Wow so easy!");
+                    await router.replace("/pictures");
+                    toast("Das hat geklappt!");
                 } else {
-                    toast.error("Oh noes!");
+                    toast.error("Fehler beim Hochladen! Bitte nochmal versuchen.");
                     console.error('Upload failed.')
                 }
             } catch (e) {
-                toast.error("Oh noes!");
+                toast.error("Fehler beim Hochladen! Bitte nochmal versuchen.");
                 console.error('Upload failed.', e)
             } finally {
                 setIsUploading(false);
@@ -87,7 +88,7 @@ export function TakePicture() {
         </div>);
     return (
         <form>
-            <ToastContainer position={"top-center"} hideProgressBar={true} />
+            <ToastContainer position={"top-center"} hideProgressBar={true}/>
             <label className={styles.cameraButton} id="preview">
                 {image ? '' : labelText}
                 {isUploading ? (
@@ -126,7 +127,6 @@ export function TakePicture() {
                             <path
                                 d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
                         </svg>
-
                     </button>
                 </div>
             ) : ''}
