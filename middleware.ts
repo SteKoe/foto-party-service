@@ -1,18 +1,35 @@
 import {NextRequest, NextResponse} from "next/server";
 
-export function middleware(req: NextRequest) {
-    if (req.nextUrl.pathname.startsWith('/pictures')) {
-        const authToken = new URL(req.url).searchParams.get("token")
+const TOKEN_PARAM_NAME = 'token';
 
-        if (authToken) {
-            if (authToken === process.env.TAKE_PICTURE_TOKEN) {
-                return NextResponse.next()
-            }
+export function middleware(request: NextRequest) {
+    const cookie = request.cookies.get(TOKEN_PARAM_NAME)
+    const authToken = new URL(request.url).searchParams.get(TOKEN_PARAM_NAME) || cookie?.value;
+
+    if (authToken) {
+        if (authToken === process.env.AUTH_TOKEN) {
+            const response = NextResponse.next();
+            response.cookies.set({
+                name: TOKEN_PARAM_NAME,
+                value: process.env.AUTH_TOKEN,
+                path: '/',
+            })
+            return response
         }
-
-        const url = req.nextUrl
-        url.pathname = '/'
-        url.search = ''
-        return NextResponse.redirect(url)
     }
+
+    const url = request.nextUrl
+    url.pathname = '/'
+    url.search = ''
+    let nextResponse = NextResponse.redirect(url);
+    nextResponse.cookies.delete(TOKEN_PARAM_NAME);
+    return nextResponse
+}
+
+export const config = {
+    matcher: [
+        "/pictures",
+        "/pictures/gallery",
+        "/pictures/take",
+    ]
 }

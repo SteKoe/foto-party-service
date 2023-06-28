@@ -15,17 +15,19 @@ export default function RootLayout({children}: {
     children: React.ReactNode
 }) {
     return (
-        <html lang="de">
-        <body>
-        <FloralHeader/>
-        <Navigation/>
-        <main>
-            {children}
-        </main>
-        <footer className="footer">
-            Created with ❤️<br/>by Kim & Stephan
-        </footer>
+        <html lang="de" className={"h-full"}>
+        <body className={"min-h-full flex flex-col justify-between"}>
+            <div>
+                <FloralHeader/>
+                <Navigation/>
+                <div>
+                    {children}
+                </div>
+            </div>
+            <footer className="footer">
+                Created with ❤️<br/>by Kim & Stephan
+            </footer>
         </body>
         </html>
-)
+    )
 }

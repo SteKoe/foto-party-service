@@ -3,10 +3,10 @@
 }
 
 .navigationItem {
-    @apply py-1 px-1 md:py-2 md:px-2.5 hover:border-b-2;
+    @apply py-1 px-2 rounded-md md:py-2 md:px-2.5 hover:bg-white hover:bg-opacity-20;
     border-color: rgb(var(--color-rgb));
 }
 
 .isActive {
-    @apply font-bold border-b-2;
+    @apply font-bold bg-opacity-20 bg-white;
 }
