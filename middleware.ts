@@ -1,4 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
+import exp from "constants";
 
 const TOKEN_PARAM_NAME = 'token';
 
@@ -9,17 +10,18 @@ export function readToken(request: NextRequest) {
 
 export function middleware(request: NextRequest) {
     const authToken = readToken(request);
-    let isAuthorized = false;
 
     if (authToken && authToken === process.env.AUTH_TOKEN) {
-        isAuthorized = true;
-        
         const response = NextResponse.next();
+        const maxAge = Number(process.env.AUTH_TOKEN_SECONDS ?? 60 * 60 * 24);
+
         response.cookies.set({
             name: TOKEN_PARAM_NAME,
             value: process.env.AUTH_TOKEN,
             path: '/',
+            maxAge
         })
+        
         return response
     }
 }
