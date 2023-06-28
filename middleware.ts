@@ -21,12 +21,5 @@ export function middleware(request: NextRequest) {
             path: '/',
         })
         return response
-    } else {
-        const url = request.nextUrl
-        url.pathname = '/'
-        url.search = ''
-        let nextResponse = NextResponse.redirect(url);
-        nextResponse.cookies.delete(TOKEN_PARAM_NAME);
-        return nextResponse
     }
 }
