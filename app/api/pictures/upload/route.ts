@@ -29,7 +29,7 @@ export async function GET(
         },
         Expires: 60, // seconds
         Conditions: [
-            ['content-length-range', 0, 1024 * 1024 * 5], // up to 1 MB
+            ['content-length-range', 0, 1024 * 1024 * 5]
         ],
     })
 

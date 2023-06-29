@@ -23,7 +23,7 @@ export function TakePicture() {
                 let dimension = await getImageDimensions(image);
 
                 const res = await fetch(
-                    `/api/upload-url?file=${filename}&fileType=${fileType}&width=${dimension.width}&height=${dimension.height}`
+                    `/api/pictures/upload?file=${filename}&fileType=${fileType}&width=${dimension.width}&height=${dimension.height}`
                 )
                 const {url, fields} = await res.json()
 
