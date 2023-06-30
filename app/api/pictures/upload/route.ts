@@ -22,7 +22,7 @@ export async function POST(
 
     if (file instanceof Blob) {
         const input = await toBuffer(file.stream());
-        const buffer = await sharp(input).resize(1024).toBuffer();
+        const buffer = await sharp(input).resize(Number(process.env.RESIZE_SIZE) ?? 1024).toBuffer();
 
         const fileExt = file.name.split('.').pop();
         const newFilename = `${randomUUID()}.${fileExt}`;
