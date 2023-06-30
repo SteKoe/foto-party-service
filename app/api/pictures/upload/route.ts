@@ -24,6 +24,7 @@ export async function POST(
         const input = await toBuffer(file.stream());
         const maxDimension = Number(process.env.RESIZE_SIZE) ?? 1024;
         const buffer = await sharp(input)
+            .withMetadata()
             .resize({
                 height: maxDimension,
                 width: maxDimension,
