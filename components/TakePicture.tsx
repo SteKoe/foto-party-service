@@ -17,22 +17,10 @@ export function TakePicture() {
             setIsUploading(true);
 
             try {
-                const filename = encodeURIComponent(image.name)
-                const fileType = encodeURIComponent(image.type)
-
-                let dimension = await getImageDimensions(image);
-
-                const res = await fetch(
-                    `/api/pictures/upload?file=${filename}&fileType=${fileType}&width=${dimension.width}&height=${dimension.height}`
-                )
-                const {url, fields} = await res.json()
-
                 const formData = new FormData()
-                Object.entries({...fields, file: image}).forEach(([key, value]) => {
-                    formData.append(key, value as string)
-                })
-
-                const upload = await fetch(url, {
+                formData.append("file", image)
+                
+                const upload = await fetch('/api/pictures/upload', {
                     method: 'POST',
                     body: formData,
                 })
@@ -99,7 +87,7 @@ export function TakePicture() {
                                 <path
                                     d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z"/>
                             </svg>
-                            Bild wird hochgeladen :)
+                            Bild wird hochgeladen!
                         </div>
                     </div>
                 ) : ''}
@@ -132,16 +120,4 @@ export function TakePicture() {
             ) : ''}
         </form>
     )
-}
-
-async function getImageDimensions(file: File) {
-    let img = new Image();
-    img.src = URL.createObjectURL(file);
-    await img.decode();
-    let width = img.width;
-    let height = img.height;
-    return {
-        width,
-        height,
-    }
 }

@@ -12,7 +12,8 @@ export async function GET(
             Key: params.name
         });
         const response = await client.send(command);
-        return new NextResponse(await response.Body?.transformToWebStream());
+        const stream = await response.Body?.transformToWebStream()!;
+        return new NextResponse(stream);
     } catch (e) {
         console.error(e);
         return NextResponse.json({error: 404}, {status: 404});

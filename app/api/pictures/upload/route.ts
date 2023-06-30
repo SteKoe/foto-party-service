@@ -1,6 +1,8 @@
 import {S3Client} from "@aws-sdk/client-s3";
-import {createPresignedPost} from "@aws-sdk/s3-presigned-post";
 import {NextResponse} from "next/server";
+import sharp from "sharp";
+import {createPresignedPost} from "@aws-sdk/s3-presigned-post";
+import {FormData} from "next/dist/compiled/@edge-runtime/primitives";
 import {randomUUID} from "crypto";
 
 const s3 = new S3Client({
@@ -12,26 +14,62 @@ const s3 = new S3Client({
     }
 })
 
-export async function GET(
+export async function POST(
     request: Request,
 ) {
-    const {searchParams} = new URL(request.url)
-    const file = randomUUID() + ".jpg"
-    const fileType = searchParams.get('fileType')
+    const formData = await request.formData();
+    const file = formData.get("file");
 
-    const post = await createPresignedPost(s3, {
+    if (file instanceof Blob) {
+        const input = await toBuffer(file.stream());
+        const buffer = await sharp(input).resize(1024).toBuffer();
+
+        const fileExt = file.name.split('.').pop();
+        const newFilename = `${randomUUID()}.${fileExt}`;
+        const response = await uploadToS3(newFilename, new Blob([buffer]));
+
+        if (response.ok) {
+            return new NextResponse(null, {status: 201});
+        } else {
+            return NextResponse.json({
+                error: response.statusText
+            }, {status: 400})
+        }
+    }
+
+    return NextResponse.json("post");
+}
+
+
+async function uploadToS3(filename: string, blob: Blob) {
+    const {url, fields} = await createPresignedPost(s3, {
         Bucket: process.env.BUCKET!,
-        Key: file!,
-        Fields: {
-            'Content-Type': fileType!,
-            'Width': searchParams.get('width')!,
-            'Height': searchParams.get('height')!,
-        },
+        Key: filename,
         Expires: 60, // seconds
         Conditions: [
             ['content-length-range', 0, 1024 * 1024 * 5]
         ],
     })
 
-    return NextResponse.json(post);
+    const s3UploadFormData = new FormData();
+    Object.entries({...fields, file: blob}).forEach(([key, value]) => {
+        s3UploadFormData.append(key, value)
+    })
+    return await fetch(url, {
+        method: 'POST',
+        body: s3UploadFormData,
+    });
+}
+
+async function toBuffer(stream: ReadableStream<Uint8Array>) {
+    const list = []
+    const reader = stream.getReader()
+    while (true) {
+        const {value, done} = await reader.read()
+        if (value)
+            list.push(value)
+        if (done)
+            break
+    }
+    return Buffer.concat(list)
 }
