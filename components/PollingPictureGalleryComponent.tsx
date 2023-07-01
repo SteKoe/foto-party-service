@@ -57,7 +57,7 @@ export default function PollingPictureGalleryComponent() {
 
     return (
         <>
-            <div className={"fixed top-1 right-1 flex gap-1 text-black"}>
+            <div className={"fixed top-1 right-1 flex gap-1 text-black z-40"}>
                 <div
                     className={"bg-white bg-opacity-50 text-center h-7 w-7 text-xs md:h-10 md:w-10 md:text-base rounded flex justify-center items-center "}>
                     {isLoading ? (
