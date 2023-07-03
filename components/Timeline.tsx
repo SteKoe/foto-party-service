@@ -1,6 +1,6 @@
 import {TimelineEntry} from "@/components/TimelineEntry";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faHeart, faRing} from '@fortawesome/free-solid-svg-icons'
+import {faBabyCarriage, faHeart} from '@fortawesome/free-solid-svg-icons'
 import Image from "next/image";
 
 export default function Timeline() {
@@ -8,45 +8,120 @@ export default function Timeline() {
         <div className=" flex flex-col justify-center ">
             <div className="py-3 sm:max-w-xl sm:mx-auto w-full px-2 sm:px-0">
                 <div className={"relative h-36 translate-x-2"}>
-                    <Image width={96} height={96} src={"/img/der-stephan.jpg"} alt={""} className={"rounded-full absolute right-1/2 border-2"} />
-                    <Image width={96} height={96} src={"/img/die-kim.jpg"} alt={""} className={"rounded-full absolute left-1/2 -translate-x-4 border-2"} />
+                    <Image width={96} height={96} src={"/img/der-stephan.jpg"} alt={""}
+                           className={"rounded-full absolute right-1/2 border-2"}/>
+                    <Image width={96} height={96} src={"/img/die-kim.jpg"} alt={""}
+                           className={"rounded-full absolute left-1/2 -translate-x-4 border-2"}/>
                 </div>
                 <div className="relative text-gray-700 antialiased text-sm font-semibold">
                     <div
                         className="hidden sm:block w-0.5 bg-white absolute h-full left-1/2 transform -translate-x-1/2"></div>
 
-                    <TimelineEntry
-                        datum={"01.02.2019"}
-                        icon={(
-                            <FontAwesomeIcon icon={faHeart} className="text-white p-1.5"/>
-                        )}>
-                        <div className={"px-4 pt-4"}>
-                            Now this is a story all about how.
+                    
+
+                    <TimelineEntry datum={"15.03.2019"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-laufen.jpg"
+                               className={"w-full aspect-square object-cover object-top mb-4"}/>
+                        <div className={"px-4"}>
+                            Priaten joho!
                         </div>
                     </TimelineEntry>
 
-                    <TimelineEntry
-                        position={"right"}
-                        datum={"Oktober 2019"}>
-                        <Image alt={""} width={350} height={350}  src="/img/timeline/2019-paris.jpg" className={"w-full aspect-square object-cover object-bottom mb-4"} />
+                    <TimelineEntry datum={"06.04.2019"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-ball.jpg"
+                               className={"w-full aspect-square object-cover object-center mb-4"}/>
+                        <div className={"px-4"}>
+                            Stephans erster Tanzball!
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"August 2019"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-tuerkei.jpg"
+                               className={"w-full aspect-square object-cover object-center mb-4"}/>
+                        <div className={"px-4"}>
+                            Dalaman.
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"Oktober 2019"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-paris.jpg"
+                               className={"w-full aspect-square object-cover object-bottom mb-4"}/>
                         <div className={"px-4"}>
                             Urlaub in Paris!
                         </div>
                     </TimelineEntry>
-                    
-                    <TimelineEntry datum={"30.09.2021"}>
-                        <Image alt={""} width={350} height={350}  src="/img/timeline/2021-goettingen.jpg" className={"w-full aspect-square object-cover object-bottom mb-4"} />
+
+                    <TimelineEntry datum={"Silvester 2019"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-silvester.jpg"
+                               className={"w-full aspect-square object-cover object-center mb-4"}/>
                         <div className={"px-4"}>
-                            Göttingen Ära zuende
+                            Erster Pärchenurlaub!
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"März 2020"}>
+                        <div className={"px-4 pt-4"}>
+                            Berlin! Berlin! Wir waren in Berlin!
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"März 2021"}>
+                        <div className={"px-4 pt-4"}>
+                            Berlin! Berlin! Wir waren in Berlin!
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"Juli 2021"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2021-sueddeutschland.jpg"
+                               className={"w-full aspect-square object-cover object-center mb-4"}/>
+                        <div className={"px-4"}>
+                            Roadtrip: Deutschlands Süden.
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"30.09.2021"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2021-goettingen.jpg"
+                               className={"w-full aspect-square object-cover object-bottom mb-4"}/>
+                        <div className={"px-4"}>
+                            Göttingen. Eine Ära zu Ende.
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"21.10.2021"}
+                                   icon={<FontAwesomeIcon icon={faBabyCarriage} className="text-white p-1.5"/>}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2021-katze-oktober.jpg"
+                               className={"w-full aspect-square object-cover object-top mb-4"}/>
+                        <div className={"px-4"}>
+                            Hurra! Es ist eine Katze!
+                        </div>
+                    </TimelineEntry>
+
+
+                    <TimelineEntry datum={"26.05.2022"}
+                                   icon={<FontAwesomeIcon icon={faBabyCarriage} className="text-white p-1.5"/>}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2022-katze-oxford.jpg"
+                               className={"w-full aspect-square object-cover object-top mb-4"}/>
+                        <div className={"px-4"}>
+                            Hurra! Es ist ein Kater!
+                        </div>
+                    </TimelineEntry>
+
+                    <TimelineEntry datum={"August 2022"}>
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2022-frankreich.jpg"
+                               className={"w-full aspect-square object-cover object-top mb-4"}/>
+                        <div className={"px-4"}>
+                            Fronkreisch! Normandie! Ola-la!
                         </div>
                     </TimelineEntry>
 
                     <TimelineEntry
                         datum={"01.06.2023"}
+                        position={"right"}
                         icon={(
                             <FontAwesomeIcon icon={faHeart} className="text-white p-1.5"/>
                         )}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2023-verlobung.jpg" className={"w-full aspect-square object-cover object-center mb-4"} />
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2023-verlobung.jpg"
+                               className={"w-full aspect-square object-cover object-center mb-4"}/>
                         <div className={"px-4"}>
                             Verlobung
                         </div>
@@ -56,10 +131,10 @@ export default function Timeline() {
                         datum={"31.05.2025"}
                         position={"right"}
                         icon={(
-                            <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1" />
+                            <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1"/>
                         )}>
                         <div className={"px-4 pt-4"}>
-                            Well... 
+                            Well...
                         </div>
                     </TimelineEntry>
                 </div>
