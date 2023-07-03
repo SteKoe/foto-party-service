@@ -7,9 +7,11 @@ export default function Timeline() {
     return (
         <div className=" flex flex-col justify-center ">
             <div className="py-3 sm:max-w-xl sm:mx-auto w-full px-2 sm:px-0">
-
+                <div className={"relative h-36 translate-x-2"}>
+                    <Image width={96} height={96} src={"/img/der-stephan.jpg"} alt={""} className={"rounded-full absolute right-1/2 border-2"} />
+                    <Image width={96} height={96} src={"/img/die-kim.jpg"} alt={""} className={"rounded-full absolute left-1/2 -translate-x-4 border-2"} />
+                </div>
                 <div className="relative text-gray-700 antialiased text-sm font-semibold">
-
                     <div
                         className="hidden sm:block w-0.5 bg-white absolute h-full left-1/2 transform -translate-x-1/2"></div>
 
@@ -26,9 +28,16 @@ export default function Timeline() {
                     <TimelineEntry
                         position={"right"}
                         datum={"Oktober 2019"}>
-                        <Image alt={""} width={256} height={256}  src="/img/2019-paris.jpg" className={"aspect-square object-cover object-bottom mb-4"} />
+                        <Image alt={""} width={350} height={350}  src="/img/timeline/2019-paris.jpg" className={"w-full aspect-square object-cover object-bottom mb-4"} />
                         <div className={"px-4"}>
                             Urlaub in Paris!
+                        </div>
+                    </TimelineEntry>
+                    
+                    <TimelineEntry datum={"30.09.2021"}>
+                        <Image alt={""} width={350} height={350}  src="/img/timeline/2021-goettingen.jpg" className={"w-full aspect-square object-cover object-bottom mb-4"} />
+                        <div className={"px-4"}>
+                            Göttingen Ära zuende
                         </div>
                     </TimelineEntry>
 
@@ -37,7 +46,7 @@ export default function Timeline() {
                         icon={(
                             <FontAwesomeIcon icon={faHeart} className="text-white p-1.5"/>
                         )}>
-                        <Image alt={""} width={256} height={256} src="/img/2023-verlobung.jpg" className={"aspect-square object-cover object-center mb-4"} />
+                        <Image alt={""} width={350} height={350} src="/img/timeline/2023-verlobung.jpg" className={"w-full aspect-square object-cover object-center mb-4"} />
                         <div className={"px-4"}>
                             Verlobung
                         </div>
@@ -53,8 +62,6 @@ export default function Timeline() {
                             Well... 
                         </div>
                     </TimelineEntry>
-
-
                 </div>
             </div>
         </div>

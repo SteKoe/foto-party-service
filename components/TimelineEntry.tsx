@@ -1,4 +1,6 @@
 import {PropsWithChildren, ReactNode} from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faMapPin} from "@fortawesome/free-solid-svg-icons";
 
 type TimelineEntryProps = {
     position?: 'left' | 'right',
@@ -18,8 +20,8 @@ export function TimelineEntry({position = 'left', icon, children, datum}: Timeli
                     </div>
                 </div>
                 <div
-                    className="rounded-full bg-blue-500 border-white border-2 w-8 h-8 absolute left-1/2 -translate-y-4 sm:translate-y-0 transform -translate-x-1/2 flex items-center justify-center">
-                    {icon}
+                    className="rounded-full bg-red-600 border-white border-2 w-8 h-8 absolute left-1/2 -translate-y-4 sm:translate-y-0 transform -translate-x-1/2 flex items-center justify-center">
+                    {icon ? icon : <FontAwesomeIcon icon={faMapPin} className="text-white p-2.5" />}
                 </div>
             </div>
         </div>
