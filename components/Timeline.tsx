@@ -1,6 +1,7 @@
 import {TimelineEntry} from "@/components/TimelineEntry";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faHeart, faRing} from '@fortawesome/free-solid-svg-icons'
+import Image from "next/image";
 
 export default function Timeline() {
     return (
@@ -25,7 +26,7 @@ export default function Timeline() {
                     <TimelineEntry
                         position={"right"}
                         datum={"Oktober 2019"}>
-                        <img src="/img/2019-paris.jpg" className={"aspect-square object-cover object-bottom mb-4"} />
+                        <Image alt={""} width={256} height={256}  src="/img/2019-paris.jpg" className={"aspect-square object-cover object-bottom mb-4"} />
                         <div className={"px-4"}>
                             Urlaub in Paris!
                         </div>
@@ -36,7 +37,7 @@ export default function Timeline() {
                         icon={(
                             <FontAwesomeIcon icon={faHeart} className="text-white p-1.5"/>
                         )}>
-                        <img src="/img/2023-verlobung.jpg" className={"aspect-square object-cover object-center mb-4"} />
+                        <Image alt={""} width={256} height={256} src="/img/2023-verlobung.jpg" className={"aspect-square object-cover object-center mb-4"} />
                         <div className={"px-4"}>
                             Verlobung
                         </div>
@@ -46,7 +47,7 @@ export default function Timeline() {
                         datum={"31.05.2025"}
                         position={"right"}
                         icon={(
-                            <img src={"/img/ring.png"} className="text-white p-1" />
+                            <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1" />
                         )}>
                         <div className={"px-4 pt-4"}>
                             Well... 
