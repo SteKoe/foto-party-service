@@ -1,10 +1,7 @@
 import {NextRequest, NextResponse} from "next/server";
 import {readToken} from "@/middleware";
+import listFiles from "@/app/api/GoogleDriveClient";
 
 export async function GET(request: NextRequest) {
-    const token = readToken(request);
-    
-    return NextResponse.json({
-        authorized: token === process.env.AUTH_TOKEN
-    });
+    return NextResponse.json(await listFiles())
 }

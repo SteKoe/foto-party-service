@@ -1,6 +1,8 @@
 import {PropsWithChildren, ReactNode} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapPin} from "@fortawesome/free-solid-svg-icons";
+import styles from "./TimelineEntry.module.css"
+import classNames from "classnames";
 
 type TimelineEntryProps = {
     position?: 'left' | 'right',
@@ -9,11 +11,11 @@ type TimelineEntryProps = {
 } & PropsWithChildren
 export function TimelineEntry({position = 'left', icon, children, datum}: TimelineEntryProps) {
     return (
-        <div className="mt-6 sm:mt-0 sm:mb-12">
+        <div className={classNames("mt-6 sm:mt-0 sm:mb-12 timeline-entry", styles['timeline-entry'])}>
             <div className="flex flex-col sm:flex-row items-center">
                 <div className={`flex w-full mx-auto items-center ${position === 'left' ? 'justify-start' : 'justify-end'}`}>
                     <div className={`w-full sm:w-1/2 ${position === 'left' ? 'sm:pr-8' : 'sm:pl-8'}`}>
-                        <div className="overflow-hidden bg-white rounded shadow relative">
+                        <div className="overflow-hidden bg-white/80 backdrop-blur rounded shadow relative">
                             {children}
                             {datum ? (<div className="px-4 pb-4"><strong><em>{datum}</em></strong></div>) : ''}
                         </div>

@@ -1,15 +1,47 @@
 import {google} from "googleapis";
+import {createReadStream, readFileSync} from "fs";
+import path from "path";
 
-const drive = google.drive({
-    version: 'v3',
-    auth: 'AIzaSyBBtzBjf5afDFUZx2CVy7e33NF2eL1o0pQ'
-});
+const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
 
-export default async function main() {
-    const res = await drive.files.list({
-        q: `'1LumFp8Nh7q-4u9S3MfG2saE8NLGM3Xwy' in parents`
-    })
+async function authorize() {
+    const jwtClient = new google.auth.JWT(
+        process.env.GOOGLE_CLIENT_EMAIL,
+        "",
+        process.env.GOOGLE_PRIVATE_KEY,
+        SCOPES
+    )
+    await jwtClient.authorize();
+    return jwtClient;
+}
+
+async function uploadFile(authClient) {
+    const drive = google.drive({version: 'v3', auth: authClient});
+
+    const file = await drive.files.create({
+        media: {
+            body: createReadStream('/Users/stekoe/workspaces/kiste-heiraten/public/img/bg-top.png')
+        },
+        fields: 'id',
+        requestBody: {
+            name: "bg-top.png",
+        },
+    });
     
-    console.log(res);
+    console.log(file);
+    
+    return file;
+}
+
+export default async function listFiles() {
+    const auth = await authorize();
+    const drive = google.drive({
+        version: 'v3',
+        auth: auth
+    });
+
+    const res = await uploadFile(auth)
+
+    return res.data;
 }
 

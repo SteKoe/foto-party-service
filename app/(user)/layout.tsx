@@ -4,6 +4,7 @@ import FloralHeader from "@/components/FloralHeader";
 import React from "react";
 import Navigation from "@/components/Navigation";
 import {Metadata} from "next";
+import AnimatedStarfield from "@/components/starfield/AnimatedStarfieldComponent";
 
 export const metadata: Metadata = {
     title: 'Kim & Stephan',
@@ -18,11 +19,9 @@ export default function RootLayout({children}: {
         <html lang="de" className={"h-full"}>
         <body className={"min-h-full flex flex-col justify-between"}>
             <div>
-                <FloralHeader/>
                 <Navigation/>
-                <div>
-                    {children}
-                </div>
+                <AnimatedStarfield />
+                {children}
             </div>
             <footer className="footer">
                 Created with ❤️<br/>by Kim & Stephan

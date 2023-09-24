@@ -1,0 +1,8 @@
+.timeline-entry {
+    transition: all ease 1s;
+    transform: scale(0) rotateZ(15deg);
+}
+
+.is-visible {
+    transform: scaleY(1);
+}
