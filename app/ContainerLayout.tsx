@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedStarfield from "@/components/starfield/AnimatedStarfieldComponent";
 
 export default function ContainerLayout({children, size = "max-w-4xl"}: {
     children: React.ReactNode,
