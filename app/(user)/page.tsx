@@ -3,7 +3,7 @@ import React from "react";
 import {HeroImage} from "@/components/HeroImage";
 
 export default function Home() {
-    const targetDate = new Date(process.env.MARRIAGE_DATE || Date.now())
+    const targetDate = new Date(process.env.MARRIAGE_DATE!)
     const now = new Date();
     const secondsDiff = targetDate.getTime() - now.getTime();
     const daysLeft = Math.floor(secondsDiff / (1000 * 3600 * 24));
@@ -11,7 +11,7 @@ export default function Home() {
     const title = <>{process.env.MARRIAGE_TITLE}</>;
     const subtitle = (
         <>
-            <span dangerouslySetInnerHTML={{__html: process.env.MARRIAGE_SUBTITLE}}/><br/>
+            <span dangerouslySetInnerHTML={{__html: process.env.MARRIAGE_SUBTITLE!}}/><br/>
             Noch {daysLeft} Tage!
         </>
     );

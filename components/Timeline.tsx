@@ -7,6 +7,71 @@ import Image from "next/image";
 import {useEffect} from "react";
 import styles from "./TimelineEntry.module.css";
 
+const timelineEntries = [
+    {
+        datum: "15.03.2019",
+        bild: "/img/timeline/2019-laufen.jpg",
+        beschreibung: "Priaten joho!"
+    },
+    {
+        datum: "06.04.2019",
+        bild: "/img/timeline/2019-ball.jpg",
+        beschreibung: "Let's Dance! Erster gemeinsamer Tanzball!"
+    },
+    {
+        datum: "August 2019",
+        bild: "/img/timeline/2019-tuerkei.jpg",
+        beschreibung: "Unser erster gemeinsamer Urlaub. In Dalyan!"
+    },
+    {
+        datum: "Oktboer 2019",
+        bild: "/img/timeline/2019-paris.jpg",
+        beschreibung: "Urlaub in Paris!"
+    },
+    {
+        datum: "Silvester 2019",
+        bild: "/img/timeline/2019-silvester.jpg",
+        beschreibung: "Pärchenurlaub ins neue Jahr!"
+    },
+    {
+        datum: "Juli 2021",
+        bild: "/img/timeline/2021-sueddeutschland.jpg",
+        beschreibung: "Partner in Crime! Roadtrip durch trotz des Virus!"
+    },
+    {
+        datum: "September 2021",
+        bild: "/img/timeline/2021-goettingen.jpg",
+        beschreibung: "Ciao Göttingen, es war schön!"
+    },
+    {
+        datum: "21.10.2021",
+        bild: "/img/timeline/2021-katze-oktober.jpg",
+        beschreibung: "Wir haben Nachwuchs! Es ist... eine Katze!"
+    },
+    {
+        datum: "26.05.2022",
+        bild: "/img/timeline/2022-katze-oxford.jpg",
+        beschreibung: "Hurra! Es ist ein Kater!"
+    },
+    {
+        datum: "August 2022",
+        bild: "/img/timeline/2022-frankreich.jpg",
+        beschreibung: "Fronkreisch! Normandie! Ola-la!"
+    },
+    {
+        icon: <FontAwesomeIcon icon={faHeart} className="text-white p-1.5"/>,
+        datum: "01.06.2023",
+        bild: "/img/timeline/2023-verlobung.jpg",
+        beschreibung: "Verlobung"
+    },
+    {
+        icon: <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1"/>,
+        datum: "31.05.2025",
+        beschreibung: "Well... :)"
+    }
+];
+
+
 export default function Timeline() {
     useEffect(() => {
         let observer = new IntersectionObserver((entries, observer) => {
@@ -37,125 +102,17 @@ export default function Timeline() {
                     <div
                         className="hidden sm:block w-0.5 bg-white/20 backdrop-blur absolute h-full left-1/2 transform -translate-x-1/2"></div>
 
-                    <TimelineEntry datum={"15.03.2019"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-laufen.jpg"
-                               className={"w-full aspect-square object-cover object-top mb-4"}/>
-                        <div className={"px-4"}>
-                            Priaten joho!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"06.04.2019"} position={"right"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-ball.jpg"
-                               className={"w-full aspect-square object-cover object-center mb-4"}/>
-                        <div className={"px-4"}>
-                            Stephans erster Tanzball!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"August 2019"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-tuerkei.jpg"
-                               className={"w-full aspect-square object-cover object-center mb-4"}/>
-                        <div className={"px-4"}>
-                            Unser erster gemeinsamer Urlaub. In Dalyan!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"Oktober 2019"} position={"right"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-paris.jpg"
-                               className={"w-full aspect-square object-cover object-bottom mb-4"}/>
-                        <div className={"px-4"}>
-                            Urlaub in Paris!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"Silvester 2019"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2019-silvester.jpg"
-                               className={"w-full aspect-square object-cover object-center mb-4"}/>
-                        <div className={"px-4"}>
-                            Erster Pärchenurlaub!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"März 2020"} position={"right"}>
-                        <div className={"px-4 pt-4"}>
-                            Berlin! Berlin! Wir waren in Berlin!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"März 2021"}>
-                        <div className={"px-4 pt-4"}>
-                            Berlin! Berlin! Wir waren in Berlin!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"Juli 2021"} position={"right"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2021-sueddeutschland.jpg"
-                               className={"w-full aspect-square object-cover object-center mb-4"}/>
-                        <div className={"px-4"}>
-                            Roadtrip: Deutschlands Süden.
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"30.09.2021"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2021-goettingen.jpg"
-                               className={"w-full aspect-square object-cover object-bottom mb-4"}/>
-                        <div className={"px-4"}>
-                            Göttingen. Eine Ära zu Ende.
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"21.10.2021"}
-                                   position={"right"}
-                                   icon={<FontAwesomeIcon icon={faBabyCarriage}
-                                                          className="text-white p-1.5"/>}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2021-katze-oktober.jpg"
-                               className={"w-full aspect-square object-cover object-top mb-4"}/>
-                        <div className={"px-4"}>
-                            Hurra! Es ist eine Katze!
-                        </div>
-                    </TimelineEntry>
-
-
-                    <TimelineEntry datum={"26.05.2022"}
-                                   icon={<FontAwesomeIcon icon={faBabyCarriage} className="text-white p-1.5"/>}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2022-katze-oxford.jpg"
-                               className={"w-full aspect-square object-cover object-top mb-4"}/>
-                        <div className={"px-4"}>
-                            Hurra! Es ist ein Kater!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry datum={"August 2022"} position={"right"}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2022-frankreich.jpg"
-                               className={"w-full aspect-square object-cover object-top mb-4"}/>
-                        <div className={"px-4"}>
-                            Fronkreisch! Normandie! Ola-la!
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry
-                        datum={"01.06.2023"}
-                        icon={(
-                            <FontAwesomeIcon icon={faHeart} className="text-white p-1.5"/>
-                        )}>
-                        <Image alt={""} width={350} height={350} src="/img/timeline/2023-verlobung.jpg"
-                               className={"w-full aspect-square object-cover object-center mb-4"}/>
-                        <div className={"px-4"}>
-                            Verlobung
-                        </div>
-                    </TimelineEntry>
-
-                    <TimelineEntry
-                        position={"right"}
-                        datum={"31.05.2025"}
-                        icon={(
-                            <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1"/>
-                        )}>
-                        <div className={"px-4 pt-4"}>
-                            Well... :)
-                        </div>
-                    </TimelineEntry>
+                    {timelineEntries.map((te, idx) => (
+                        <TimelineEntry datum={te.datum}
+                                       position={idx % 2 === 0 ? 'left' : 'right'}
+                                        icon={te.icon ?? null}>
+                            {te.bild ? (<Image alt={""} width={350} height={350} src={te.bild}
+                                                className={"w-full aspect-square object-cover object-top"}/>) : ''}
+                            <div className={"px-4 pt-4"}>
+                                {te.beschreibung}
+                            </div>
+                        </TimelineEntry>
+                    ))}
                 </div>
             </div>
         </div>
