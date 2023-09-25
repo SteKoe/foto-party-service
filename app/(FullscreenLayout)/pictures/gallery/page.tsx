@@ -3,6 +3,6 @@ import PollingPictureGalleryComponent from "@/components/PollingPictureGalleryCo
 
 export default async function Page() {
     return (
-        <PollingPictureGalleryComponent />
+        <PollingPictureGalleryComponent/>
     )
 }

@@ -1,5 +1,10 @@
 import React from "react";
 import ContainerLayout from "@/app/ContainerLayout";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'Kim & Stephan | Wann & Wo',
+}
 
 export default function Page() {
     return (
@@ -8,9 +13,10 @@ export default function Page() {
                 Wann & Wo
             </h1>
             <p>
-                Malorum ultricies ridiculus singulis affert vulputate. Tantas ea conubia minim commune disputationi. 
-                Quidam nominavi tritani habeo quas praesent dico qui iuvaret scelerisque. 
-                Efficiantur no aliquet quot conubia labores. Mucius repudiare lacinia arcu tritani delectus porta dicam eam.
+                Malorum ultricies ridiculus singulis affert vulputate. Tantas ea conubia minim commune disputationi.
+                Quidam nominavi tritani habeo quas praesent dico qui iuvaret scelerisque.
+                Efficiantur no aliquet quot conubia labores. Mucius repudiare lacinia arcu tritani delectus porta dicam
+                eam.
             </p>
             <p>
                 <img className="imageRight h-40"

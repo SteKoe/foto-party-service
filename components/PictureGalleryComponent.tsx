@@ -49,6 +49,7 @@ export function PictureGalleryComponent({images, columnsCount = 4, children}: Pi
                                 </button>
                             </div>
                             <Image src={"/api/pictures/" + img} alt={img} width={500} height={250}
+                                   loading="lazy"
                                    className={"rounded"} data-src={"/api/pictures/" + img}/>
                         </div>
                     ))}
