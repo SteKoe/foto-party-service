@@ -1,6 +1,6 @@
 import React from "react";
 import ContainerLayout from "@/app/ContainerLayout";
-import PicturesPageComponent from "@/app/(user)/pictures/PicturesPageComponent";
+import PicturesPageComponent from "@/components/PicturesPageComponent";
 
 export default async function Page() {
     return (

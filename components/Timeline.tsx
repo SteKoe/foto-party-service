@@ -93,9 +93,9 @@ export default function Timeline() {
         <div className=" flex flex-col justify-center timeline">
             <div className="py-3 sm:max-w-xl sm:mx-auto w-full px-2 sm:px-0">
                 <div className={"relative h-36 translate-x-2"}>
-                    <Image width={96} height={96} src={"/img/der-stephan.jpg"} alt={""}
+                    <Image width={96} height={96} src={"/img/timeline/der-stephan.jpg"} alt={""}
                            className={"rounded-full absolute right-1/2 border-2"}/>
-                    <Image width={96} height={96} src={"/img/die-kim.jpg"} alt={""}
+                    <Image width={96} height={96} src={"/img/timeline/die-kim.jpg"} alt={""}
                            className={"rounded-full absolute left-1/2 -translate-x-4 border-2"}/>
                 </div>
                 <div className="relative text-gray-700 antialiased text-sm font-semibold">

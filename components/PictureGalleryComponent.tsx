@@ -13,13 +13,13 @@ import styles from "./PictureGalleryComponent.module.css"
 
 type PicturesComponentProps = {
     images: string[],
-    columnsCount?: number
+    columnsCount?: number,
 } & PropsWithChildren
 
 export function PictureGalleryComponent({images, columnsCount = 4, children}: PicturesComponentProps) {
     const [deletedImages, setDeletedImages] = useState([] as string[]);
     const removeImage = async (imageToDelete: string) => {
-        if (window.confirm("Willst du dieses Bild für jeden unwiederbringlich löschen?")) {
+        if (window.confirm("Willst du dieses Bild für jeden, wirklich jeden, unwiederbringlich löschen?")) {
             const response = await fetch('/api/pictures/' + imageToDelete, {
                 method: 'DELETE'
             });
