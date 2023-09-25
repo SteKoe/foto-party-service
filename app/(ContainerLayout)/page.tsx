@@ -10,8 +10,8 @@ export default function Home() {
     const title = <>{process.env.MARRIAGE_TITLE}</>;
     const subtitle = (
         <>
-            <span dangerouslySetInnerHTML={{__html: process.env.MARRIAGE_SUBTITLE!}}/><br/>
-            Noch {daysLeft} Tage!
+            <span dangerouslySetInnerHTML={{__html: process.env.MARRIAGE_SUBTITLE!}}/>
+            {daysLeft > 0 ? (<><br/>Noch {daysLeft} Tage!</>) : ''}
         </>
     );
 
@@ -20,6 +20,7 @@ export default function Home() {
         <>
             <h1 className="heroHeading text-center">
                 {title}
+                <small>Wir heiraten!</small>
                 <small>{subtitle}</small>
             </h1>
             <main className="px-4 py-8 md:p-12">
