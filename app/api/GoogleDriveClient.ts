@@ -53,17 +53,17 @@ export async function getFile(fileId: string): Promise<ArrayBuffer> {
     const res = await drive.files.get({
         fileId,
         alt: 'media'
-    }, {responseType: 'arraybuffer'} )
+    }, {responseType: 'arraybuffer'})
 
     return res.data as ArrayBuffer
 }
 
 export async function deleteFile(fileId: string) {
     const drive = google.drive({version: 'v3', auth: createAuthClient()});
-    
+
     const res = await drive.files.delete({
         fileId
     })
-    
+
     return res.status;
 }

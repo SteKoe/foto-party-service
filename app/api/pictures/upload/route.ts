@@ -1,19 +1,7 @@
-import {S3Client} from "@aws-sdk/client-s3";
 import {NextResponse} from "next/server";
 import sharp from "sharp";
-import {createPresignedPost} from "@aws-sdk/s3-presigned-post";
-import {FormData} from "next/dist/compiled/@edge-runtime/primitives";
 import {randomUUID} from "crypto";
 import {uploadImage} from "@/app/api/GoogleDriveClient";
-
-const s3 = new S3Client({
-    apiVersion: '2006-03-01',
-    region: process.env.REGION!,
-    credentials: {
-        accessKeyId: process.env.ACCESS_KEY!,
-        secretAccessKey: process.env.SECRET_ACCESS_KEY!,
-    }
-})
 
 export async function POST(
     request: Request,

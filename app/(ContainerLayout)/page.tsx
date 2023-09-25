@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 import {HeroImage} from "@/components/HeroImage";
 
@@ -24,7 +23,7 @@ export default function Home() {
                 <small>{subtitle}</small>
             </h1>
             <main className="px-4 py-8 md:p-12">
-                <HeroImage />
+                <HeroImage/>
             </main>
         </>
     )

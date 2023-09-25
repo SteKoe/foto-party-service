@@ -1,6 +1,4 @@
-import {ListObjectsV2Command} from "@aws-sdk/client-s3";
 import {NextResponse} from "next/server";
-import {client} from "@/app/api/S3Client";
 import {listFiles} from "@/app/api/GoogleDriveClient";
 
 export async function GET(

@@ -1,6 +1,5 @@
 import '../globals.css'
 import '../fonts/Marcellus/index.css'
-import FloralHeader from "@/components/FloralHeader";
 import React from "react";
 import Navigation from "@/components/Navigation";
 import {Metadata} from "next";
@@ -18,14 +17,14 @@ export default function RootLayout({children}: {
     return (
         <html lang="de" className={"h-full"}>
         <body className={"min-h-full flex flex-col justify-between"}>
-            <div>
-                <Navigation/>
-                <AnimatedStarfield />
-                {children}
-            </div>
-            <footer className="footer">
-                Created with ❤️<br/>by Kim & Stephan
-            </footer>
+        <div>
+            <Navigation/>
+            <AnimatedStarfield/>
+            {children}
+        </div>
+        <footer className="footer">
+            Created with ❤️<br/>by Kim & Stephan
+        </footer>
         </body>
         </html>
     )
