@@ -38,8 +38,11 @@ export async function listFiles(): Promise<(string | null | undefined)[] | undef
 
     const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
     const res = await drive.files.list({
-        q: `'${folderId}' in parents and trashed = false`
+        q: `'${folderId}' in parents and trashed = false`,
+        orderBy: 'modifiedTime desc'
     })
+
+    console.log(res.data);
 
     return res.data?.files?.map(f => f.id);
 }

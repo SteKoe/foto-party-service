@@ -7,7 +7,7 @@ import {Metadata} from "next";
 import AnimatedStarfield from "@/components/starfield/AnimatedStarfieldComponent";
 
 export const metadata: Metadata = {
-    title: 'Kim & Stephan',
+    title: 'Kim & Stephan | Hochzeit unter Sternen',
     description: 'Wir heiraten dann wohl!',
     viewport: 'width=device-width, initial-scale=1.0'
 }

@@ -1,5 +1,10 @@
 import React from "react";
 import ContainerLayout from "@/app/ContainerLayout";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'Kim & Stephan | Wann & Wo',
+}
 
 export default function Page() {
     return (
