@@ -8,7 +8,8 @@ import AnimatedStarfield from "@/components/starfield/AnimatedStarfieldComponent
 export const metadata: Metadata = {
     title: 'Kim & Stephan | Hochzeit unter Sternen',
     description: 'Wir heiraten dann wohl!',
-    viewport: 'width=device-width, initial-scale=1.0'
+    viewport: 'width=device-width, initial-scale=1.0',
+    themeColor: "#2C305A"
 }
 
 export default function RootLayout({children}: {
