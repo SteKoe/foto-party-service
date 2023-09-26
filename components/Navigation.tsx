@@ -13,7 +13,7 @@ type Links = {
 }
 
 const links: Links[] = [
-    {name: "Start", href: "/" },
+    {name: "Start", href: "/"},
     {name: "Wann & Wo", href: "/location"},
     {name: "Story", href: "/story"},
     {name: "Galerie", href: "/pictures", filterFn: ({isAuthorized}) => isAuthorized === true},
@@ -22,7 +22,7 @@ const links: Links[] = [
 export default function Navigation() {
     const currentPathname = usePathname();
     const [isAuthorized, setIsAuthorized] = useState(false);
-    
+
     useEffect(() => {
         const auth = async () => {
             try {
@@ -34,8 +34,22 @@ export default function Navigation() {
                 setIsAuthorized(false)
             }
         }
-        
+
         auth();
+    }, []);
+
+    useEffect(() => {
+        const listener = (e: Event) => {
+            const classList = document.querySelector("ul[role=navigation]")!.classList;
+            if (Math.floor(window.scrollY) > 10) {
+                classList.add(styles['scrolled']);
+            } else {
+                classList.remove(styles['scrolled']);
+            }
+        };
+        document.addEventListener("scroll", listener)
+
+        return () => document.removeEventListener("scroll", listener);
     }, []);
 
     return (
@@ -45,7 +59,8 @@ export default function Navigation() {
 
                 return (
                     <li key={link.name}>
-                        <Link href={link.href} className={classNames(styles.navigationItem, {[styles.isActive]: isActive})}>
+                        <Link href={link.href}
+                              className={classNames(styles.navigationItem, {[styles.isActive]: isActive})}>
                             {link.name}
                         </Link>
                     </li>

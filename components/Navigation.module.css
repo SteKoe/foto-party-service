@@ -1,5 +1,9 @@
 .navigation {
-    @apply list-none text-center flex justify-center my-6 md:my-12 gap-3;
+    @apply list-none text-center flex justify-center py-6 md:py-12 gap-3 sticky top-0 z-10 transition-all;
+}
+
+.navigation.scrolled {
+    @apply py-3 md:py-4 border-b border-white/20 bg-black/20 backdrop-blur;
 }
 
 .navigationItem {
