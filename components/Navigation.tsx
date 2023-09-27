@@ -15,7 +15,7 @@ type Links = {
 const links: Links[] = [
     {name: "Start", href: "/"},
     {name: "Wann & Wo", href: "/location"},
-    {name: "Story", href: "/story"},
+    {name: "Story", href: "/story", filterFn: ({isAuthorized}) => isAuthorized === true},
     {name: "Galerie", href: "/pictures", filterFn: ({isAuthorized}) => isAuthorized === true},
 ]
 
