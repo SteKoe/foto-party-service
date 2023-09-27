@@ -8,6 +8,7 @@ import {events_kim} from "@/app/(ContainerLayout)/story/events_kim";
 import {events_stephan} from "@/app/(ContainerLayout)/story/events_stephan";
 import Timeline from "@/components/timeline/Timeline";
 import {events_coupled} from "@/app/(ContainerLayout)/story/events_coupled";
+import {faHeart} from "@fortawesome/free-solid-svg-icons";
 
 export function TimelinePageContent() {
     useEffect(() => {
@@ -29,7 +30,7 @@ export function TimelinePageContent() {
         });
 
         observer.observe(document.querySelector(`.${styles["main-timeline"]}`)!);
-        
+
         return () => observer.disconnect()
     }, []);
 
@@ -42,16 +43,16 @@ export function TimelinePageContent() {
                        className={classNames(styles['avatar'], styles['kim'])}/>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-2 md:gap-12 md:mx-12">
+            <div className="hidden grid grid-cols-1 md:grid-cols-2 gap-4 mx-2 md:gap-12 md:mx-12">
                 <div className="flex-1">
-                    <Timeline timelineEntries={events_kim}/>
+                    <Timeline timelineEntries={events_kim} timelineIcon={faHeart}/>
                 </div>
                 <div className="flex-1">
-                    <Timeline timelineEntries={events_stephan}/>
+                    <Timeline timelineEntries={events_stephan} timelineIcon={faHeart}/>
                 </div>
             </div>
             <div className={classNames(styles["main-timeline"])}>
-                <Timeline timelineEntries={events_coupled}/>
+                <Timeline timelineEntries={events_coupled} timelineIcon={faHeart}/>
             </div>
         </>
     )

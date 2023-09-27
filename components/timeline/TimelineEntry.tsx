@@ -2,12 +2,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapPin} from "@fortawesome/free-solid-svg-icons";
 import styles from "./TimelineEntry.module.scss"
 import classNames from "classnames";
-import {TimelineEvent} from "@/app/(ContainerLayout)/story/TimelineEvent";
+import {TimelineEvent, TimelineEventPosition} from "@/app/(ContainerLayout)/story/TimelineEvent";
 import Image from "next/image";
 
 type TimelineEntryProps = TimelineEvent
 
-export function TimelineEntry({position = 'left', icon, datum, bild, beschreibung}: TimelineEntryProps) {
+const positions: TimelineEventPosition[] = ['left', 'center', 'right']
+
+export function TimelineEntry({
+                                  position = positions[Math.floor(Math.random() * positions.length)],
+                                  icon,
+                                  datum,
+                                  bild,
+                                  beschreibung
+                              }: TimelineEntryProps) {
     return (
         <section className={classNames(
             "timeline-entry",
@@ -28,7 +36,6 @@ export function TimelineEntry({position = 'left', icon, datum, bild, beschreibun
                                             className={"w-full aspect-square object-cover object-top"}/>) : ''}
                             <section className={"px-4 pt-4"}>
                                 {beschreibung}
-                                {position}
                             </section>
                             {datum ? (<div className="px-4 pb-4"><strong><em>{datum}</em></strong></div>) : ''}
                         </div>

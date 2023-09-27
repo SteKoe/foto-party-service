@@ -2,3 +2,8 @@
     @apply hidden w-0.5 bg-white/20 backdrop-blur absolute h-full left-1/2 transform -translate-x-1/2;
     @apply sm:block;
 }
+
+.timeline-bar__icon {
+    @apply absolute text-white/20 text-2xl top-0 -translate-x-1/2 -translate-y-8;
+}
+

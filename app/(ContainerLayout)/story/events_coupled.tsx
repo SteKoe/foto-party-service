@@ -33,7 +33,7 @@ export const events_coupled: TimelineEvent[] = [
     {
         datum: "Juli 2021",
         bild: "/img/timeline/2021-sueddeutschland.jpg",
-        beschreibung: "Partner in Crime! Roadtrip durch trotz des Virus!"
+        beschreibung: "Partner in Crime! Roadtrip trotz des Virus!"
     },
     {
         datum: "September 2021",
@@ -59,11 +59,11 @@ export const events_coupled: TimelineEvent[] = [
         icon: <FontAwesomeIcon icon={faHeart} className="text-white p-1.5"/>,
         datum: "01.06.2023",
         bild: "/img/timeline/2023-verlobung.jpg",
-        beschreibung: "Verlobung"
+        beschreibung: "Wir haben JA! gesagt!"
     },
     {
         icon: <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1"/>,
-        datum: "31.05.2025",
+        datum: "30.08.2024",
         beschreibung: "Well... :)"
     }
 ]
