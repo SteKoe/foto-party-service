@@ -19,9 +19,9 @@ export default function Home() {
     return (
         <>
             <h1 className="heroHeading text-center">
+                <small><em>Hochzeit unter Sternen</em></small>
                 {title}
-                <small>Wir heiraten!</small>
-                <small>{subtitle}</small>
+                <small className="mt-8 md:mt-12">{subtitle}</small>
             </h1>
             <main className="px-4 py-8 md:p-12">
                 <HeroImage/>

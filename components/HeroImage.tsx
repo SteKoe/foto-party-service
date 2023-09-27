@@ -21,10 +21,8 @@ export const HeroImage = () => {
     }, []);
 
     return (
-        <span className=" relative overflow-hidden cover-image">
-            <Image src="/img/hero.jpg" width={1024} height={256} alt="" className="rounded-2xl bg-image mx-auto parallax-bg"/>
-            <Image src="/img/hero-characters.webp" width={1024} height={256} alt=""
-                   className="absolute inset-0 parallax-img mx-auto"/>
+        <span className="relative cover-image">
+            <Image src="/img/hero.jpg" width={1024} height={256} alt="" className="rounded md:rounded-xl bg-image mx-auto parallax-bg shadow-xl"/>
         </span>
     )
 }

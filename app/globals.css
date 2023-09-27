@@ -37,7 +37,7 @@ footer {
 }
 
 .heroHeading {
-    @apply text-4xl md:text-8xl mb-8 mt-12 md:pt-0 md:mt-12 md:mb-8;
+    @apply text-6xl md:text-8xl mb-8 mt-12 md:pt-0 md:mt-12 md:mb-8;
 }
 
 .heroHeading small {

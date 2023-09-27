@@ -14,7 +14,7 @@ type Links = {
 
 const links: Links[] = [
     {name: "Start", href: "/"},
-    {name: "Wann & Wo", href: "/location"},
+    {name: "Wann & Wo", href: "/location", filterFn: ({isAuthorized}) => isAuthorized === true},
     {name: "Story", href: "/story", filterFn: ({isAuthorized}) => isAuthorized === true},
     {name: "Galerie", href: "/pictures", filterFn: ({isAuthorized}) => isAuthorized === true},
 ]
@@ -52,20 +52,26 @@ export default function Navigation() {
         return () => document.removeEventListener("scroll", listener);
     }, []);
 
-    return (
-        <ul role="navigation" className={styles.navigation}>
-            {links.filter(link => link.filterFn?.call(link, {isAuthorized}) ?? true).map(link => {
-                const isActive = link.href === currentPathname;
+    const filteredLinks = links.filter(link => link.filterFn?.call(link, {isAuthorized}) ?? true);
 
-                return (
-                    <li key={link.name}>
-                        <Link href={link.href}
-                              className={classNames(styles.navigationItem, {[styles.isActive]: isActive})}>
-                            {link.name}
-                        </Link>
-                    </li>
-                );
-            })}
-        </ul>
+    return (
+        <>
+            {
+                filteredLinks.length <= 1 ? '' : (<ul role="navigation" className={styles.navigation}>
+                    {filteredLinks.map(link => {
+                        const isActive = link.href === currentPathname;
+    
+                        return (
+                            <li key={link.name}>
+                                <Link href={link.href}
+                                      className={classNames(styles.navigationItem, {[styles.isActive]: isActive})}>
+                                    {link.name}
+                                </Link>
+                            </li>
+                        );
+                    })}
+                </ul>)
+            }
+        </>
     )
 }

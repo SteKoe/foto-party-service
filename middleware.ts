@@ -9,6 +9,7 @@ export function readToken(request: NextRequest) {
 
 const authorizedPaths = [
     '/story',
+    '/location',
     '/pictures',
     '/pictures/take',
     '/pictures/gallery',
