@@ -5,6 +5,7 @@
 .kim {
     @apply left-1/4 -translate-x-10;
 }
+
 .kim.__coupled {
     @apply left-1/2 -translate-x-20
 }

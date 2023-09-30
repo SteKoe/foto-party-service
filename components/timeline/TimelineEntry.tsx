@@ -35,7 +35,7 @@ export function TimelineEntry({
                         <div className="overflow-hidden bg-white/80 backdrop-blur rounded shadow relative">
                             {bild ? (<Image alt={""} width={640} height={640} src={bild}
                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
-                            {movie ? (<video width={640} height={640} src={movie} autoPlay controls muted loop playsInline
+                            {movie ? (<video width={640} height={640} src={movie} autoPlay muted loop playsInline
                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
 
                             {beschreibung ? (
