@@ -1,6 +1,6 @@
 export type TimelineEvent = {
-    datum: string,
-    beschreibung: string,
+    datum?: string,
+    beschreibung?: string,
     bild?: string,
     movie?: string,
     position?: TimelineEventPosition,

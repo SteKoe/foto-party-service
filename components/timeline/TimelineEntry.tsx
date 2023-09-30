@@ -37,9 +37,12 @@ export function TimelineEntry({
                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
                             {movie ? (<video width={1000} height={1000} src={movie} autoPlay muted loop
                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
-                            <section className={"px-4 pt-4"}>
-                                {beschreibung}
-                            </section>
+
+                            {beschreibung ? (
+                                <section className={"px-4 pt-4"}>
+                                    {beschreibung}
+                                </section>
+                            ) : ''}
                             {datum ? (<div className="px-4 pb-4"><strong><em>{datum}</em></strong></div>) : ''}
                         </div>
                     </div>

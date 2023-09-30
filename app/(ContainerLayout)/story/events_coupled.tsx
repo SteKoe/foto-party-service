@@ -8,7 +8,7 @@ export const events_coupled: TimelineEvent[] = [
     {
         datum: "16.01.2019",
         bild: "/img/timeline/2019-erstes-date.jpg",
-        beschreibung: "Köln. Erstes Date. 14 Stunden. 41.537 Schritte.",
+        beschreibung: "Köln. Erstes Date. 16 Stunden. 41.537 Schritte.",
         position: 'center'
     },
     {
@@ -90,7 +90,7 @@ export const events_coupled: TimelineEvent[] = [
     {
         datum: "26.08.2023",
         movie: "/img/timeline/2023-ball.mp4",
-        beschreibung: ""
+        beschreibung: "Üben für den großen Auftritt!"
     },
     {
         icon: <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1"/>,
