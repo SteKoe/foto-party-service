@@ -43,7 +43,7 @@ export function TimelinePageContent() {
                        className={classNames(styles['avatar'], styles['kim'])}/>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mx-2 md:gap-12 md:mx-12">
+            <div className="grid grid-cols-2 gap-2 mx-2 md:gap-12 md:mx-12">
                 <div className="flex-1">
                     <Timeline timelineEntries={events_kim} timelineIcon={faHeart}/>
                 </div>

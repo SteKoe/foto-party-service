@@ -5,9 +5,8 @@ import timelineEntryStyles from "./TimelineEntry.module.scss";
 import styles from "./Timeline.module.css";
 import {TimelineEvent} from "@/app/(ContainerLayout)/story/TimelineEvent";
 import {TimelineEntry} from "@/components/timeline/TimelineEntry";
-import {faHeart, IconDefinition} from "@fortawesome/free-solid-svg-icons";
+import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import classNames from "classnames";
 
 type TimelineProps = {
     timelineIcon: IconDefinition,
@@ -16,7 +15,7 @@ type TimelineProps = {
 
 export default function Timeline({timelineEntries, timelineIcon}: TimelineProps) {
     useEffect(() => {
-        let observer = new IntersectionObserver((entries, observer) => {
+        let observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add(timelineEntryStyles['is-visible'])
@@ -37,10 +36,10 @@ export default function Timeline({timelineEntries, timelineIcon}: TimelineProps)
                     <FontAwesomeIcon icon={timelineIcon} className={styles['timeline-bar__icon']}/>
                 </div>
 
-                <div className="m-8">
+                <div className="m-2 md:m-8">
                     {timelineEntries.map((te, idx) => (
                         <TimelineEntry key={`timeline-entry-${idx}`}
-                            {...te} />
+                                       {...te} />
                     ))}
                 </div>
 
