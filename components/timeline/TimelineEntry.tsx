@@ -14,6 +14,7 @@ export function TimelineEntry({
                                   icon,
                                   datum,
                                   bild,
+                                  movie,
                                   beschreibung
                               }: TimelineEntryProps) {
     return (
@@ -32,8 +33,10 @@ export function TimelineEntry({
                 >
                     <div>
                         <div className="overflow-hidden bg-white/80 backdrop-blur rounded shadow relative">
-                            {bild ? (<Image alt={""} width={350} height={350} src={bild}
-                                            className={"w-full aspect-square object-cover object-top"}/>) : ''}
+                            {bild ? (<Image alt={""} width={1000} height={1000} src={bild}
+                                            className={"w-full min-w-full object-cover object-top"}/>) : ''}
+                            {movie ? (<video width={1000} height={1000} src={movie} autoPlay muted loop
+                                            className={"w-full min-w-full object-cover object-top"}/>) : ''}
                             <section className={"px-4 pt-4"}>
                                 {beschreibung}
                             </section>

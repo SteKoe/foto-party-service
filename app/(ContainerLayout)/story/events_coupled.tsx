@@ -6,6 +6,26 @@ import {TimelineEvent} from "@/app/(ContainerLayout)/story/TimelineEvent";
 
 export const events_coupled: TimelineEvent[] = [
     {
+        datum: "16.01.2019",
+        bild: "/img/timeline/2019-erstes-date.jpg",
+        beschreibung: "Köln. Erstes Date. 14 Stunden. 41.537 Schritte.",
+        position: 'center'
+    },
+    {
+        datum: "01.02.2019",
+        beschreibung: "Wir sind ein Paar!",
+    },
+    {
+        datum: "10.02.2019",
+        movie: "/img/timeline/20190210-konfetti.mp4",
+        beschreibung: "Es soll Konfetti für uns regnen!",
+    },
+    {
+        datum: "24.02.2019",
+        bild: "/img/timeline/20190224-golden-gate.jpg",
+        beschreibung: "San Francisco. Golden Gate Bridge. 10.000 km entfernt. 9 Stunden Zeitverschiebung.",
+    },
+    {
         datum: "15.03.2019",
         bild: "/img/timeline/2019-laufen.jpg",
         beschreibung: "Priaten joho!"
@@ -29,6 +49,12 @@ export const events_coupled: TimelineEvent[] = [
         datum: "Silvester 2019",
         bild: "/img/timeline/2019-silvester.jpg",
         beschreibung: "Pärchenurlaub ins neue Jahr!"
+    },
+    {
+        datum: "August 2020",
+        bild: "/img/timeline/2020-leipzig-kollage.jpg",
+        beschreibung: "Bekloppt in Leipzig! Wir sind speziell. Und viele!",
+        position: "center"
     },
     {
         datum: "Juli 2021",
@@ -60,6 +86,11 @@ export const events_coupled: TimelineEvent[] = [
         datum: "01.06.2023",
         bild: "/img/timeline/2023-verlobung.jpg",
         beschreibung: "Wir haben JA! gesagt!"
+    },
+    {
+        datum: "26.08.2023",
+        movie: "/img/timeline/2023-ball.mp4",
+        beschreibung: ""
     },
     {
         icon: <Image alt={""} width={64} height={64} src={"/img/ring.png"} className="text-white p-1"/>,

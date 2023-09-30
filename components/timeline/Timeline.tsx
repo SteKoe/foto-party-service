@@ -40,11 +40,7 @@ export default function Timeline({timelineEntries, timelineIcon}: TimelineProps)
                 <div className="m-8">
                     {timelineEntries.map((te, idx) => (
                         <TimelineEntry key={`timeline-entry-${idx}`}
-                                       datum={te.datum}
-                                       position={te.position}
-                                       icon={te.icon}
-                                       beschreibung={te.beschreibung}
-                                       bild={te.bild}/>
+                            {...te} />
                     ))}
                 </div>
 

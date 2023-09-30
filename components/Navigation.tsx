@@ -40,11 +40,14 @@ export default function Navigation() {
 
     useEffect(() => {
         const listener = (e: Event) => {
-            const classList = document.querySelector("ul[role=navigation]")!.classList;
-            if (Math.floor(window.scrollY) > 10) {
-                classList.add(styles['scrolled']);
-            } else {
-                classList.remove(styles['scrolled']);
+            const classList = document.querySelector("ul[role=navigation]")?.classList;
+            
+            if(classList) {
+                if (Math.floor(window.scrollY) > 10) {
+                    classList.add(styles['scrolled']);
+                } else {
+                    classList.remove(styles['scrolled']);
+                }
             }
         };
         document.addEventListener("scroll", listener)

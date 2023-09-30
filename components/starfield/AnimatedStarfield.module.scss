@@ -13,6 +13,11 @@
   @return unquote($value);
 }
 
+$diag2Speed: 600s;
+$diag1Speed: $diag2Speed * 1.1;
+$cwAnimationSpeed: $diag2Speed * 1.5;
+$ccwAnimationSpeed: $diag2Speed * 1.55;
+
 $shadows-small: multiple-box-shadow(1000);
 $shadows-medium: multiple-box-shadow(1000);
 $shadows-big: multiple-box-shadow(300);
@@ -49,7 +54,7 @@ $shadows-big: multiple-box-shadow(300);
     height: 1px;
     border-radius: 50%;
     background: transparent;
-    animation: rotatingCCW 1550s infinite linear;
+    animation: rotatingCCW $ccwAnimationSpeed infinite linear;
     transform-origin: 50% 50%;
     position: absolute;
     top: 50%;
@@ -76,7 +81,7 @@ $shadows-big: multiple-box-shadow(300);
     height: 1px;
     border-radius: 50%;
     background: transparent;
-    animation: diag2 1000s infinite linear;
+    animation: diag2 $diag2Speed infinite linear;
     transform-origin: 50% 50%;
     position: absolute;
     top: 50%;
@@ -104,7 +109,7 @@ $shadows-big: multiple-box-shadow(300);
     border-radius: 50%;
     background: transparent;
     box-shadow: $shadows-medium;
-    animation: diag1 1100s infinite linear;
+    animation: diag1 $diag1Speed infinite linear;
     transform-origin: 50% 50%;
     position: absolute;
     top: 50%;
@@ -132,7 +137,7 @@ $shadows-big: multiple-box-shadow(300);
     border-radius: 50%;
     background: transparent;
     box-shadow: $shadows-big;
-    animation: rotatingCW 1500s infinite linear;
+    animation: rotatingCW $cwAnimationSpeed infinite linear;
     transform-origin: 50% 50%;
     position: absolute;
     top: 50%;
