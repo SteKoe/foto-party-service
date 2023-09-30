@@ -91,7 +91,7 @@ export function TakePicture() {
                         </div>
                     </div>
                 ) : ''}
-                <input type="file" accept="image/png, image/jpeg"
+                <input type="file" accept="image/png, image/jpeg" multiple
                        onChange={previewImage}/>
             </label>
             {image ? (

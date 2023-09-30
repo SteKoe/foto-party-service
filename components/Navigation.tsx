@@ -16,7 +16,9 @@ const links: Links[] = [
     {name: "Start", href: "/"},
     {name: "Wann & Wo", href: "/location", filterFn: ({isAuthorized}) => isAuthorized === true},
     {name: "Story", href: "/story", filterFn: ({isAuthorized}) => isAuthorized === true},
-    {name: "Galerie", href: "/pictures", filterFn: ({isAuthorized}) => isAuthorized === true},
+    {name: "Galerie", href: "/pictures", filterFn: ({isAuthorized}) => {
+            return isAuthorized === true && new Date() >= new Date(2024, 7, 28, 0, 0, 0, 0);
+        }},
 ]
 
 export default function Navigation() {
