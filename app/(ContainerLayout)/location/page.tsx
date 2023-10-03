@@ -22,7 +22,7 @@ export default function Page() {
                 möchten wir für den Rest unseres Lebens fortgehen. Viele Reisen, eine Pandemie und vor allem Tanzbälle
                 später, möchten wir nun den nächsten Schritt wagen und uns das Ja-Wort geben.
             </p>
-            <div className="text-center mb-12">Wir heiraten! <br/>Und das möchten wir mit euch feiern!</div>
+            <div className="text-center mb-12">Wir heiraten! <br/>Und das möchten wir mit Euch feiern!</div>
             <p className="initialLetter mb-12">
                 Die standesamtliche Trauung findet im Planetarium Bochum statt. "Hochzeit unter Sternen" ist das Motto unseres Tages!
                 Nach der Trauung werden wir mit Euch ins Franz Ferdinand flanieren, wo wir uns im Rahmen einer freien Trauung das Ja-Wort geben.
