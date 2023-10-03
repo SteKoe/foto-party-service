@@ -11,7 +11,7 @@
 }
 
 body {
-    background-image: linear-gradient(#2C305A, #22365A);
+    background-image: linear-gradient(#090f3a, #03092c);
     background-attachment: fixed;
     color: rgb(var(--color-rgb));
     font-family: 'Open Sans', sans-serif;

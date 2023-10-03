@@ -4,6 +4,7 @@ import React from "react";
 import Navigation from "@/components/Navigation";
 import {Metadata} from "next";
 import AnimatedStarfield from "@/components/starfield/AnimatedStarfieldComponent";
+import {Shootingstar} from "@/components/shootingstar/Shootingstar";
 
 export const metadata: Metadata = {
     title: 'Kim & Stephan | Hochzeit unter Sternen',
@@ -21,6 +22,7 @@ export default function RootLayout({children}: {
         <div>
             <Navigation/>
             <AnimatedStarfield/>
+            <Shootingstar />
             {children}
         </div>
         <footer className="footer">
