@@ -14,7 +14,7 @@ export default function Page() {
         <ContainerLayout>
             <h1 className="heroHeading heading text-center">
                 Was, wann, wo?<br />
-                <small><em>Unser Tag mit euch!</em></small>
+                <small><em>Unser Tag mit Euch!</em></small>
             </h1>
             <p className="initialLetter mb-12">
                 Wenn wir schon beim Bogenschießen nichts treffen, hat Armors Pfeil zumindest uns erwischt! 
@@ -25,8 +25,8 @@ export default function Page() {
             <div className="text-center mb-12">Wir heiraten! <br/>Und das möchten wir mit euch feiern!</div>
             <p className="initialLetter mb-12">
                 Die standesamtliche Trauung findet im Planetarium Bochum statt. "Hochzeit unter Sternen" ist das Motto unseres Tages!
-                Nach der Trauung werden wir mit euch in die Franz Ferdinand flanieren, wo wir uns im Rahmen einer freien Trauung das Ja-Wort geben.
-                Anschließend wird gefeiert, getanzt und gelacht! Wir freuen uns auf euch!
+                Nach der Trauung werden wir mit Euch ins Franz Ferdinand flanieren, wo wir uns im Rahmen einer freien Trauung das Ja-Wort geben.
+                Anschließend wird gefeiert, getanzt und gelacht! Wir freuen uns auf Euch!
             </p>
             <div className="text-center mb-12">Dresscode: Tanzbar festlich!</div>
             
