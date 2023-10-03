@@ -12,5 +12,9 @@ export const events_kim: TimelineEvent[] = [
     {
         bild: "/img/timeline/kim/kim-essen.jpg",
         position: "center"
-    }
+    },
+    {
+        bild: "/img/timeline/kim/kim-einschulung.jpg",
+        position: "center"
+    },
 ]
