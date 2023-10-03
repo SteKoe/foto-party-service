@@ -9,29 +9,28 @@ import {events_stephan} from "@/app/(ContainerLayout)/story/events_stephan";
 import Timeline from "@/components/timeline/Timeline";
 import {events_coupled} from "@/app/(ContainerLayout)/story/events_coupled";
 import {faHeart} from "@fortawesome/free-solid-svg-icons";
+import abc from "./abc.svg";
 
 export function TimelinePageContent() {
     useEffect(() => {
-        const observer = new IntersectionObserver((event) => {
-            event.forEach(e => {
-                const stephan = document.querySelector(`.${styles['stephan']}`);
-                const kim = document.querySelector(`.${styles['kim']}`);
+        const listener = () => {
+            const stephan = document.querySelector(`.${styles['stephan']}`);
+            const kim = document.querySelector(`.${styles['kim']}`);
+            const timeline = document.querySelector(`.${styles["main-timeline"]}`)!;
+            const top = timeline.getBoundingClientRect().top;
 
-                if (e.isIntersecting) {
-                    stephan?.classList.add(styles['__coupled'])
-                    kim?.classList.add(styles['__coupled'])
-                } else {
-                    stephan?.classList.remove(styles['__coupled'])
-                    kim?.classList.remove(styles['__coupled'])
-                }
-            })
-        }, {
-            threshold: [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
-        });
+            if (top <= 400) {
+                stephan?.classList.add(styles['__coupled'])
+                kim?.classList.add(styles['__coupled'])
+            } else {
+                stephan?.classList.remove(styles['__coupled'])
+                kim?.classList.remove(styles['__coupled'])
+            }
+        };
 
-        observer.observe(document.querySelector(`.${styles["main-timeline"]}`)!);
+        window.addEventListener('scroll', listener);
 
-        return () => observer.disconnect()
+        return () => window.removeEventListener("scroll", listener);
     }, []);
 
     return (
@@ -51,6 +50,7 @@ export function TimelinePageContent() {
                     <Timeline timelineEntries={events_stephan} timelineIcon={faHeart}/>
                 </div>
             </div>
+            
             <div className={classNames(styles["main-timeline"])}>
                 <Timeline timelineEntries={events_coupled} timelineIcon={faHeart}/>
             </div>

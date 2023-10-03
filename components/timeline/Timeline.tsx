@@ -3,7 +3,7 @@
 import React, {useEffect} from "react";
 import timelineEntryStyles from "./TimelineEntry.module.scss";
 import styles from "./Timeline.module.css";
-import {TimelineEvent} from "@/app/(ContainerLayout)/story/TimelineEvent";
+import {TimelineEvent, TimelineEventPosition} from "@/app/(ContainerLayout)/story/TimelineEvent";
 import {TimelineEntry} from "@/components/timeline/TimelineEntry";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -12,6 +12,8 @@ type TimelineProps = {
     timelineIcon: IconDefinition,
     timelineEntries: TimelineEvent[]
 }
+
+const positions: TimelineEventPosition[] = ['left', 'center', 'right']
 
 export default function Timeline({timelineEntries, timelineIcon}: TimelineProps) {
     useEffect(() => {
@@ -26,6 +28,8 @@ export default function Timeline({timelineEntries, timelineIcon}: TimelineProps)
         document.querySelectorAll('.timeline-entry').forEach((section) => {
             observer.observe(section);
         });
+        
+        return () => observer.disconnect();
     }, []);
 
     return (
@@ -39,7 +43,8 @@ export default function Timeline({timelineEntries, timelineIcon}: TimelineProps)
                 <div className="m-2 md:m-8">
                     {timelineEntries.map((te, idx) => (
                         <TimelineEntry key={`timeline-entry-${idx}`}
-                                       {...te} />
+                                       {...te} 
+                                        position={te.position ?? positions[idx % positions.length]}/>
                     ))}
                 </div>
 

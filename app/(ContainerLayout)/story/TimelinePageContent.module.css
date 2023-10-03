@@ -1,5 +1,5 @@
 .avatar {
-    @apply rounded-full absolute border-2 border-opacity-5 transition-all duration-500 shadow-xl;
+    @apply rounded-full absolute border-2 border-opacity-5 transition-all duration-1000 shadow-xl;
 }
 
 .kim {

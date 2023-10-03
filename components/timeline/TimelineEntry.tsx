@@ -1,3 +1,5 @@
+'use client';
+
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapPin} from "@fortawesome/free-solid-svg-icons";
 import styles from "./TimelineEntry.module.scss"
@@ -7,10 +9,8 @@ import Image from "next/image";
 
 type TimelineEntryProps = TimelineEvent
 
-const positions: TimelineEventPosition[] = ['left', 'center', 'right']
-
 export function TimelineEntry({
-                                  position = positions[Math.floor(Math.random() * positions.length)],
+                                  position,
                                   icon,
                                   datum,
                                   bild,
@@ -36,7 +36,7 @@ export function TimelineEntry({
                             {bild ? (<Image alt={""} width={640} height={640} src={bild}
                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
                             {movie ? (<video width={640} height={640} src={movie} autoPlay muted loop playsInline
-                                            className={"w-full min-w-full object-cover object-top"}/>) : ''}
+                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
 
                             {beschreibung ? (
                                 <section className={"px-4 pt-4"}>
