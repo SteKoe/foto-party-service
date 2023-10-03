@@ -10,7 +10,7 @@ const random = (min: number, max: number) => {
 export function Shootingstar() {
     useEffect(() => {
         const initStar = () => {
-            const shootingStars = document.querySelectorAll(`.${styles['shootingstar']}`);
+            const shootingStars = document.querySelectorAll(`.${styles['shootingstar']}`) as NodeListOf<HTMLElement>;
 
             shootingStars.forEach((star) => {
                 star.style?.setProperty("--deg", `${180 + random(-25, 25)}deg`);
