@@ -7,6 +7,12 @@ import {TimelineEvent, TimelineEventPosition} from "@/app/(ContainerLayout)/stor
 import {TimelineEntry} from "@/components/timeline/TimelineEntry";
 import {IconDefinition} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import lgVideo from "lightgallery/plugins/video";
+import LightGallery from "lightgallery/react";
+
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-video.css';
+import 'lightgallery/css/lg-thumbnail.css';
 
 type TimelineProps = {
     timelineIcon: IconDefinition,
@@ -28,7 +34,7 @@ export default function Timeline({timelineEntries, timelineIcon}: TimelineProps)
         document.querySelectorAll('.timeline-entry').forEach((section) => {
             observer.observe(section);
         });
-        
+
         return () => observer.disconnect();
     }, []);
 
@@ -41,11 +47,21 @@ export default function Timeline({timelineEntries, timelineIcon}: TimelineProps)
                 </div>
 
                 <div className="m-2 md:m-8">
-                    {timelineEntries.map((te, idx) => (
-                        <TimelineEntry key={`timeline-entry-${idx}`}
-                                       {...te} 
-                                        position={te.position ?? positions[idx % positions.length]}/>
-                    ))}
+                    <LightGallery
+                        licenseKey="non-commercial"
+                        selector=".gallery-item"
+                        download={false}
+                        fullScreen={true}
+                        videojs={true}
+                        videojsOptions={{muted: true}}
+                        plugins={[lgVideo]}
+                    >
+                        {timelineEntries.map((te, idx) => (
+                            <TimelineEntry key={`timeline-entry-${idx}`}
+                                           {...te}
+                                           position={te.position ?? positions[idx % positions.length]}/>
+                        ))}
+                    </LightGallery>
                 </div>
 
             </div>

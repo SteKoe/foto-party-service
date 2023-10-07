@@ -35,7 +35,7 @@ export function TimelinePageContent() {
 
     return (
         <>
-            <div className={"sticky top-24 z-20 h-36"}>
+            <div className={"sticky top-24 z-20 h-36 pointer-events-none"}>
                 <Image width={96} height={96} src={"/img/timeline/der-stephan.jpg"} alt={""}
                        className={classNames(styles['avatar'], styles['stephan'])}/>
                 <Image width={96} height={96} src={"/img/timeline/die-kim.jpg"} alt={""}

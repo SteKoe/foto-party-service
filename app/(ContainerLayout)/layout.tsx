@@ -1,10 +1,10 @@
 import '../globals.css'
 import '../fonts/Marcellus/index.css'
 import React from "react";
-import Navigation from "@/components/Navigation";
 import {Metadata} from "next";
 import AnimatedStarfield from "@/components/starfield/AnimatedStarfieldComponent";
 import {Shootingstar} from "@/components/shootingstar/Shootingstar";
+import Navigation from "@/app/(ContainerLayout)/Navigation";
 
 export const metadata: Metadata = {
     title: 'Kim & Stephan | Hochzeit unter Sternen',
@@ -18,11 +18,15 @@ export default function RootLayout({children}: {
 }) {
     return (
         <html lang="de" className={"h-full"}>
+        <head>
+            <link href="/videojs.css" rel="stylesheet" />
+            <script src="/video.js"></script>
+        </head>
         <body className={"min-h-full flex flex-col justify-between"}>
         <div>
             <Navigation/>
             <AnimatedStarfield/>
-            <Shootingstar />
+            <Shootingstar/>
             {children}
         </div>
         <footer className="footer">

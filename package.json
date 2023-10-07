@@ -23,8 +23,8 @@
     "aws-sdk": "^2.1404.0",
     "classnames": "^2.3.2",
     "googleapis": "^123.0.0",
-    "gsap": "^3.12.2",
-    "lightgallery": "^2.7.1",
+    "lightgallery": "^2.7.2",
+    "luxon": "^3.4.3",
     "next": "13.4.7",
     "postcss": "8.4.24",
     "prop-types": "^15.8.1",
@@ -41,6 +41,7 @@
   "devDependencies": {
     "@aws-sdk/signature-v4-crt": "^3.357.0",
     "@types/formidable": "^2.0.6",
+    "@types/luxon": "^3.3.2",
     "@types/react-responsive-masonry": "^2.1.0",
     "aws-crt": "^1.15.18",
     "encoding": "^0.1.13",

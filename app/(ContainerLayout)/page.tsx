@@ -1,12 +1,20 @@
 import React from "react";
 import {HeroImage} from "@/components/HeroImage";
+import {DateTime, Duration, Interval} from "luxon";
+
+function calculateDaysLeft() {
+    let daysLeft = 0;
+    try {
+        const interval = Interval.fromDateTimes(DateTime.now(), DateTime.fromISO(process.env.MARRIAGE_DATE!));
+        daysLeft = Math.floor(interval.toDuration().as("days"));
+    } catch (e) {
+        console.error("Error while calculating days left", e)
+    }
+    return daysLeft;
+}
 
 export default function Home() {
-    const targetDate = new Date(process.env.MARRIAGE_DATE!)
-    const now = new Date();
-    const secondsDiff = targetDate.getTime() - now.getTime();
-    const daysLeft = Math.floor(secondsDiff / (1000 * 3600 * 24));
-
+    const daysLeft = calculateDaysLeft();
     const title = <>{process.env.MARRIAGE_TITLE}</>;
     const subtitle = (
         <>
@@ -14,7 +22,6 @@ export default function Home() {
             {daysLeft > 0 ? (<><br/>Noch {daysLeft} Tage!</>) : ''}
         </>
     );
-
 
     return (
         <>

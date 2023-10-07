@@ -4,10 +4,28 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMapPin} from "@fortawesome/free-solid-svg-icons";
 import styles from "./TimelineEntry.module.scss"
 import classNames from "classnames";
-import {TimelineEvent, TimelineEventPosition} from "@/app/(ContainerLayout)/story/TimelineEvent";
+import {TimelineEvent} from "@/app/(ContainerLayout)/story/TimelineEvent";
+
 import Image from "next/image";
 
+
 type TimelineEntryProps = TimelineEvent
+
+const dataVideo = (movie: string | undefined) => {
+    if (!movie) {
+        return undefined;
+    }
+
+    return JSON.stringify({
+        source: [
+            {
+                src: movie,
+                type: 'video/mp4',
+            },
+        ],
+        attributes: {preload: false, controls: false, playsinline: true, muted: true},
+    });
+}
 
 export function TimelineEntry({
                                   position,
@@ -32,10 +50,19 @@ export function TimelineEntry({
                     className={styles['timeline-entry__body']}
                 >
                     <div>
-                        <div className="overflow-hidden bg-white/80 backdrop-blur rounded shadow relative">
+                        <div data-src={bild}
+                             data-video={dataVideo(movie)}
+                             data-sub-html={beschreibung}
+                             className={classNames('overflow-hidden bg-white/80 backdrop-blur rounded shadow relative', {'gallery-item': bild || movie})}>
                             {bild ? (<Image alt={""} width={640} height={640} src={bild}
                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
-                            {movie ? (<video width={640} height={640} src={movie} autoPlay muted loop playsInline
+                            {movie ? (<video width={640}
+                                             height={640}
+                                             src={movie}
+                                             autoPlay={true}
+                                             muted={true}
+                                             loop={true}
+                                             playsInline={true}
                                              className={"w-full min-w-full object-cover object-top"}/>) : ''}
 
                             {beschreibung ? (

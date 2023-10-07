@@ -1,21 +1,29 @@
 .shootingstar {
-    --animation-duration: 24s;
-    --deg: 185deg;
+    --animation-duration: 4s;
+    --deg: -185deg;
     --top: 20%;
     
     position: absolute;
-    left: 10%;
+    left: 20%;
     width: 4px;
     height: 4px;
     background: #fff;
     border-radius: 50%;
     box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1),
     0 0 0 8px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 1);
-    animation: animate 20s linear infinite;
     top: var(--top);
     right: 0;
-    animation-delay: 0s;
-    animation-duration: var(--animation-duration);
+
+    opacity: 0;
+    transform: rotate(calc(var(--deg))) translateX(0px);
+    transition-property: opacity, transform;
+    transition-timing-function: ease;
+    
+}
+.shootingstar.animate {
+    transition-duration: var(--animation-duration);
+    opacity: 1;
+    transform: rotate(calc(var(--deg))) translateX(-2500px);
 }
 
 .shootingstar::before {
@@ -26,21 +34,4 @@
     width: 300px;
     height: 1px;
     background: linear-gradient(-90deg, transparent, #fff);
-}
-
-@keyframes animate {
-    0% {
-        transform: rotate(calc(var(--deg)));
-        opacity: 0;
-    }
-    2% {
-        opacity: 1;
-    }
-    5% {
-        transform: rotate(calc(var(--deg))) translateX(-2500px);
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-    }
 }
