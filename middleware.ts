@@ -34,7 +34,7 @@ export function middleware(request: NextRequest) {
 
             response.cookies.set({
                 name: TOKEN_PARAM_NAME,
-                value: process.env.AUTH_TOKEN,
+                value: process.env.AUTH_TOKEN!,
                 path: '/',
                 maxAge
             })
