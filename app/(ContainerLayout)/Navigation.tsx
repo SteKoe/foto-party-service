@@ -25,6 +25,6 @@ export default function Navigation() {
     const filteredLinks = links
         .filter(l => l.filterFn?.({isAuthorized}) ?? true)
         .map(l => ({...l, filterFn: undefined}));
-    
+
     return <NavigationComponent links={filteredLinks}/>
 }

@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Rsvp {
+  rsvp_id          String               @id @default(uuid())
+  name             String
+  due_date         DateTime             @default(now())
+  attendees        RsvpAttendee[]
+  options          RsvpOption[]
+  attendee_choices RsvpAttendeeChoice[]
+}
+
+model RsvpOption {
+  rsvp_option_id   String               @default(uuid())
+  rsvp_id          String
+  name             String
+  type             String
+  order            Int                  @default(0)
+  config           Json                 @default("{}")
+  rsvp             Rsvp?                @relation(fields: [rsvp_id], references: [rsvp_id], onUpdate: NoAction)
+  attendee_choices RsvpAttendeeChoice[]
+
+  @@id([rsvp_id, rsvp_option_id])
+}
+
+model RsvpAttendee {
+  attendee_id String               @id @default(uuid())
+  rsvp_id     String
+  group_id    String
+  name        String
+  rsvp        Rsvp                 @relation(fields: [rsvp_id], references: [rsvp_id], onUpdate: NoAction)
+  choices     RsvpAttendeeChoice[]
+
+  @@index([rsvp_id], map: "RsvpAttendees_rsvp_id_fkey")
+}
+
+model RsvpAttendeeChoice {
+  rsvp_id        String
+  rsvp_option_id String
+  attendee_id    String
+  value          String
+  rsvp           Rsvp          @relation(fields: [rsvp_id], references: [rsvp_id], onUpdate: NoAction)
+  attendee       RsvpAttendee? @relation(fields: [attendee_id], references: [attendee_id], onUpdate: NoAction)
+  option         RsvpOption    @relation(fields: [rsvp_id, rsvp_option_id], references: [rsvp_id, rsvp_option_id], onUpdate: NoAction)
+
+  @@id([rsvp_id, rsvp_option_id, attendee_id])
+}

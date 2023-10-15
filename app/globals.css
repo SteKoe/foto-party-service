@@ -16,6 +16,15 @@ body {
     color: rgb(var(--color-rgb));
     font-family: 'Open Sans', sans-serif;
 }
+h1 {
+    @apply text-4xl md:text-6xl mb-8 mt-12 md:pt-0 md:mt-12;
+}
+h2 {
+    @apply text-3xl md:text-5xl mb-8 mt-12 md:pt-0 md:mt-12;
+}
+h3 {
+    @apply text-2xl md:text-4xl mb-8 mt-12 md:pt-0 md:mt-12;
+}
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Marcellus', serif;
