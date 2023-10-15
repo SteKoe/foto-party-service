@@ -3,7 +3,6 @@ import ContainerLayout from "@/app/ContainerLayout";
 import {Metadata} from "next";
 import prisma from "@/app/prisma";
 import {RsvpPageComponent} from "@/components/RsvpPageComponent";
-import {encrypt} from "@/utils/crypto";
 
 export const metadata: Metadata = {
     title: 'Kim & Stephan | RSVP',
@@ -13,10 +12,6 @@ export default async function Page({params}: { params: { group_id: string } }) {
     if (!params.group_id) {
         return <></>
     }
-
-    console.log(encrypt(JSON.stringify({
-        group_id: params.group_id
-    })));
     
     const attendees = await prisma.rsvpAttendee.findMany({
         where: {
