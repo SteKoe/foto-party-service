@@ -23,7 +23,6 @@ export function RsvpPageComponent({rsvp, rsvpOptions, attendees}: Props) {
     return (
         <>
             <section>
-                <h1>{rsvp.name}</h1>
                 Hallo {readableNum(attendees)}!
             </section>
             {attendeeForms}

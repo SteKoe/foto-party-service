@@ -34,8 +34,8 @@ export function BooleanField({rsvpOption, onChange, value}: Props) {
 
     return (
         <>
-            <label className="col-span-3 font-semibold text-gray-900 dark:text-white">{rsvpOption.name}</label>
-            <ul className="col-span-9 items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <label className="col-span-12 md:col-span-3 font-semibold text-gray-900 dark:text-white">{rsvpOption.name}</label>
+            <ul className="col-span-12 md:col-span-9 items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                 {internalDefinition.config.values.map((option, index) => {
                     return <OptionItem key={`${rsvpOption.rsvp_option_id}-${index}`}
                                        index={index}

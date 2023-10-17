@@ -3,19 +3,25 @@ import ContainerLayout from "@/app/ContainerLayout";
 import {Metadata} from "next";
 import prisma from "@/app/prisma";
 import {RsvpPageComponent} from "@/components/RsvpPageComponent";
+import {cookies} from "next/headers";
+import {TOKEN_PARAM_NAME} from "@/middleware";
+import {decryptToken} from "@/utils/crypto";
 
 export const metadata: Metadata = {
     title: 'Kim & Stephan | RSVP',
 }
 
-export default async function Page({params}: { params: { group_id: string } }) {
-    if (!params.group_id) {
-        return <></>
+export default async function Page() {
+    const tokenFromCookie = cookies().get(TOKEN_PARAM_NAME)?.value;
+    const token = await decryptToken(tokenFromCookie ?? '');
+    console.log(token);
+    if (!token?.rsvpGroupId) {
+        return <>{}</>
     }
-    
+
     const attendees = await prisma.rsvpAttendee.findMany({
         where: {
-            group_id: params.group_id
+            group_id: token.rsvpGroupId
         },
         include: {
             choices: true,

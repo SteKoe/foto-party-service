@@ -1,4 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
+import {decryptSymmetric, decryptToken} from "@/utils/crypto";
 
 export const TOKEN_PARAM_NAME = 'token';
 
@@ -18,14 +19,21 @@ const authorizedPaths = [
     '/api/pictures/upload',
 ];
 
-export function checkIsAuthorized(authToken: string | undefined) {
-    return authToken && authToken === process.env.AUTH_TOKEN;
+export async function checkIsAuthorized(authToken: string | undefined) {
+    try {
+        const decryptedToken = await decryptToken(authToken ?? '');
+        return decryptedToken !== null;
+    } catch (e) {
+        console.log("Error check authentication", e);
+        return false;
+    }
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const authToken = readToken(request);
 
-    if (checkIsAuthorized(authToken)) {
+    const isAuthorized = await checkIsAuthorized(authToken);
+    if (isAuthorized) {
         if (request.nextUrl.searchParams.has(TOKEN_PARAM_NAME)) {
             const url = request.nextUrl;
             url.searchParams.delete(TOKEN_PARAM_NAME);
@@ -35,16 +43,16 @@ export function middleware(request: NextRequest) {
 
             response.cookies.set({
                 name: TOKEN_PARAM_NAME,
-                value: process.env.AUTH_TOKEN!,
+                value: authToken!,
                 path: '/',
                 maxAge
             })
             return response
         }
-
+        
         return NextResponse.next()
     }
-
+    
     const pathname = new URL(request.url).pathname;
     const requiresAuthentication = authorizedPaths.includes(pathname);
     if (requiresAuthentication) {
