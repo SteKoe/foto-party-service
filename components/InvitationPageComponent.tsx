@@ -17,15 +17,11 @@ export function InvitationPageComponent({invitations, wedding}: Props) {
     const guests: WeddingGuest[] = invitations.flatMap(invitation => invitation.Guest)
 
 
-    
     return (
         <>
-            <h1>Wir freuen uns auf euch!</h1>
+            <h1>Hallo {readableNum(guests)}!</h1>
             <p>
-                Hallo {readableNum(guests)}! Schön, dass ihr hier seid. Bitte füllt das Formular aus, damit wir wissen,
-                ob ihr kommt und was ihr essen möchtet. Ohne zu viel verraten zu wollen: es gibt natürlich ein Buffet,
-                die Vorspeise aber wird euch am Platz serviert und wir würden gerne wissen, welche Präferenzen wir
-                berücksichtigen dürfen.
+                {getDescription(guests.length > 1)}
             </p>
             {invitations.map((invitation: InvitationWithGuestChoice) => {
                 return (
@@ -55,4 +51,23 @@ function readableNum(guests: WeddingGuest[]): string {
     }
 }
 
+function getDescription(plural: boolean) {
+    if (plural) {
+        return (<>
+            Schön, dass ihr hier seid. Bitte füllt das Formular aus, damit wir wissen,
+            ob ihr kommt und was ihr essen möchtet. Ohne zu viel verraten zu wollen: es gibt natürlich ein Buffet,
+            die Vorspeise aber wird am Platz serviert. Daher möchten gerne wissen, welche Präferenzen wir
+            berücksichtigen dürfen.
+        </>)
+    }
+
+    return (
+        <>
+            Schön, dass du da bist. Bitte fülle das Formular aus, damit wir wissen,
+            ob du kommst und was du essen magst. Ohne zu viel verraten zu wollen: es gibt natürlich ein Buffet,
+            die Vorspeise aber wird am Platz serviert. Daher möchten gerne wissen, welche Präferenzen wir
+            berücksichtigen dürfen.
+        </>
+    )
+}
 

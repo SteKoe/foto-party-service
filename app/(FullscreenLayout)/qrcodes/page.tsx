@@ -30,7 +30,7 @@ export default async function Page() {
             <div className={"grid-cols-1 rounded bg-white p-2 pb-4 text-black text-center"}>
                 <img className={"mx-auto"} src={dataUrl} alt={""}/>
                 <div className={""}>
-                    <Link isBlock showAnchorIcon href={link}>Öffnen</Link>
+                    <Link isBlock showAnchorIcon href={link} target="_blank">Öffnen</Link>
                 </div>
                 <div>
                     {guests?.map(g => g.name).join(", ")}
