@@ -1,5 +1,5 @@
 import {NextRequest, NextResponse} from "next/server";
-import {decryptSymmetric, decryptToken} from "@/utils/crypto";
+import {decryptToken} from "@/utils/crypto";
 
 export const TOKEN_PARAM_NAME = 'token';
 
@@ -9,7 +9,7 @@ export function readToken(request: NextRequest) {
 }
 
 const authorizedPaths = [
-    '/rsvp',
+    '/invitation',
     '/story',
     '/location',
     '/pictures',

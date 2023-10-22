@@ -1,21 +1,21 @@
 import {NextResponse} from "next/server";
 import prisma from "@/app/prisma";
-import {Rsvp} from "@prisma/client";
+import {Invitation} from ".prisma/client";
 
 export async function GET(
     request: Request,
-    {params}: { params: { rsvp_id: string } }
+    {params}: { params: { invitation_id: string } }
 ) {
     try {
-        const rsvp: Rsvp = await prisma.rsvp.findUniqueOrThrow({
+        const rsvp: Invitation = await prisma.invitation.findUniqueOrThrow({
             where: {
-                rsvp_id: params.rsvp_id
+                invitation_id: params.invitation_id
             },
         });
 
         return NextResponse.json(rsvp);
     } catch (error: any) {
-        console.error(`Error reading RSVP ${params.rsvp_id}:`, error);
+        console.error(`Error reading RSVP ${params.invitation_id}:`, error);
         return NextResponse.json({error: "Nothing here"}, {status: 404});
     }
 }

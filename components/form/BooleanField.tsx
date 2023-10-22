@@ -1,47 +1,55 @@
 'use client';
 
-import {RsvpOption} from "@prisma/client";
 import classNames from "classnames";
 import {z} from "zod";
 import {makeid} from "@/utils/makeId";
+import {InvitationGuestOption} from ".prisma/client";
 
 type Props = {
-    rsvpOption: RsvpOption,
+    fieldDefinition: InvitationGuestOption,
     value: boolean,
-    onChange: (e: RsvpOption & {
+    onChange: (e: InvitationGuestOption & {
         value: boolean
     }) => void
 }
 
 const ValueSchema = z.boolean().nullable()
 
-export function BooleanField({rsvpOption, onChange, value}: Props) {
-    const internalValue = ValueSchema.parse(value);
 
-    const internalDefinition = {
-        ...rsvpOption,
+type InternalFieldDefinitionType = InvitationGuestOption & {
+    config: {
+        values: { value: boolean, label: string }[]
+    }
+};
+export function BooleanField({fieldDefinition, onChange, value}: Props) {
+    const internalValue = ValueSchema.parse(value);
+    
+    const uniqueId = makeid(5)
+
+    const internalFieldDefinition = {
+        ...fieldDefinition,
         config: {
             values: [
                 {value: true, label: "Ja"},
                 {value: false, label: "Nein"},
             ],
         }
-    }
+    } as InternalFieldDefinitionType;
 
     const onChangeInternal = (e?: boolean) => {
-        onChange({...rsvpOption, value: e === true})
+        onChange({...fieldDefinition, value: e === true})
     }
 
     return (
         <>
-            <label className="col-span-12 md:col-span-3 font-semibold text-gray-900 dark:text-white">{rsvpOption.name}</label>
+            <label className="col-span-12 md:col-span-3 font-semibold text-white">{fieldDefinition.name}</label>
             <ul className="col-span-12 md:col-span-9 items-center w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                {internalDefinition.config.values.map((option, index) => {
-                    return <OptionItem key={`${rsvpOption.rsvp_option_id}-${index}`}
+                {internalFieldDefinition.config.values.map((value, index) => {
+                    return <OptionItem key={`${fieldDefinition.option_id}-${uniqueId}-${index}`}
                                        index={index}
-                                       definition={internalDefinition}
-                                       option={option}
-                                       checked={option.value === internalValue}
+                                       fieldDefinition={internalFieldDefinition}
+                                       option={value}
+                                       checked={value.value === internalValue}
                                        onChange={onChangeInternal}/>
                 })}
             </ul>
@@ -51,11 +59,7 @@ export function BooleanField({rsvpOption, onChange, value}: Props) {
 
 type OptionItemProps = {
     index: number,
-    definition: RsvpOption & {
-        config: {
-            values: any[]
-        }
-    },
+    fieldDefinition: InternalFieldDefinitionType,
     checked: boolean,
     option: {
         value: boolean,
@@ -64,11 +68,11 @@ type OptionItemProps = {
     onChange: (value: boolean) => void
 }
 
-function OptionItem({index, option, definition, onChange, checked}: OptionItemProps) {
-    const id = `${definition.rsvp_option_id}-${makeid()}-${index}`;
+function OptionItem({index, option, fieldDefinition, onChange, checked}: OptionItemProps) {
+    const id = `${fieldDefinition.option_id}-${option.value}-${index}`;
 
     const className = classNames(
-        {'w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600': (index !== definition.config.values?.length - 1)},
+        {'w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600': (index !== fieldDefinition.config.values?.length - 1)},
         'w-full dark:border-gray-600'
     )
 

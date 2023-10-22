@@ -1,20 +1,17 @@
 'use client';
 
 import {BooleanField} from "@/components/form/BooleanField";
-import {RsvpOption} from "@prisma/client";
-import {SelectField} from "@/components/form/SelectField";
+import {InvitationGuestOption} from ".prisma/client";
 
 type FieldProps = {
-    rsvpOption: RsvpOption,
+    option: InvitationGuestOption,
     value: any,
-    onChange: (e: RsvpOption & { value: any }) => void
+    onChange: (e: InvitationGuestOption & { value: any }) => void
 }
 
 export function Field(props: FieldProps) {
-    switch (props.rsvpOption.type) {
+    switch (props.option.type) {
         case 'boolean':
-            return <BooleanField rsvpOption={props.rsvpOption} value={props.value} onChange={props.onChange}/>
-        case 'select':
-            return <SelectField definition={props.rsvpOption} value={props.value} onChange={props.onChange}/>
+            return <BooleanField fieldDefinition={props.option} value={props.value} onChange={props.onChange}/>
     }
 }

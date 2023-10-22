@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import './fonts/Marcellus/index.css';
+@import './fonts/OpenSans/index.css';
 
 @tailwind base;
 @tailwind components;
@@ -6,16 +7,17 @@
 
 :root {
     --color-rgb: 255, 255, 255;
-    --background-rgb: 16, 23, 61;
+    --background-color: linear-gradient(#090f3a, #03092c);
     --white: 255, 255, 255
 }
 
 body {
-    background-image: linear-gradient(#090f3a, #03092c);
+    background-image: var(--background-color);
     background-attachment: fixed;
     color: rgb(var(--color-rgb));
     font-family: 'Open Sans', sans-serif;
 }
+
 h1 {
     @apply text-4xl md:text-6xl mb-8 mt-12 md:pt-0 md:mt-12;
 }
@@ -26,16 +28,11 @@ h3 {
     @apply text-2xl md:text-4xl mb-8 mt-12 md:pt-0 md:mt-12;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Marcellus', serif;
-    @apply font-extrabold;
-}
-
 body *::selection {
     background-color: rgba(var(--color-rgb), .25);
 }
 
-p {
+p:has(+ p) {
     @apply mb-4 leading-7;
 }
 

@@ -1,6 +1,6 @@
 import {NavigationComponent} from "@/components/NavigationComponent";
 import {cookies} from "next/headers";
-import {checkIsAuthorized, TOKEN_PARAM_NAME} from "@/middleware";
+import {TOKEN_PARAM_NAME} from "@/middleware";
 import {DateTime} from "luxon";
 import {decryptToken} from "@/utils/crypto";
 
@@ -19,7 +19,7 @@ const links: Links[] = [
             return token !== true && DateTime.now() >= DateTime.fromISO(process.env.MARRIAGE_DATE!);
         }
     },
-    {name: "RSVP", href: "/rsvp", filterFn: ({token}) => token !== null && token.rsvp_group_id !== null},
+    {name: "Einladung", href: "/invitation", filterFn: ({token}) => token !== null && token.invitation_id !== null},
 ]
 
 export default async function Navigation() {

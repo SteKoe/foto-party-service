@@ -1,10 +1,6 @@
 import React from "react";
 import {HeroImage} from "@/components/HeroImage";
 import {DateTime, Interval} from "luxon";
-import {cookies} from "next/headers";
-import {TOKEN_PARAM_NAME} from "@/middleware";
-import {decryptToken} from "@/utils/crypto";
-import prisma from "@/app/prisma";
 
 function calculateDaysLeft() {
     let daysLeft = 0;
@@ -20,15 +16,12 @@ function calculateDaysLeft() {
 export default async function Home() {
     const daysLeft = calculateDaysLeft();
     const title = <>{process.env.MARRIAGE_TITLE}</>;
-    const subtitle = (
-        <>
+    const subtitle = (<>
             <span dangerouslySetInnerHTML={{__html: process.env.MARRIAGE_SUBTITLE!}}/>
             {daysLeft > 0 ? (<><br/>Noch {daysLeft} Tage!</>) : ''}
-        </>
-    );
+        </>);
 
-    return (
-        <>
+    return (<>
             <h1 className="heroHeading text-center">
                 <small><em>Hochzeit unter Sternen</em></small>
                 {title}
@@ -37,6 +30,5 @@ export default async function Home() {
             <main className="px-4 py-8 md:p-12">
                 <HeroImage/>
             </main>
-        </>
-    )
+        </>)
 }

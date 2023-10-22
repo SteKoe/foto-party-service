@@ -8,47 +8,60 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-model Rsvp {
-  rsvp_id          String               @id @default(uuid())
-  name             String
-  due_date         DateTime             @default(now())
-  attendees        RsvpAttendee[]
-  options          RsvpOption[]
-  attendee_choices RsvpAttendeeChoice[]
+model Invitation {
+  invitation_id  String       @id
+  guest_id       String
+  wedding_id     String
+  invitation_key String       @db.VarChar(16)
+  order          Int          @default(0)
+  Guest          WeddingGuest @relation(fields: [guest_id], references: [guest_id])
+
+  @@unique([wedding_id, invitation_id])
+  @@index([guest_id], map: "Invitation_guest_id_fkey")
 }
 
-model RsvpOption {
-  rsvp_option_id   String               @default(uuid())
-  rsvp_id          String
-  name             String
-  type             String
-  order            Int                  @default(0)
-  config           Json                 @default("{}")
-  rsvp             Rsvp?                @relation(fields: [rsvp_id], references: [rsvp_id], onUpdate: NoAction)
-  attendee_choices RsvpAttendeeChoice[]
-
-  @@id([rsvp_id, rsvp_option_id])
+model Wedding {
+  wedding_id            String                  @id @default(dbgenerated("(uuid())"))
+  name                  String
+  date                  DateTime                @default(now())
+  GuestChoice           GuestChoice[]
+  InvitationGuestOption InvitationGuestOption[]
+  WeddingGuest          WeddingGuest[]
 }
 
-model RsvpAttendee {
-  attendee_id String               @id @default(uuid())
-  rsvp_id     String
-  group_id    String
+model WeddingGuest {
+  guest_id    String        @id @default(dbgenerated("(uuid())"))
+  wedding_id  String
   name        String
-  rsvp        Rsvp                 @relation(fields: [rsvp_id], references: [rsvp_id], onUpdate: NoAction)
-  choices     RsvpAttendeeChoice[]
+  GuestChoice GuestChoice[]
+  Invitation  Invitation[]
+  Wedding     Wedding       @relation(fields: [wedding_id], references: [wedding_id], onUpdate: NoAction, map: "RsvpAttendee_rsvp_id_fkey")
 
-  @@index([rsvp_id], map: "RsvpAttendees_rsvp_id_fkey")
+  @@index([wedding_id], map: "RsvpAttendees_rsvp_id_fkey")
 }
 
-model RsvpAttendeeChoice {
-  rsvp_id        String
-  rsvp_option_id String
-  attendee_id    String
-  value          String
-  rsvp           Rsvp          @relation(fields: [rsvp_id], references: [rsvp_id], onUpdate: NoAction)
-  attendee       RsvpAttendee? @relation(fields: [attendee_id], references: [attendee_id], onUpdate: NoAction)
-  option         RsvpOption    @relation(fields: [rsvp_id, rsvp_option_id], references: [rsvp_id, rsvp_option_id], onUpdate: NoAction)
+model GuestChoice {
+  invitation_id         String                @default(dbgenerated("(uuid())"))
+  option_id             String
+  guest_id              String
+  value                 String
+  WeddingGuest          WeddingGuest          @relation(fields: [guest_id], references: [guest_id], onUpdate: NoAction, map: "RsvpAttendeeChoice_attendee_id_fkey")
+  Wedding               Wedding               @relation(fields: [invitation_id], references: [wedding_id], onUpdate: NoAction, map: "RsvpAttendeeChoice_rsvp_id_fkey")
+  InvitationGuestOption InvitationGuestOption @relation(fields: [invitation_id, option_id], references: [wedding_id, option_id], onUpdate: NoAction, map: "RsvpAttendeeChoice_rsvp_id_rsvp_option_id_fkey")
 
-  @@id([rsvp_id, rsvp_option_id, attendee_id])
+  @@id([invitation_id, option_id, guest_id])
+  @@index([guest_id], map: "RsvpAttendeeChoice_attendee_id_fkey")
+}
+
+model InvitationGuestOption {
+  option_id   String
+  wedding_id  String
+  type        String
+  name        String
+  config      String        @default("{}") @db.LongText
+  order       Int           @default(0)
+  GuestChoice GuestChoice[]
+  Wedding     Wedding       @relation(fields: [wedding_id], references: [wedding_id], onUpdate: NoAction, map: "RsvpOption_rsvp_id_fkey")
+
+  @@id([wedding_id, option_id])
 }

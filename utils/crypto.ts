@@ -2,7 +2,7 @@ import {z} from "zod";
 
 
 const tokenSchema = z.object({
-    rsvpGroupId: z.string().optional()
+    invitationKey: z.string().optional()
 }).strict();
 
 export type AuthToken = z.infer<typeof tokenSchema>;
