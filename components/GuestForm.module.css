@@ -9,7 +9,7 @@
     animation: rocket 2s ease-in-out forwards;
 }
 
-@media (prefers-reduced-motion) { {
+@media (prefers-reduced-motion) {
     .success::after {
         display: none;
     }   
