@@ -119,7 +119,7 @@ export function GuestForm({invitationOption, invitation}: AttendeeForm) {
             <div className="grid grid-cols-12 mt-4">
                 <Button color={formState.saving ? 'secondary' : formState.success ? 'success' : 'primary'}
                         radius="sm"
-                        className={classNames('col-start-4 col-span-9', {
+                        className={classNames('col-span-12 md:col-start-4 md:col-span-9', {
                             [style['success']]: formState.success
                         })}
                         disabled={formState.saving}
