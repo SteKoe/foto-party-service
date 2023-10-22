@@ -19,6 +19,10 @@ const authorizedPaths = [
     '/api/pictures/upload',
 ];
 
+const forbiddenPathsOnServer = [
+    '/qrcodes'
+]
+
 export async function checkIsAuthorized(authToken: string | undefined) {
     try {
         const decryptedToken = await decryptToken(authToken ?? '');
@@ -30,6 +34,12 @@ export async function checkIsAuthorized(authToken: string | undefined) {
 }
 
 export async function middleware(request: NextRequest) {
+    const pathname = new URL(request.url).pathname;
+
+    if (process.env.VERCEL && forbiddenPathsOnServer.includes(pathname)) {
+        return NextResponse.redirect(new URL('/', request.url));
+    }
+
     const authToken = readToken(request);
 
     const isAuthorized = await checkIsAuthorized(authToken);
@@ -49,11 +59,10 @@ export async function middleware(request: NextRequest) {
             })
             return response
         }
-        
+
         return NextResponse.next()
     }
-    
-    const pathname = new URL(request.url).pathname;
+
     const requiresAuthentication = authorizedPaths.includes(pathname);
     if (requiresAuthentication) {
         return NextResponse.redirect(new URL('/', request.url));
