@@ -2,7 +2,7 @@
 
 import React from "react";
 import {GuestForm} from "@/components/GuestForm";
-import {InvitationGuestOption, Wedding, WeddingGuest} from ".prisma/client";
+import {InvitationGuestOption, Wedding, WeddingGuest} from "@/prisma/generated/client";
 import {InvitationWithGuestChoice} from "@/prisma/types";
 
 type Props = {

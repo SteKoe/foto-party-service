@@ -3,7 +3,7 @@
 import classNames from "classnames";
 import {z} from "zod";
 import {makeid} from "@/utils/makeId";
-import {InvitationGuestOption} from ".prisma/client";
+import {InvitationGuestOption} from "@/prisma/generated/client";
 
 type Props = {
     fieldDefinition: InvitationGuestOption,

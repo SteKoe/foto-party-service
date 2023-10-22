@@ -1,7 +1,7 @@
 'use client';
 
 import {BooleanField} from "@/components/form/BooleanField";
-import {InvitationGuestOption} from ".prisma/client";
+import {InvitationGuestOption} from "@/prisma/generated/client";
 
 type FieldProps = {
     option: InvitationGuestOption,

@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server";
 import prisma from "@/app/prisma";
-import {Invitation} from ".prisma/client";
+import {Invitation} from "@/prisma/generated/client";
 
 export async function GET(
     request: Request,

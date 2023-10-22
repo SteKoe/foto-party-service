@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import {GuestChoice, InvitationGuestOption} from "@prisma/client";
 import {Field} from "@/components/form/Field";
-import {WeddingGuest} from ".prisma/client";
+import {GuestChoice, InvitationGuestOption, WeddingGuest} from "@/prisma/generated/client";
 
 const convertType = (rsvpOption: InvitationGuestOption, value: any) => {
     if (rsvpOption.type.toLowerCase() === 'boolean') {
