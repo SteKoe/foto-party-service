@@ -1,0 +1,29 @@
+.success {
+    overflow: visible;
+}
+.success::after {
+    position: absolute;
+    left: 5%;
+    content: '🚀';
+    font-size: 5rem;
+    animation: rocket 2s ease-in-out forwards;
+}
+
+@media (prefers-reduced-motion) { {
+    .success::after {
+        display: none;
+    }   
+}
+
+@keyframes rocket {
+    0% {
+        opacity: 0;
+        transform: translate(0,0);
+    }
+    20% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(1000px,-1000px) ;
+    }
+}

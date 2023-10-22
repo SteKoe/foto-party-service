@@ -4,6 +4,8 @@ import {InvitationGuestOption} from "@/prisma/generated/client";
 import {Button} from "@nextui-org/react";
 import {InvitationWithGuestChoice} from "@/prisma/types";
 import {saveGuestChoices} from "@/app/actions/invitation";
+import classNames from "classnames";
+import style from "components/GuestForm.module.css"
 
 const convertType = (rsvpOption: InvitationGuestOption, value: any) => {
     if (rsvpOption.type.toLowerCase() === 'boolean') {
@@ -28,7 +30,8 @@ type AttendeeForm = {
 
 export function GuestForm({invitationOption, invitation}: AttendeeForm) {
     const [formState, setFormState] = useState({
-        saving: false
+        saving: false,
+        success: false
     })
     
     const initialState = invitationOption
@@ -64,21 +67,38 @@ export function GuestForm({invitationOption, invitation}: AttendeeForm) {
     const handleSubmit = async (e: FormEvent<any>) => {
         e.preventDefault();
 
-        setFormState({
-            saving: true
-        })
+        setFormState(prevState => ({
+            ...prevState,
+            saving: true,
+            success: false
+        }));
+        
         try {
             await saveGuestChoices({
                 guest_id: invitation.Guest.guest_id,
                 wedding_id: invitation.wedding_id,
                 choices: state
             })
+
+            setFormState(prevState => ({
+                ...prevState,
+                saving: false,
+                success: true
+            }));
+            
+            setTimeout(() => {
+                setFormState(prevState => ({
+                    ...prevState,
+                    success: false
+                }));
+            }, 1500);
         } catch (e) {
             console.error(e);
-        } finally {
-            setFormState({
-                saving: false
-            })
+            setFormState(prevState => ({
+                ...prevState,
+                saving: false,
+                success: false
+            }));
         }
     }
 
@@ -97,12 +117,14 @@ export function GuestForm({invitationOption, invitation}: AttendeeForm) {
                 })}
             </div>
             <div className="grid grid-cols-12 mt-4">
-                <Button color={formState.saving ? 'secondary' : 'primary'}
+                <Button color={formState.saving ? 'secondary' : formState.success ? 'success' : 'primary'}
                         radius="sm"
-                        className="col-start-4 col-span-9"
+                        className={classNames('col-start-4 col-span-9', {
+                            [style['success']]: formState.success
+                        })}
                         disabled={formState.saving}
                         type="submit">
-                    {formState.saving ? 'Wird gespeichert...' : 'Speichern'}
+                    {formState.saving ? 'Wird gespeichert...' : formState.success ? 'Gespeichert!' : 'Speichern'}
                 </Button>
             </div>
         </form>
