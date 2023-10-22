@@ -1,6 +1,9 @@
-import React, {useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {Field} from "@/components/form/Field";
-import {GuestChoice, InvitationGuestOption, WeddingGuest} from "@/prisma/generated/client";
+import {InvitationGuestOption} from "@/prisma/generated/client";
+import {Button} from "@nextui-org/react";
+import {InvitationWithGuestChoice} from "@/prisma/types";
+import {saveGuestChoices} from "@/app/actions/invitation";
 
 const convertType = (rsvpOption: InvitationGuestOption, value: any) => {
     if (rsvpOption.type.toLowerCase() === 'boolean') {
@@ -20,19 +23,21 @@ const convertToBoolean = (value: string | boolean | null) => {
 
 type AttendeeForm = {
     invitationOption: InvitationGuestOption[],
-    guest: WeddingGuest & {
-        GuestChoice?: GuestChoice[]
-    }
+    invitation: InvitationWithGuestChoice
 }
 
-export function GuestForm({invitationOption, guest}: AttendeeForm) {
+export function GuestForm({invitationOption, invitation}: AttendeeForm) {
+    const [formState, setFormState] = useState({
+        saving: false
+    })
+    
     const initialState = invitationOption
         .map((rev) => ({
             [rev.option_id]: null
         }))
         .reduce((acc, curr) => ({...acc, ...curr}), {});
 
-    const guestChoices = guest.GuestChoice?.reduce((acc: any, curr: any) => {
+    const guestChoices = invitation.Guest.GuestChoice?.reduce((acc: any, curr: any) => {
         const rsvpOption = invitationOption.find((rev) => rev.option_id === curr.option_id)!;
         const convertedValue = convertType(rsvpOption, curr.value);
 
@@ -46,7 +51,6 @@ export function GuestForm({invitationOption, guest}: AttendeeForm) {
         ...guestChoices
     });
 
-    const [isSaving, setIsSaving] = useState(false);
     const onChange = async (e: InvitationGuestOption & {
         value: any
     }) => {
@@ -55,36 +59,52 @@ export function GuestForm({invitationOption, guest}: AttendeeForm) {
             [e.option_id]: e.value
         };
         setState(newState);
+    }
 
-        const uri = `/api/wedding/${invitationOption[0].wedding_id}/guest/${guest.guest_id}`;
+    const handleSubmit = async (e: FormEvent<any>) => {
+        e.preventDefault();
 
+        setFormState({
+            saving: true
+        })
         try {
-            setIsSaving(true);
-            await fetch(uri, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newState),
-            });
+            await saveGuestChoices({
+                guest_id: invitation.Guest.guest_id,
+                wedding_id: invitation.wedding_id,
+                choices: state
+            })
         } catch (e) {
+            console.error(e);
         } finally {
-            setIsSaving(false);
+            setFormState({
+                saving: false
+            })
         }
     }
 
-    const fields = invitationOption.map((option) => {
-        return (
-            <Field key={option.name} option={option} value={state[option.option_id]} onChange={onChange}/>
-        )
-    })
-
     return (
-        <>
+        <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-12 gap-4 items-center">
-                {isSaving && <div className="col-span-9 col-start-4">Saving...</div>}
-                {fields}
+                {invitationOption.map((option) => {
+                    return (
+                        <Field key={option.name}
+                               guestId={invitation.Guest.guest_id}
+                               option={option}
+                               value={state[option.option_id]}
+                               onChange={onChange}
+                        />
+                    )
+                })}
             </div>
-        </>
+            <div className="grid grid-cols-12 mt-4">
+                <Button color={formState.saving ? 'secondary' : 'primary'}
+                        radius="sm"
+                        className="col-start-4 col-span-9"
+                        disabled={formState.saving}
+                        type="submit">
+                    {formState.saving ? 'Wird gespeichert...' : 'Speichern'}
+                </Button>
+            </div>
+        </form>
     );
 }
