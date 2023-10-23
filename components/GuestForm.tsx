@@ -31,7 +31,8 @@ type AttendeeForm = {
 export function GuestForm({invitationOption, invitation}: AttendeeForm) {
     const [formState, setFormState] = useState({
         saving: false,
-        success: false
+        success: false,
+        error: false
     })
     
     const initialState = invitationOption
@@ -70,7 +71,8 @@ export function GuestForm({invitationOption, invitation}: AttendeeForm) {
         setFormState(prevState => ({
             ...prevState,
             saving: true,
-            success: false
+            success: false,
+            error: false
         }));
         
         try {
@@ -83,23 +85,27 @@ export function GuestForm({invitationOption, invitation}: AttendeeForm) {
             setFormState(prevState => ({
                 ...prevState,
                 saving: false,
-                success: true
+                success: true,
             }));
             
-            setTimeout(() => {
-                setFormState(prevState => ({
-                    ...prevState,
-                    success: false
-                }));
-            }, 1500);
         } catch (e) {
             console.error(e);
             setFormState(prevState => ({
                 ...prevState,
                 saving: false,
-                success: false
+                success: false,
+                error: true
             }));
         }
+
+        setTimeout(() => {
+            setFormState(prevState => ({
+                ...prevState,
+                saving: false,
+                success: false,
+                error: false
+            }));
+        }, 2500);
     }
 
     return (
@@ -117,14 +123,14 @@ export function GuestForm({invitationOption, invitation}: AttendeeForm) {
                 })}
             </div>
             <div className="grid grid-cols-12 mt-4">
-                <Button color={formState.saving ? 'secondary' : formState.success ? 'success' : 'primary'}
+                <Button color={formState.saving ? 'secondary' : formState.success ? 'success' : formState.error ? 'danger' : 'primary'}
                         radius="sm"
-                        className={classNames('col-span-12 md:col-start-4 md:col-span-9', {
+                        className={classNames('col-span-12', {
                             [style['success']]: formState.success
                         })}
                         disabled={formState.saving}
                         type="submit">
-                    {formState.saving ? 'Wird gespeichert...' : formState.success ? 'Gespeichert!' : 'Speichern'}
+                    {formState.saving ? 'Wird gespeichert...' : formState.success ? 'Gespeichert!' : formState.error ? 'Das hat nicht geklappt, versuche es nochmal!' : 'Speichern'}
                 </Button>
             </div>
         </form>

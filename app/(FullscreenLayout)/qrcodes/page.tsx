@@ -11,9 +11,10 @@ export default async function Page() {
         include: {
             Guest: true
         },
-        orderBy: {
-            order: "asc"
-        }
+        orderBy: [
+            {invitation_key: "asc"},
+            {order: "asc"}
+        ]
     });
     const groupedInvitations = groupByInvitationKey(invitations);
 
@@ -27,13 +28,13 @@ export default async function Page() {
         const guests = groupedInvitations[invitation_key]?.flatMap((invitation) => invitation.Guest);
 
         return (
-            <div className={"grid-cols-1 rounded bg-white p-2 pb-4 text-black text-center"}>
-                <img className={"mx-auto"} src={dataUrl} alt={""}/>
-                <div className={""}>
-                    <Link isBlock showAnchorIcon href={link} target="_blank">Öffnen</Link>
-                </div>
-                <div>
+            <div className={"grid-cols-1 rounded bg-white p-2 text-black text-center"}>
+                <div className="bg-gray-200 rounded p-2 truncate">
                     {guests?.map(g => g.name).join(", ")}
+                </div>
+                <img className={"mx-auto my-0"} src={dataUrl} alt={""}/>
+                <div className="mt-0 mb-2">
+                    <Link isBlock showAnchorIcon href={link} target="_blank">Öffnen</Link>
                 </div>
             </div>
         )
@@ -41,7 +42,7 @@ export default async function Page() {
 
 
     return (
-        <div className={"grid-cols-6 grid gap-4 m-4"}>
+        <div className={"grid-cols-1 md:grid-cols-3 xl:grid-cols-6 grid gap-4 m-4"}>
             {map}
         </div>
     )

@@ -24,6 +24,9 @@ export default async function Page() {
             where: {
                 invitation_key: token.invitationKey,
             },
+            orderBy: {
+                order: 'asc'
+            },
             include: {
                 Guest: {
                     include: {
@@ -38,7 +41,11 @@ export default async function Page() {
             wedding_id: invitations[0].wedding_id,
         },
         include: {
-            InvitationGuestOption: true
+            InvitationGuestOption: {
+                orderBy: {
+                    order: 'asc'
+                }
+            }
         }
     });
 

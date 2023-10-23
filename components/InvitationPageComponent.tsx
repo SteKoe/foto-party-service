@@ -16,7 +16,6 @@ type Props = {
 export function InvitationPageComponent({invitations, wedding}: Props) {
     const guests: WeddingGuest[] = invitations.flatMap(invitation => invitation.Guest)
 
-
     return (
         <>
             <h1>Hallo {readableNum(guests)}!</h1>
@@ -25,9 +24,10 @@ export function InvitationPageComponent({invitations, wedding}: Props) {
             </p>
             {invitations.map((invitation: InvitationWithGuestChoice) => {
                 return (
-                    <div key={invitation.Guest.guest_id}>
+                    <div key={invitation.Guest.guest_id} className="border rounded-md border-white/20 bg-black/20 backdrop-blur p-4 my-8">
                         <div>
-                            <h3>{invitation.Guest.name}</h3>
+                            <h3 className="m-0 flex-1">{invitation.Guest.name}</h3>
+                            <hr className="my-3 h-px rounded-full my-8 bg-white/20 border-0"/>
                             <GuestForm invitation={invitation}
                                        invitationOption={wedding.InvitationGuestOption}/>
                         </div>

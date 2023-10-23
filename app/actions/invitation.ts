@@ -13,35 +13,37 @@ type Props = {
 
 export async function saveGuestChoices({guest_id, wedding_id, choices}: Props) {
     for (let option_id in choices) {
-        const value = String(choices[option_id]);
-        try {
-            await prisma.guestChoice.upsert({
-                where: {
-                    wedding_id_option_id_guest_id: {
+        if (choices[option_id] !== null) {
+            const value = String(choices[option_id]);
+            try {
+                await prisma.guestChoice.upsert({
+                    where: {
+                        wedding_id_option_id_guest_id: {
+                            wedding_id,
+                            option_id,
+                            guest_id
+                        },
+                    },
+                    update: {
+                        value
+                    },
+                    create: {
                         wedding_id,
                         option_id,
-                        guest_id
-                    },
-                },
-                update: {
-                    value
-                },
-                create: {
+                        guest_id,
+                        value,
+                    }
+                })
+
+                revalidatePath('/')
+            } catch (e) {
+                console.log(`Error saving ${JSON.stringify({
                     wedding_id,
                     option_id,
                     guest_id,
                     value,
-                }
-            })
-
-            revalidatePath('/')
-        } catch (e) {
-            console.log(`Error saving ${JSON.stringify({
-                wedding_id,
-                option_id,
-                guest_id,
-                value,
-            })}`, e);
+                })}`, e);
+            }
         }
     }
 }

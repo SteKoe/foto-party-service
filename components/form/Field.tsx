@@ -2,6 +2,7 @@
 
 import {BooleanField} from "@/components/form/BooleanField";
 import {InvitationGuestOption} from "@/prisma/generated/client";
+import {Textarea} from "@nextui-org/input";
 
 type FieldProps = {
     option: InvitationGuestOption,
@@ -18,5 +19,16 @@ export function Field(props: FieldProps) {
                                  value={props.value}
                                  onChange={props.onChange}
             />
+        case 'text':
+            return <Textarea
+                label={props.option.name}
+                color="secondary"
+                className="col-span-12"
+                value={props.value ?? ''}
+                onValueChange={(value) => props.onChange({
+                    ...props.option,
+                    value: value.trim()
+                })}
+            ></Textarea>
     }
 }
