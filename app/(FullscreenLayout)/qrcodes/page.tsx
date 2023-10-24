@@ -28,12 +28,12 @@ export default async function Page() {
         const guests = groupedInvitations[invitation_key]?.flatMap((invitation) => invitation.Guest);
 
         return (
-            <div className={"grid-cols-1 rounded bg-white p-2 text-black text-center"}>
+            <div className={"grid-cols-1 rounded bg-white p-2 text-black text-center print:border-1 break-inside-avoid"}>
                 <div className="bg-gray-200 rounded p-2 truncate">
                     {guests?.map(g => g.name).join(", ")}
                 </div>
                 <img className={"mx-auto my-0"} src={dataUrl} alt={""}/>
-                <div className="mt-0 mb-2">
+                <div className="mt-0 mb-2 print:hidden">
                     <Link isBlock showAnchorIcon href={link} target="_blank">Öffnen</Link>
                 </div>
             </div>
@@ -42,7 +42,7 @@ export default async function Page() {
 
 
     return (
-        <div className={"grid-cols-1 md:grid-cols-3 xl:grid-cols-6 grid gap-4 m-4"}>
+        <div className={"grid-cols-1 print:grid-cols-3 md:grid-cols-3 xl:grid-cols-6 grid gap-4 m-4"}>
             {map}
         </div>
     )
