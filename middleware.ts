@@ -1,10 +1,10 @@
-import {NextRequest, NextResponse} from "next/server";
-import {decryptToken} from "@/utils/crypto";
+import { NextRequest, NextResponse } from 'next/server';
+import { decryptToken } from '@/utils/crypto';
 
 export const TOKEN_PARAM_NAME = 'token';
 
 export function readToken(request: NextRequest) {
-    const cookie = request.cookies.get(TOKEN_PARAM_NAME)
+    const cookie = request.cookies.get(TOKEN_PARAM_NAME);
     return request.nextUrl.searchParams.get(TOKEN_PARAM_NAME) || cookie?.value;
 }
 
@@ -19,16 +19,14 @@ const authorizedPaths = [
     '/api/pictures/upload',
 ];
 
-const forbiddenPathsOnServer = [
-    '/qrcodes'
-]
+const forbiddenPathsOnServer = ['/qrcodes'];
 
 export async function checkIsAuthorized(authToken: string | undefined) {
     try {
         const decryptedToken = await decryptToken(authToken ?? '');
         return decryptedToken !== null;
     } catch (e) {
-        console.log("Error check authentication", e);
+        console.log('Error check authentication', e);
         return false;
     }
 }
@@ -48,19 +46,26 @@ export async function middleware(request: NextRequest) {
             const url = request.nextUrl;
             url.searchParams.delete(TOKEN_PARAM_NAME);
 
+            const token = await decryptToken(authToken!);
+            if (token?.invitationKey && Object.keys(token).length === 1) {
+                url.pathname = '/invitation';
+            }
+
             const response = NextResponse.redirect(url);
-            const maxAge = Number(process.env.AUTH_TOKEN_SECONDS ?? 60 * 60 * 24);
+            const maxAge = Number(
+                process.env.AUTH_TOKEN_SECONDS ?? 60 * 60 * 24,
+            );
 
             response.cookies.set({
                 name: TOKEN_PARAM_NAME,
                 value: authToken!,
                 path: '/',
-                maxAge
-            })
-            return response
+                maxAge,
+            });
+            return response;
         }
 
-        return NextResponse.next()
+        return NextResponse.next();
     }
 
     const requiresAuthentication = authorizedPaths.includes(pathname);
