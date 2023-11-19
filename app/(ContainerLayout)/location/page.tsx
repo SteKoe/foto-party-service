@@ -30,7 +30,7 @@ export default function Page() {
                 Trauung das Ja-Wort geben.
                 Anschließend wird gefeiert, getanzt und gelacht! Wir freuen uns auf Euch!
             </p>
-            <div className="text-center mb-12">Dresscode: Tanzbar festlich!</div>
+            <div className="text-center mb-12">Dresscode: Tanzbar chick!</div>
 
             <h2 className="heading text-4xl text-center">Locations</h2>
 
@@ -62,7 +62,7 @@ export default function Page() {
                         <h2 className="mb-4 text-2xl">Location & Freie Trauung</h2>
                         <dl className="horizontal">
                             <dt className="font-bold">Wann</dt>
-                            <dd>16:00 Uhr</dd>
+                            <dd>16:30 Uhr</dd>
                             <dt className="font-bold">Wo</dt>
                             <dd>Franz Ferdinand<br/>Klinikstraße 51, 44791 Bochum</dd>
                         </dl>
