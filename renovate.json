@@ -6,8 +6,11 @@
   "packageRules": [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": false,
+      "automerge": true,
       "automergeType": "branch"
     }
+  ],
+  "automergeSchedule": [
+    "before 4am on Monday"
   ]
 }
