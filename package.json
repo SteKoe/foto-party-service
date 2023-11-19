@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@aws-sdk/signature-v4-crt": "^3.357.0",
-    "@types/formidable": "^2.0.6",
+    "@types/formidable": "^3.0.0",
     "@types/luxon": "^3.3.2",
     "@types/node": "^20.8.6",
     "@types/qrcode": "^1.5.4",
