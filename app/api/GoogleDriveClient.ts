@@ -17,7 +17,7 @@ export async function uploadImage(filename: string, blob: Buffer) {
     try {
         const drive = google.drive({ version: 'v3', auth: createAuthClient() });
 
-        let bufferStream = new stream.PassThrough();
+        const bufferStream = new stream.PassThrough();
         bufferStream.end(blob);
 
         return await drive.files.create({

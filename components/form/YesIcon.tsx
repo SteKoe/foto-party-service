@@ -1,4 +1,4 @@
-import React, {PropsWithoutRef} from "react";
+import React, { PropsWithoutRef } from 'react';
 
 export const YesIcon = (props: PropsWithoutRef<any>) => (
     <svg

@@ -1,15 +1,14 @@
 'use client';
 
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faMapPin} from "@fortawesome/free-solid-svg-icons";
-import styles from "./TimelineEntry.module.scss"
-import classNames from "classnames";
-import {TimelineEvent} from "@/app/(ContainerLayout)/story/TimelineEvent";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapPin } from '@fortawesome/free-solid-svg-icons';
+import styles from './TimelineEntry.module.scss';
+import classNames from 'classnames';
+import { TimelineEvent } from '@/app/(ContainerLayout)/story/TimelineEvent';
 
-import Image from "next/image";
+import Image from 'next/image';
 
-
-type TimelineEntryProps = TimelineEvent
+type TimelineEntryProps = TimelineEvent;
 
 const dataVideo = (movie: string | undefined) => {
     if (!movie) {
@@ -23,60 +22,101 @@ const dataVideo = (movie: string | undefined) => {
                 type: 'video/mp4',
             },
         ],
-        attributes: {preload: false, controls: false, playsinline: true, muted: true},
+        attributes: {
+            preload: false,
+            controls: false,
+            playsinline: true,
+            muted: true,
+        },
     });
-}
+};
 
 export function TimelineEntry({
-                                  position,
-                                  icon,
-                                  datum,
-                                  bild,
-                                  movie,
-                                  beschreibung
-                              }: TimelineEntryProps) {
+    position,
+    icon,
+    datum,
+    bild,
+    movie,
+    beschreibung,
+}: TimelineEntryProps) {
     return (
-        <section className={classNames(
-            "timeline-entry",
-            styles['timeline-entry'],
-            {
+        <section
+            className={classNames('timeline-entry', styles['timeline-entry'], {
                 [styles['timeline-entry--left']]: position === 'left',
                 [styles['timeline-entry--center']]: position === 'center',
                 [styles['timeline-entry--right']]: position === 'right',
-            }
-        )}>
+            })}
+        >
             <div className={styles['timeline-entry__wrapper']}>
-                <div
-                    className={styles['timeline-entry__body']}
-                >
+                <div className={styles['timeline-entry__body']}>
                     <div>
-                        <div data-src={bild}
-                             data-video={dataVideo(movie)}
-                             data-sub-html={beschreibung}
-                             className={classNames('overflow-hidden bg-white/80 backdrop-blur rounded shadow relative', {'gallery-item': bild || movie})}>
-                            {bild ? (<Image alt={""} width={640} height={640} src={bild}
-                                            className={"w-full min-w-full object-cover object-top"}/>) : ''}
-                            {movie ? (<video width={640}
-                                             height={640}
-                                             src={movie}
-                                             autoPlay={true}
-                                             muted={true}
-                                             loop={true}
-                                             playsInline={true}
-                                             className={"w-full min-w-full object-cover object-top"}/>) : ''}
+                        <div
+                            data-src={bild}
+                            data-video={dataVideo(movie)}
+                            data-sub-html={beschreibung}
+                            className={classNames(
+                                'relative overflow-hidden rounded bg-white/80 shadow backdrop-blur',
+                                { 'gallery-item': bild || movie },
+                            )}
+                        >
+                            {bild ? (
+                                <Image
+                                    alt={''}
+                                    width={640}
+                                    height={640}
+                                    src={bild}
+                                    className={
+                                        'w-full min-w-full object-cover object-top'
+                                    }
+                                />
+                            ) : (
+                                ''
+                            )}
+                            {movie ? (
+                                <video
+                                    width={640}
+                                    height={640}
+                                    src={movie}
+                                    autoPlay={true}
+                                    muted={true}
+                                    loop={true}
+                                    playsInline={true}
+                                    className={
+                                        'w-full min-w-full object-cover object-top'
+                                    }
+                                />
+                            ) : (
+                                ''
+                            )}
 
                             {beschreibung ? (
-                                <section className={"px-4 pt-4"}>
+                                <section className={'px-4 pt-4'}>
                                     {beschreibung}
                                 </section>
-                            ) : ''}
-                            {datum ? (<div className="px-4 pb-4"><strong><em>{datum}</em></strong></div>) : ''}
+                            ) : (
+                                ''
+                            )}
+                            {datum ? (
+                                <div className="px-4 pb-4">
+                                    <strong>
+                                        <em>{datum}</em>
+                                    </strong>
+                                </div>
+                            ) : (
+                                ''
+                            )}
                         </div>
                     </div>
                 </div>
-                <div
-                    className={styles['timeline-entry__icon']}>
-                    {icon ? icon : <FontAwesomeIcon icon={faMapPin} className="text-white p-2.5"/>}
+                <div className={styles['timeline-entry__icon']}>
+                    {icon ? (
+                        icon
+                    ) : (
+                        <FontAwesomeIcon
+                            icon={faMapPin}
+                            className="p-2.5 text-white"
+                        />
+                    )}
                 </div>
             </div>
         </section>

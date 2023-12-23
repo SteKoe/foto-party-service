@@ -1,13 +1,11 @@
-import {NextResponse} from "next/server";
-import sharp from "sharp";
-import {randomUUID} from "crypto";
-import {uploadImage} from "@/app/api/GoogleDriveClient";
+import { NextResponse } from 'next/server';
+import sharp from 'sharp';
+import { randomUUID } from 'crypto';
+import { uploadImage } from '@/app/api/GoogleDriveClient';
 
-export async function POST(
-    request: Request,
-) {
+export async function POST(request: Request) {
     const formData = await request.formData();
-    const file = formData.get("file");
+    const file = formData.get('file');
 
     if (file instanceof Blob) {
         const input = await toBuffer(file.stream());
@@ -27,26 +25,30 @@ export async function POST(
         const response = await uploadImage(newFilename, buffer);
 
         if (response) {
-            return new NextResponse(null, {status: 201});
+            return new NextResponse(null, { status: 201 });
         } else {
-            return NextResponse.json({
-                error: response
-            }, {status: 400})
+            return NextResponse.json(
+                {
+                    error: response,
+                },
+                { status: 400 },
+            );
         }
     }
 
-    return NextResponse.json("post");
+    return NextResponse.json('post');
 }
 
 async function toBuffer(stream: ReadableStream<Uint8Array>) {
-    const list = []
-    const reader = stream.getReader()
-    while (true) {
-        const {value, done} = await reader.read()
-        if (value)
-            list.push(value)
-        if (done)
-            break
+    const list = [];
+    const reader = stream.getReader();
+
+    let complete = false;
+    while (!complete) {
+        const { value, done } = await reader.read();
+        if (value) list.push(value);
+
+        complete = done;
     }
-    return Buffer.concat(list)
+    return Buffer.concat(list);
 }

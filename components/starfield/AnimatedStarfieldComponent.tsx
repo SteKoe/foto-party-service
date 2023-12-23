@@ -7,7 +7,7 @@ export default function AnimatedStarfield() {
             <div
                 className={classNames(
                     styles['root'],
-                    'flex flex-col starfield-root',
+                    'starfield-root flex flex-col',
                 )}
             >
                 <div className={styles['starContainer']}>

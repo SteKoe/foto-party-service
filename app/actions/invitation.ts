@@ -1,18 +1,22 @@
-'use server'
+'use server';
 
-import prisma from "@/app/prisma";
-import {revalidatePath} from "next/cache";
+import prisma from '@/app/prisma';
+import { revalidatePath } from 'next/cache';
 
 type Props = {
-    wedding_id: string,
-    guest_id: string,
+    wedding_id: string;
+    guest_id: string;
     choices: {
-        [key: string]: any
-    }
-}
+        [key: string]: any;
+    };
+};
 
-export async function saveGuestChoices({guest_id, wedding_id, choices}: Props) {
-    for (let option_id in choices) {
+export async function saveGuestChoices({
+    guest_id,
+    wedding_id,
+    choices,
+}: Props) {
+    for (const option_id in choices) {
         if (choices[option_id] !== null) {
             const value = String(choices[option_id]);
             try {
@@ -21,28 +25,31 @@ export async function saveGuestChoices({guest_id, wedding_id, choices}: Props) {
                         wedding_id_option_id_guest_id: {
                             wedding_id,
                             option_id,
-                            guest_id
+                            guest_id,
                         },
                     },
                     update: {
-                        value
+                        value,
                     },
                     create: {
                         wedding_id,
                         option_id,
                         guest_id,
                         value,
-                    }
-                })
+                    },
+                });
 
-                revalidatePath('/')
+                revalidatePath('/');
             } catch (e) {
-                console.log(`Error saving ${JSON.stringify({
-                    wedding_id,
-                    option_id,
-                    guest_id,
-                    value,
-                })}`, e);
+                console.log(
+                    `Error saving ${JSON.stringify({
+                        wedding_id,
+                        option_id,
+                        guest_id,
+                        value,
+                    })}`,
+                    e,
+                );
             }
         }
     }

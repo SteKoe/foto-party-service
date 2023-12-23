@@ -1,5 +1,5 @@
-import React from "react";
-import Image from "next/image";
+import React from 'react';
+import Image from 'next/image';
 
 const alt = `
 Ein ekelhaft gutaussehendes und mindestens genauso verliebtes Paar, sitzt sich küssend auf einer Bank auf stein.
@@ -7,9 +7,14 @@ Ein ekelhaft gutaussehendes und mindestens genauso verliebtes Paar, sitzt sich k
 
 export const HeroImage = () => {
     return (
-        <span className="relative cover-image">
-            <Image src="/img/hero.jpg" width={1024} height={256} alt={alt}
-                   className="rounded md:rounded-xl mx-auto shadow-xl"/>
+        <span className="cover-image relative">
+            <Image
+                src="/img/hero.jpg"
+                width={1024}
+                height={256}
+                alt={alt}
+                className="mx-auto rounded shadow-xl md:rounded-xl"
+            />
         </span>
-    )
-}
+    );
+};

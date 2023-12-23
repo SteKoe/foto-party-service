@@ -1,4 +1,4 @@
-import React, {PropsWithoutRef} from "react";
+import React, { PropsWithoutRef } from 'react';
 
 export const NoIcon = (props: PropsWithoutRef<any>) => (
     <svg
@@ -16,4 +16,3 @@ export const NoIcon = (props: PropsWithoutRef<any>) => (
         />
     </svg>
 );
-

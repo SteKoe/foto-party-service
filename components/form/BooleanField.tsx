@@ -1,37 +1,29 @@
 'use client';
 
-import {z} from "zod";
-import {InvitationGuestOption} from "@/prisma/generated/client";
-import {Switch} from "@nextui-org/switch";
-import {YesIcon} from "@/components/form/YesIcon";
-import {NoIcon} from "@/components/form/NoIcon";
+import { InvitationGuestOption } from '@/prisma/generated/client';
+import { Switch } from '@nextui-org/switch';
+import { YesIcon } from '@/components/form/YesIcon';
+import { NoIcon } from '@/components/form/NoIcon';
 
 type Props = {
-    guestId: string,
-    fieldDefinition: InvitationGuestOption,
-    value: boolean,
-    onChange: (e: InvitationGuestOption & {
-        value: boolean
-    }) => void
-}
-
-const ValueSchema = z.boolean().nullable()
-
-
-type InternalFieldDefinitionType = InvitationGuestOption & {
-    config: {
-        values: { value: boolean, label: string }[]
-    }
+    guestId: string;
+    fieldDefinition: InvitationGuestOption;
+    value: boolean;
+    onChange: (
+        e: InvitationGuestOption & {
+            value: boolean;
+        },
+    ) => void;
 };
 
-export function BooleanField({fieldDefinition, value, onChange}: Props) {
+export function BooleanField({ fieldDefinition, value, onChange }: Props) {
     const onValueChange = (value: boolean) => {
         onChange({
             ...fieldDefinition,
             value,
-        })
-    }
-    
+        });
+    };
+
     return (
         <div className="col-span-12">
             <Switch
@@ -51,5 +43,5 @@ export function BooleanField({fieldDefinition, value, onChange}: Props) {
                 </div>
             </Switch>
         </div>
-    )
+    );
 }

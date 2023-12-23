@@ -1,11 +1,11 @@
 import React from 'react';
 import ContainerLayout from '@/app/ContainerLayout';
-import {Metadata} from 'next';
-import {InvitationPageComponent} from '@/components/InvitationPageComponent';
-import {cookies} from 'next/headers';
-import {TOKEN_PARAM_NAME} from '@/middleware';
-import {decryptToken} from '@/utils/crypto';
-import prisma from "@/app/prisma";
+import { Metadata } from 'next';
+import { InvitationPageComponent } from '@/components/InvitationPageComponent';
+import { cookies } from 'next/headers';
+import { TOKEN_PARAM_NAME } from '@/middleware';
+import { decryptToken } from '@/utils/crypto';
+import prisma from '@/app/prisma';
 
 export const metadata: Metadata = {
     title: 'Kim & Stephan | RSVP',
@@ -19,22 +19,21 @@ export default async function Page() {
         return <>{}</>;
     }
 
-    const invitations =
-        await prisma.invitation.findMany({
-            where: {
-                invitation_key: token.invitationKey,
-            },
-            orderBy: {
-                order: 'asc'
-            },
-            include: {
-                Guest: {
-                    include: {
-                        GuestChoice: true
-                    }
+    const invitations = await prisma.invitation.findMany({
+        where: {
+            invitation_key: token.invitationKey,
+        },
+        orderBy: {
+            order: 'asc',
+        },
+        include: {
+            Guest: {
+                include: {
+                    GuestChoice: true,
                 },
-            }
-        });
+            },
+        },
+    });
 
     const wedding = await prisma.wedding.findFirst({
         where: {
@@ -43,15 +42,18 @@ export default async function Page() {
         include: {
             InvitationGuestOption: {
                 orderBy: {
-                    order: 'asc'
-                }
-            }
-        }
+                    order: 'asc',
+                },
+            },
+        },
     });
 
     return (
         <ContainerLayout>
-            <InvitationPageComponent invitations={invitations} wedding={wedding!}/>
+            <InvitationPageComponent
+                invitations={invitations}
+                wedding={wedding!}
+            />
         </ContainerLayout>
     );
 }
