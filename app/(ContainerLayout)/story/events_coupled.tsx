@@ -41,7 +41,7 @@ export const events_coupled: TimelineEvent[] = [
         beschreibung: "Unser erster gemeinsamer Urlaub. In Dalyan!"
     },
     {
-        datum: "Oktboer 2019",
+        datum: "Oktober 2019",
         bild: "/img/timeline/2019-paris.jpg",
         beschreibung: "Urlaub in Paris!"
     },

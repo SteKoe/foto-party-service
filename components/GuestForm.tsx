@@ -5,7 +5,7 @@ import {Button} from "@nextui-org/react";
 import {InvitationWithGuestChoice} from "@/prisma/types";
 import {saveGuestChoices} from "@/app/actions/invitation";
 import classNames from "classnames";
-import style from "components/GuestForm.module.css"
+import style from "./GuestForm.module.css"
 
 const convertType = (rsvpOption: InvitationGuestOption, value: any) => {
     if (rsvpOption.type.toLowerCase() === 'boolean') {
