@@ -17,6 +17,11 @@ const links: Links[] = [
         href: '/location',
         filterFn: ({ token }) => token !== null,
     },
+    {
+        name: 'Geschenke?',
+        href: '/gifts',
+        filterFn: ({ token }) => token !== null,
+    },
     { name: 'Story', href: '/story', filterFn: ({ token }) => token !== null },
     {
         name: 'Galerie',
