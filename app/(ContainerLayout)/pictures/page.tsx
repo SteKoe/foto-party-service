@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     return (
-        <ContainerLayout size={'max-w-5xl'}>
+        <ContainerLayout size={'max-w-5xl w-full'}>
             <PicturesPageComponent />
         </ContainerLayout>
     );
