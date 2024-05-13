@@ -81,8 +81,9 @@ export function TakePicture() {
             Klick mich, mach ein Foto und lade es hoch!
         </div>
     );
+
     return (
-        <form>
+        <form className="mt-16">
             <ToastContainer position={'top-center'} hideProgressBar={true} />
             <label className={styles.cameraButton} id="preview">
                 {image ? '' : labelText}
