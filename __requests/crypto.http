@@ -1,4 +1,0 @@
-POST http://localhost:3000/api/encrypt
-Content-Type: application/json
-
-{ "rsvpGroupId": "0a83d168-d81a-44e3-8de5-2987bb61924c" }
