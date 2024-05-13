@@ -14,10 +14,8 @@ const authorizedPaths = [
     '/gifts',
     '/location',
     '/pictures',
-    '/pictures/take',
     '/pictures/gallery',
     '/api/pictures',
-    '/api/pictures/upload',
 ];
 
 const forbiddenPathsOnServer = ['/qrcodes'];
