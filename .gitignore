@@ -36,5 +36,5 @@ yarn-error.log*
 next-env.d.ts
 /prisma/generated/
 
-api/decrypt
-api/encrypt
+/app/api/decrypt
+/app/api/encrypt
