@@ -27,8 +27,8 @@ export function TakePicture() {
 
                 if (upload.ok) {
                     resetForm();
-                    await router.replace('/pictures');
                     toast('Das hat geklappt!');
+                    router.replace('/pictures/take');
                 } else {
                     toast.error(
                         'Fehler beim Hochladen! Bitte nochmal versuchen.',
