@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { decryptToken } from '@/utils/crypto';
+import { decryptToken, ROLES } from '@/utils/crypto';
 
 export const TOKEN_PARAM_NAME = 'token';
 
@@ -20,12 +20,18 @@ const authorizedPaths = [
 
 const forbiddenPathsOnServer = ['/qrcodes'];
 
-export async function checkIsAuthorized(authToken: string | undefined) {
+export async function checkIsAuthorized(
+    pathname: string,
+    authToken: string | undefined,
+) {
     try {
         const decryptedToken = await decryptToken(authToken ?? '');
-        const isAuthorized = decryptedToken !== null;
-        console.log('Middleware', 'checkIsAuthorized', isAuthorized);
-        return isAuthorized;
+
+        if (pathname.startsWith('/pictures/gallery')) {
+            return decryptedToken?.roles?.includes(ROLES.SHOW_PICTURES);
+        }
+
+        return decryptedToken !== null;
     } catch (e) {
         console.log('Error check authentication', e);
         return false;
@@ -41,16 +47,15 @@ export async function middleware(request: NextRequest) {
 
     const authToken = readToken(request);
 
-    const isAuthorized = await checkIsAuthorized(authToken);
-
+    const isAuthorized = await checkIsAuthorized(pathname, authToken);
+    const token = await decryptToken(authToken!);
+    console.log(token);
     if (isAuthorized) {
         const tokenParam = request.nextUrl.searchParams.has(TOKEN_PARAM_NAME);
-        console.log('Middleware', 'tokenParam', tokenParam);
         if (tokenParam) {
             const url = request.nextUrl;
             url.searchParams.delete(TOKEN_PARAM_NAME);
 
-            const token = await decryptToken(authToken!);
             if (token?.invitationKey && Object.keys(token).length === 1) {
                 url.pathname = '/invitation';
             }
@@ -73,7 +78,6 @@ export async function middleware(request: NextRequest) {
     }
 
     const requiresAuthentication = authorizedPaths.includes(pathname);
-    console.log('Middleware', 'requiresAuthentication', requiresAuthentication);
     if (requiresAuthentication) {
         return NextResponse.redirect(new URL('/', request.url));
     }

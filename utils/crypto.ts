@@ -1,8 +1,14 @@
 import { z } from 'zod';
 
+export enum ROLES {
+    TAKE_PICTURES = 'TAKE_PICTURES',
+    SHOW_PICTURES = 'SHOW_PICTURES',
+}
+
 const tokenSchema = z
     .object({
         invitationKey: z.string().optional(),
+        roles: z.array(z.nativeEnum(ROLES)).optional(),
     })
     .strict();
 
@@ -86,8 +92,10 @@ export async function decryptToken(
             Buffer.from(authToken ?? '', 'base64').toString('utf-8'),
         );
         const decodedTokenText = await decryptSymmetric(encodedToken);
-        return tokenSchema.parse(JSON.parse(decodedTokenText));
+        const data = JSON.parse(decodedTokenText);
+        return tokenSchema.parse(data);
     } catch (e) {
+        console.error('Error decrypting token', e);
         return null;
     }
 }
