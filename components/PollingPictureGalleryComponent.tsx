@@ -8,13 +8,34 @@ import prettyMilliseconds from 'pretty-ms';
 
 const POLLING_INTERVAL_IN_SECONDS = 60;
 
+function Countdown(props: { time: number }) {
+    const [remainingSeconds, setRemainingSeconds] = useState(props.time);
+
+    useEffect(() => {
+        const countdown = setInterval(() => {
+            setRemainingSeconds((prev) => prev - 1);
+            if (remainingSeconds <= 0) {
+                setRemainingSeconds(props.time);
+            }
+        }, 1000);
+
+        return () => {
+            clearInterval(countdown);
+        };
+    }, []);
+    return (
+        <>
+            {prettyMilliseconds(remainingSeconds * 1000, {
+                compact: true,
+            })}
+        </>
+    );
+}
+
 export default function PollingPictureGalleryComponent() {
     const [images, setImages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const searchParams = useSearchParams();
-    const [remainingSeconds, setRemainingSeconds] = useState(
-        POLLING_INTERVAL_IN_SECONDS,
-    );
 
     const galleryColumns = Number(searchParams.get('columns') ?? 2);
 
@@ -43,16 +64,10 @@ export default function PollingPictureGalleryComponent() {
             const data = await getData();
             setImages(data);
             setIsLoading(false);
-            setRemainingSeconds(POLLING_INTERVAL_IN_SECONDS);
         }, 1000 * POLLING_INTERVAL_IN_SECONDS);
-
-        const countdown = setInterval(() => {
-            setRemainingSeconds((prev) => prev - 1);
-        }, 1000);
 
         return () => {
             clearInterval(pollImages);
-            clearInterval(countdown);
         };
     }, []);
 
@@ -81,9 +96,7 @@ export default function PollingPictureGalleryComponent() {
                             'flex h-7 items-center justify-center rounded bg-white bg-opacity-50 text-center text-xs md:h-10 md:w-10 md:text-base '
                         }
                     >
-                        {prettyMilliseconds(remainingSeconds * 1000, {
-                            compact: true,
-                        })}
+                        <Countdown time={POLLING_INTERVAL_IN_SECONDS} />
                     </div>
                 )}
                 <ToggleFullscreenButton />
