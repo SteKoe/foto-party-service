@@ -23,7 +23,9 @@ const forbiddenPathsOnServer = ['/qrcodes'];
 export async function checkIsAuthorized(authToken: string | undefined) {
     try {
         const decryptedToken = await decryptToken(authToken ?? '');
-        return decryptedToken !== null;
+        const isAuthorized = decryptedToken !== null;
+        console.log('Middleware', 'checkIsAuthorized', isAuthorized);
+        return isAuthorized;
     } catch (e) {
         console.log('Error check authentication', e);
         return false;
@@ -40,8 +42,11 @@ export async function middleware(request: NextRequest) {
     const authToken = readToken(request);
 
     const isAuthorized = await checkIsAuthorized(authToken);
+
     if (isAuthorized) {
-        if (request.nextUrl.searchParams.has(TOKEN_PARAM_NAME)) {
+        const tokenParam = request.nextUrl.searchParams.has(TOKEN_PARAM_NAME);
+        console.log('Middleware', 'tokenParam', tokenParam);
+        if (tokenParam) {
             const url = request.nextUrl;
             url.searchParams.delete(TOKEN_PARAM_NAME);
 
@@ -68,6 +73,7 @@ export async function middleware(request: NextRequest) {
     }
 
     const requiresAuthentication = authorizedPaths.includes(pathname);
+    console.log('Middleware', 'requiresAuthentication', requiresAuthentication);
     if (requiresAuthentication) {
         return NextResponse.redirect(new URL('/', request.url));
     }
