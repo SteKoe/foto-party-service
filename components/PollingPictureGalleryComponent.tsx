@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { PictureGalleryComponent } from '@/components/PictureGalleryComponent';
 import ToggleFullscreenButton from '@/components/ToggleFullscreen';
 import { useSearchParams } from 'next/navigation';
+import prettyMilliseconds from 'pretty-ms';
 
 const POLLING_INTERVAL_IN_SECONDS = 60;
 
@@ -11,8 +12,11 @@ export default function PollingPictureGalleryComponent() {
     const [images, setImages] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const searchParams = useSearchParams();
+    const [remainingSeconds, setRemainingSeconds] = useState(
+        POLLING_INTERVAL_IN_SECONDS,
+    );
 
-    const galleryColumns = Number(searchParams.get('columns') ?? 4);
+    const galleryColumns = Number(searchParams.get('columns') ?? 2);
 
     async function getData() {
         const res = await fetch(`/api/pictures?count=${galleryColumns * 10}`);
@@ -34,13 +38,22 @@ export default function PollingPictureGalleryComponent() {
     }, []);
 
     useEffect(() => {
-        const id = setInterval(async () => {
+        const pollImages = setInterval(async () => {
             setIsLoading(true);
             const data = await getData();
             setImages(data);
             setIsLoading(false);
+            setRemainingSeconds(POLLING_INTERVAL_IN_SECONDS);
         }, 1000 * POLLING_INTERVAL_IN_SECONDS);
-        return () => clearInterval(id);
+
+        const countdown = setInterval(() => {
+            setRemainingSeconds((prev) => prev - 1);
+        }, 1000);
+
+        return () => {
+            clearInterval(pollImages);
+            clearInterval(countdown);
+        };
     }, []);
 
     return (
@@ -63,7 +76,15 @@ export default function PollingPictureGalleryComponent() {
                         </svg>
                     </div>
                 ) : (
-                    ''
+                    <div
+                        className={
+                            'flex h-7 items-center justify-center rounded bg-white bg-opacity-50 text-center text-xs md:h-10 md:w-10 md:text-base '
+                        }
+                    >
+                        {prettyMilliseconds(remainingSeconds * 1000, {
+                            compact: true,
+                        })}
+                    </div>
                 )}
                 <ToggleFullscreenButton />
             </div>
