@@ -1,7 +1,6 @@
 import { NavigationComponent } from '@/components/NavigationComponent';
 import { cookies } from 'next/headers';
 import { TOKEN_PARAM_NAME } from '@/middleware';
-import { DateTime } from 'luxon';
 import { AuthToken, decryptToken } from '@/utils/crypto';
 
 type Links = {
@@ -33,16 +32,6 @@ const links: Links[] = [
         href: '/story',
         filterFn: ({ token }: FilterFnProps) => {
             return token?.invitationKey !== undefined;
-        },
-    },
-    {
-        name: 'Galerie',
-        href: '/pictures',
-        filterFn: ({ token }: FilterFnProps) => {
-            return (
-                token?.invitationKey !== undefined &&
-                DateTime.now() >= DateTime.fromISO(process.env.MARRIAGE_DATE!)
-            );
         },
     },
     {

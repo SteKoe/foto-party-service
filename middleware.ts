@@ -14,6 +14,7 @@ const authorizedPaths = [
     '/gifts',
     '/location',
     '/pictures',
+    '/pictures/take',
     '/pictures/gallery',
     '/api/pictures',
 ];
@@ -29,6 +30,10 @@ export async function checkIsAuthorized(
 
         if (pathname.startsWith('/pictures/gallery')) {
             return decryptedToken?.roles?.includes(ROLES.SHOW_PICTURES);
+        }
+
+        if (pathname.startsWith('/pictures/take')) {
+            return decryptedToken?.roles?.includes(ROLES.TAKE_PICTURES);
         }
 
         return decryptedToken !== null;
@@ -49,7 +54,7 @@ export async function middleware(request: NextRequest) {
 
     const isAuthorized = await checkIsAuthorized(pathname, authToken);
     const token = await decryptToken(authToken!);
-    console.log(token);
+
     if (isAuthorized) {
         const tokenParam = request.nextUrl.searchParams.has(TOKEN_PARAM_NAME);
         if (tokenParam) {
