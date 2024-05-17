@@ -11,7 +11,7 @@ type Links = {
 };
 
 type FilterFnProps = {
-    token?: AuthToken;
+    token?: AuthToken | null;
 };
 
 const links: Links[] = [
