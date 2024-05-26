@@ -1,22 +1,15 @@
 import { google } from 'googleapis';
 import * as stream from 'stream';
 
-const createAuthClient = () => {
-    const authClient = new google.auth.OAuth2(
-        process.env.GOOGLE_CLIENT_ID,
-        process.env.GOOGLE_CLIENT_SECRET,
-        process.env.GOOGLE_REDIRECT_URI,
-    );
-    authClient.setCredentials({
-        refresh_token: process.env.GOOGLE_REFRESH_TOKEN,
-    });
-    return authClient;
-};
-
+const jwtClient = new google.auth.JWT(
+    process.env.GOOGLE_CLIENT_EMAIL,
+    undefined,
+    process.env.GOOGLE_PRIVATE_KEY,
+    ['https://www.googleapis.com/auth/drive'], // Adjust scopes as needed
+);
 export async function uploadImage(filename: string, blob: Buffer) {
     try {
-        const drive = google.drive({ version: 'v3', auth: createAuthClient() });
-
+        const drive = google.drive({ version: 'v3', auth: jwtClient });
         const bufferStream = new stream.PassThrough();
         bufferStream.end(blob);
 
@@ -38,7 +31,7 @@ export async function uploadImage(filename: string, blob: Buffer) {
 export async function listFiles(): Promise<
     (string | null | undefined)[] | undefined
 > {
-    const drive = google.drive({ version: 'v3', auth: createAuthClient() });
+    const drive = google.drive({ version: 'v3', auth: jwtClient });
 
     const folderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
     const res = await drive.files.list({
@@ -50,7 +43,7 @@ export async function listFiles(): Promise<
 }
 
 export async function getFile(fileId: string): Promise<ArrayBuffer> {
-    const drive = google.drive({ version: 'v3', auth: createAuthClient() });
+    const drive = google.drive({ version: 'v3', auth: jwtClient });
 
     const res = await drive.files.get(
         {
@@ -64,7 +57,7 @@ export async function getFile(fileId: string): Promise<ArrayBuffer> {
 }
 
 export async function deleteFile(fileId: string) {
-    const drive = google.drive({ version: 'v3', auth: createAuthClient() });
+    const drive = google.drive({ version: 'v3', auth: jwtClient });
 
     const res = await drive.files.delete({
         fileId,

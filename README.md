@@ -2,6 +2,5 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
  * https://console.cloud.google.com/apis/api/drive.googleapis.com/metrics?hl=de&project=kiste-hochzeit
- * https://developers.google.com/oauthplayground/
+ * https://console.cloud.google.com/iam-admin/serviceaccounts/details/104630245974568870841;edit=true/keys?hl=de&project=kiste-hochzeit
 
-![OAuth Config](./docs/oauthConfig.png)
