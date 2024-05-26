@@ -45,7 +45,6 @@ export default function PollingPictureGalleryComponent() {
     );
 
     useEffect(() => {
-        console.log(width);
         setGalleryColumns(width < 640 ? 1 : width < 1024 ? 2 : 4);
     }, [width]);
 
