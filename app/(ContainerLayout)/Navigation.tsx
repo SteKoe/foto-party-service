@@ -44,7 +44,7 @@ const links: Links[] = [
 
 export default async function Navigation() {
     const tokenFromCookie = cookies().get(TOKEN_PARAM_NAME)?.value;
-    const token = await decryptToken(tokenFromCookie ?? '');
+    const token = tokenFromCookie ? await decryptToken(tokenFromCookie) : null;
     const filteredLinks = links
         .filter((l) => l.filterFn?.({ token: token }) ?? true)
         .map((l) => ({ ...l, filterFn: undefined }));

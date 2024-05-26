@@ -26,7 +26,9 @@ export async function checkIsAuthorized(
     authToken: string | undefined,
 ) {
     try {
-        const decryptedToken = await decryptToken(authToken ?? '');
+        if (!authToken) return false;
+
+        const decryptedToken = await decryptToken(authToken);
 
         if (pathname.startsWith('/pictures/gallery')) {
             return decryptedToken?.roles?.includes(ROLES.SHOW_PICTURES);
@@ -53,9 +55,9 @@ export async function middleware(request: NextRequest) {
     const authToken = readToken(request);
 
     const isAuthorized = await checkIsAuthorized(pathname, authToken);
-    const token = await decryptToken(authToken!);
 
     if (isAuthorized) {
+        const token = await decryptToken(authToken!);
         const tokenParam = request.nextUrl.searchParams.has(TOKEN_PARAM_NAME);
         if (tokenParam) {
             const url = request.nextUrl;
