@@ -5,6 +5,7 @@ import { PictureGalleryComponent } from '@/components/PictureGalleryComponent';
 import ToggleFullscreenButton from '@/components/ToggleFullscreen';
 import { useSearchParams } from 'next/navigation';
 import prettyMilliseconds from 'pretty-ms';
+import useWindowDimensions from '@/app/hooks/useWindowDimensions';
 
 const POLLING_INTERVAL_IN_SECONDS = 60;
 
@@ -37,7 +38,16 @@ export default function PollingPictureGalleryComponent() {
     const [isLoading, setIsLoading] = useState(false);
     const searchParams = useSearchParams();
 
-    const galleryColumns = Number(searchParams.get('columns') ?? 2);
+    const { width } = useWindowDimensions();
+
+    const [galleryColumns, setGalleryColumns] = useState(
+        Number(searchParams.get('columns') ?? 2),
+    );
+
+    useEffect(() => {
+        console.log(width);
+        setGalleryColumns(width < 640 ? 1 : width < 1024 ? 2 : 4);
+    }, [width]);
 
     async function getData() {
         const res = await fetch(`/api/pictures?count=${galleryColumns * 10}`);
