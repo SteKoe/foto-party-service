@@ -61,14 +61,17 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         const files = event.target.files;
         if (files && files.length === 1) {
             const file = files[0];
-            setImage(file);
-
-            const imager = document.createElement('img');
-            imager.src = URL.createObjectURL(file);
-            const elementById = document.getElementById('preview');
-            if (elementById) {
-                elementById.style.backgroundImage =
-                    'url(' + URL.createObjectURL(file) + ')';
+            if (file.size / 1e6 <= 4.5) {
+                setImage(file);
+                const imager = document.createElement('img');
+                imager.src = URL.createObjectURL(file);
+                const elementById = document.getElementById('preview');
+                if (elementById) {
+                    elementById.style.backgroundImage =
+                        'url(' + URL.createObjectURL(file) + ')';
+                }
+            } else {
+                toast('Das Bild ist zu groß! Maximal 4.5 MB. 🥲');
             }
         }
     }
