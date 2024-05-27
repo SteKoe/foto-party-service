@@ -2,13 +2,15 @@
 
 import styles from './TakePicture.module.css';
 import React, { ChangeEvent, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useRouter } from 'next/navigation';
+import { Promise } from 'ts-toolbelt/out/Any/Promise';
 
-export function TakePicture() {
-    const router = useRouter();
+interface TakePictureProps {
+    onPictureTaken?: () => Promise<void>;
+}
 
+export function TakePicture({ onPictureTaken }: TakePictureProps) {
     const [image, setImage] = useState<File | null>(null);
     const [isUploading, setIsUploading] = useState(false);
 
@@ -28,7 +30,9 @@ export function TakePicture() {
                 if (upload.ok) {
                     resetForm();
                     toast('Das hat geklappt!');
-                    router.replace('/pictures/take');
+                    typeof onPictureTaken === 'function'
+                        ? onPictureTaken()
+                        : void 0;
                 } else {
                     toast.error(
                         'Fehler beim Hochladen! Bitte nochmal versuchen.',
@@ -83,8 +87,7 @@ export function TakePicture() {
     );
 
     return (
-        <form className="mt-16">
-            <ToastContainer position={'top-center'} hideProgressBar={true} />
+        <form>
             <label className={styles.cameraButton} id="preview">
                 {image ? '' : labelText}
                 {isUploading ? (
