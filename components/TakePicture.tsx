@@ -61,7 +61,8 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         const files = event.target.files;
         if (files && files.length === 1) {
             const file = files[0];
-            if (file.size / 1e6 <= 4.5) {
+            const fileSizeInMb = file.size / 1e6;
+            if (fileSizeInMb <= 4.5) {
                 setImage(file);
                 const imager = document.createElement('img');
                 imager.src = URL.createObjectURL(file);
@@ -71,7 +72,12 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
                         'url(' + URL.createObjectURL(file) + ')';
                 }
             } else {
-                toast('Das Bild ist zu groß! Maximal 4.5 MB. 🥲');
+                const fixed = Intl.NumberFormat('de-DE', {
+                    maximumFractionDigits: 2,
+                }).format(fileSizeInMb);
+                toast(
+                    `Das Bild ist zu groß! Maximal 4.5 MB, das Bild hat leider ${fixed} MB. 🥲`,
+                );
             }
         }
     }
