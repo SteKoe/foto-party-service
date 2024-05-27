@@ -4,41 +4,46 @@ import styles from './TakePicture.module.css';
 import React, { ChangeEvent, useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Promise } from 'ts-toolbelt/out/Any/Promise';
+import classNames from 'classnames';
 
 interface TakePictureProps {
     onPictureTaken?: () => Promise<void>;
 }
 
 export function TakePicture({ onPictureTaken }: TakePictureProps) {
-    const [image, setImage] = useState<File | null>(null);
+    const [images, setImages] = useState<File[] | null>(null);
     const [isUploading, setIsUploading] = useState(false);
 
     async function submitForm() {
-        if (image) {
+        if (Array.isArray(images) && images.length > 0 && !isUploading) {
             setIsUploading(true);
 
             try {
-                const formData = new FormData();
-                formData.append('file', image);
+                const promises = images.map((image) => {
+                    const formData = new FormData();
+                    formData.append('file', image);
 
-                const upload = await fetch('/api/pictures/upload', {
-                    method: 'POST',
-                    body: formData,
+                    return fetch('/api/pictures/upload', {
+                        method: 'POST',
+                        body: formData,
+                    });
                 });
 
-                if (upload.ok) {
-                    resetForm();
-                    toast('Das hat geklappt!');
+                const results = await Promise.allSettled(promises);
+
+                if (results.every((result) => result.status === 'fulfilled')) {
+                    toast('Alle Bilder hochgeladen! :)');
                     typeof onPictureTaken === 'function'
                         ? onPictureTaken()
                         : void 0;
                 } else {
                     toast.error(
-                        'Fehler beim Hochladen! Bitte nochmal versuchen.',
+                        'Es gab Fehler beim Hochladen einiger Bilder! Bitte nochmal versuchen.',
                     );
                     console.error('Upload failed.');
                 }
+
+                resetForm();
             } catch (e) {
                 toast.error('Fehler beim Hochladen! Bitte nochmal versuchen.');
                 console.error('Upload failed.', e);
@@ -49,36 +54,21 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
     }
 
     function resetForm() {
-        setImage(null);
-
-        const elementById = document.getElementById('preview');
-        if (elementById) {
-            elementById.style.backgroundImage = '';
-        }
+        setImages(null);
     }
 
     function previewImage(event: ChangeEvent<HTMLInputElement>) {
         const files = event.target.files;
-        if (files && files.length === 1) {
-            const file = files[0];
-            const fileSizeInMb = file.size / 1e6;
-            if (fileSizeInMb <= 4.5) {
-                setImage(file);
-                const imager = document.createElement('img');
-                imager.src = URL.createObjectURL(file);
-                const elementById = document.getElementById('preview');
-                if (elementById) {
-                    elementById.style.backgroundImage =
-                        'url(' + URL.createObjectURL(file) + ')';
-                }
-            } else {
-                const fixed = Intl.NumberFormat('de-DE', {
-                    maximumFractionDigits: 2,
-                }).format(fileSizeInMb);
-                toast(
-                    `Das Bild ist zu groß! Maximal 4.5 MB, das Bild hat leider ${fixed} MB. 🥲`,
-                );
+        if (files) {
+            const validFiles = [...files].filter(
+                (file) => file.size / 1e6 <= 4.5,
+            );
+
+            if (validFiles.length !== files.length) {
+                toast('Einige Bilder sind zu groß! Maximal 4.5 MB. Erlaubt.');
             }
+
+            setImages(validFiles);
         }
     }
 
@@ -98,7 +88,24 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
     return (
         <form>
             <label className={styles.cameraButton} id="preview">
-                {image ? '' : labelText}
+                {images ? (
+                    <div
+                        className={classNames('grid', {
+                            'grid-cols-1': images.length <= 1,
+                            'grid-cols-2': images.length > 1,
+                        })}
+                    >
+                        {images.map((image) => (
+                            <img
+                                key={image.name}
+                                src={URL.createObjectURL(image)}
+                                alt="Preview"
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    labelText
+                )}
                 {isUploading ? (
                     <div className={styles.loadingOverlay}>
                         <div>
@@ -110,7 +117,8 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
                             >
                                 <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
                             </svg>
-                            Bild wird hochgeladen!
+                            {images?.length === 1 ? 'Bild' : 'Bilder'} wird
+                            hochgeladen!
                         </div>
                     </div>
                 ) : (
@@ -120,10 +128,11 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
                     type="file"
                     accept="image/png, image/jpeg"
                     multiple
+                    capture="user"
                     onChange={previewImage}
                 />
             </label>
-            {image ? (
+            {images ? (
                 <div className={styles.controls}>
                     <button
                         type="button"

@@ -1,5 +1,5 @@
 .cameraButton {
-    @apply relative overflow-hidden flex px-2 py-36 border-2 border-dashed justify-center items-center rounded-xl bg-cover bg-no-repeat bg-center aspect-[3/4] text-sm md:text-base;
+    @apply relative overflow-hidden flex border-2 border-dashed justify-center items-center rounded-xl bg-cover bg-no-repeat bg-center aspect-[3/4] text-sm md:text-base;
     @apply text-center; 
     border-color: rgb(var(--color-rgb));
 }
