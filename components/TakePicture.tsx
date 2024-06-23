@@ -128,7 +128,6 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
                     type="file"
                     accept="image/png, image/jpeg"
                     multiple
-                    capture="user"
                     onChange={previewImage}
                 />
             </label>
