@@ -5,9 +5,11 @@
 .overlay {
     @apply pointer-events-none absolute hidden h-full w-full;
 }
+
 .galleryImage:hover .overlay {
     @apply flex items-start justify-end;
 }
+
 .btn {
     @apply pointer-events-auto aspect-square bg-red-400 px-2 py-1;
 }

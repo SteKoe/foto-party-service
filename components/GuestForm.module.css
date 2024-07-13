@@ -1,6 +1,7 @@
 .success {
     overflow: visible;
 }
+
 .success::after {
     position: absolute;
     left: 5%;

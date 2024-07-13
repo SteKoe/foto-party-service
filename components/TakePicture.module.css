@@ -7,6 +7,7 @@
 .cameraButtonLabel {
     @apply flex flex-col;
 }
+
 .cameraButtonLabel svg {
     @apply mx-auto mb-4 h-auto w-12 fill-white md:mb-10 md:w-20;
 }
