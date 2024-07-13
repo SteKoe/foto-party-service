@@ -1,61 +1,61 @@
 .timeline-entry {
-  @apply mt-6 transition-all duration-1000;
-  @apply sm:mt-0 sm:mb-12 ;
-  transform: scale(0) rotateZ(15deg);
+    @apply mt-6 transition-all duration-1000;
+    @apply sm:mb-12 sm:mt-0;
+    transform: scale(0) rotateZ(15deg);
 }
 
 .is-visible {
-  transform: scaleY(1);
+    transform: scaleY(1);
 }
 
 .timeline-entry__wrapper {
-  @apply flex flex-col sm:flex-row items-center;
+    @apply flex flex-col items-center sm:flex-row;
 }
 
 .timeline-entry__body {
-  @apply flex w-full mx-auto items-center;
+    @apply mx-auto flex w-full items-center;
 }
 
 .timeline-entry__icon {
-  @apply rounded-full bg-red-600 border-white border-2 w-8 h-8 absolute left-1/2 -translate-y-4 transform -translate-x-1/2 flex items-center justify-center;
-  @apply sm:translate-y-0;
+    @apply absolute left-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-4 transform items-center justify-center rounded-full border-2 border-white bg-red-600;
+    @apply sm:translate-y-0;
 }
 
 /* LEFT */
 .timeline-entry--left {
-  .timeline-entry__body {
-    @apply justify-start;
+    .timeline-entry__body {
+        @apply justify-start;
 
-    > div {
-      @apply w-full sm:w-1/2 sm:pr-8;
+        > div {
+            @apply w-full sm:w-1/2 sm:pr-8;
+        }
     }
-  }
 }
 
 /* CENTER */
 .timeline-entry--center {
-  .timeline-entry__wrapper {
-    @apply flex-row;
-  }
-
-  .timeline-entry__body {
-    > div {
-      @apply w-full sm:w-1/2 mx-auto;
+    .timeline-entry__wrapper {
+        @apply flex-row;
     }
-  }
 
-  .timeline-entry__icon {
-    @apply top-0 -translate-y-4;
-  }
+    .timeline-entry__body {
+        > div {
+            @apply mx-auto w-full sm:w-1/2;
+        }
+    }
+
+    .timeline-entry__icon {
+        @apply top-0 -translate-y-4;
+    }
 }
 
 /* RIGHT */
 .timeline-entry--right {
-  .timeline-entry__body {
-    @apply justify-end;
+    .timeline-entry__body {
+        @apply justify-end;
 
-    > div {
-      @apply w-full sm:w-1/2 sm:pl-8;
+        > div {
+            @apply w-full sm:w-1/2 sm:pl-8;
+        }
     }
-  }
 }

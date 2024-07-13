@@ -3,11 +3,11 @@
 }
 
 .overlay {
-    @apply hidden absolute w-full h-full pointer-events-none;
+    @apply pointer-events-none absolute hidden h-full w-full;
 }
 .galleryImage:hover .overlay {
-    @apply flex justify-end items-start;
+    @apply flex items-start justify-end;
 }
 .btn {
-    @apply bg-red-400 px-2 py-1 pointer-events-auto aspect-square;
+    @apply pointer-events-auto aspect-square bg-red-400 px-2 py-1;
 }

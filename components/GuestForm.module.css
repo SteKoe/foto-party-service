@@ -12,14 +12,14 @@
 @media (prefers-reduced-motion) {
     .success::after {
         display: none;
-    }   
+    }
 }
 
 @keyframes rocket {
     0% {
         opacity: 0;
         font-size: 1rem;
-        transform: translate(0,0);
+        transform: translate(0, 0);
     }
     10% {
         opacity: 1;
@@ -31,7 +31,7 @@
         opacity: 1;
     }
     100% {
-        transform: translate(1000px,-1000px);
+        transform: translate(1000px, -1000px);
         opacity: 0;
     }
 }

@@ -1,5 +1,5 @@
 .avatar {
-    @apply rounded-full absolute border-2 border-opacity-5 transition-all duration-1000 shadow-xl;
+    @apply absolute rounded-full border-2 border-opacity-5 shadow-xl transition-all duration-1000;
 }
 
 .kim {
@@ -7,7 +7,7 @@
 }
 
 .kim.__coupled {
-    @apply left-1/2 -translate-x-20
+    @apply left-1/2 -translate-x-20;
 }
 
 .stephan {
@@ -15,9 +15,9 @@
 }
 
 .stephan.__coupled {
-    @apply left-1/2 -translate-x-4
+    @apply left-1/2 -translate-x-4;
 }
 
 .main-timeline {
-    @apply mt-24 sm:max-w-xl sm:mx-auto w-full px-2 sm:px-0;
+    @apply mt-24 w-full px-2 sm:mx-auto sm:max-w-xl sm:px-0;
 }

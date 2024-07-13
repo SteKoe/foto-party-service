@@ -8,7 +8,7 @@
 :root {
     --color-rgb: 255, 255, 255;
     --background-color: linear-gradient(#090f3a, #03092c);
-    --white: 255, 255, 255
+    --white: 255, 255, 255;
 }
 
 body {
@@ -19,20 +19,20 @@ body {
 }
 
 h1 {
-    @apply text-4xl md:text-6xl mb-8 mt-12 md:pt-0 md:mt-12;
+    @apply mb-8 mt-12 text-4xl md:mt-12 md:pt-0 md:text-6xl;
 }
 
 h2 {
-    @apply text-3xl md:text-5xl mb-8 mt-12 md:pt-0 md:mt-12;
+    @apply mb-8 mt-12 text-3xl md:mt-12 md:pt-0 md:text-5xl;
 }
 
 h3 {
-    @apply text-2xl md:text-4xl mb-8 mt-12 md:pt-0 md:mt-12;
+    @apply mb-8 mt-12 text-2xl md:mt-12 md:pt-0 md:text-4xl;
 }
 
 body *::selection {
     --color-rgb: 9, 15, 58;
-    background-color: rgba(var(--color-rgb), .3);
+    background-color: rgba(var(--color-rgb), 0.3);
 }
 
 p:has(+ p) {
@@ -45,7 +45,7 @@ p.initialLetter {
 
 p.initialLetter::first-letter {
     initial-letter: 2;
-    @apply pl-0 pr-2 italic absolute;
+    @apply absolute pl-0 pr-2 italic;
 }
 
 dl.horizontal {
@@ -61,31 +61,31 @@ dl.horizontal dd {
 }
 
 footer {
-    @apply block py-4 mx-auto text-center italic text-xs mt-8 mb-2;
+    @apply mx-auto mb-2 mt-8 block py-4 text-center text-xs italic;
 }
 
 .heading {
-    @apply mb-16 mt-12 md:pt-0 md:mt-12
+    @apply mb-16 mt-12 md:mt-12 md:pt-0;
 }
 
 .heroHeading {
-    @apply text-6xl md:text-8xl mb-16 mt-12 md:pt-0 md:mt-12;
+    @apply mb-16 mt-12 text-6xl md:mt-12 md:pt-0 md:text-8xl;
 }
 
 .heroHeading small {
-    @apply font-light text-base md:text-xl tracking-wider block pt-4 leading-5;
+    @apply block pt-4 text-base font-light leading-5 tracking-wider md:text-xl;
 }
 
 .imageRight {
-    @apply mx-auto mb-2 md:float-right md:mb-1 md:mt-2 md:ml-2 rounded-md;
+    @apply mx-auto mb-2 rounded-md md:float-right md:mb-1 md:ml-2 md:mt-2;
 }
 
 .imageLeft {
-    @apply mx-auto mb-2 md:float-left md:mb-1 md:mt-2 md:mr-2 rounded-md;
+    @apply mx-auto mb-2 rounded-md md:float-left md:mb-1 md:mr-2 md:mt-2;
 }
 
 .lg-icon.no-font {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     font-weight: normal;
-    font-size: .75rem !important;
+    font-size: 0.75rem !important;
 }
