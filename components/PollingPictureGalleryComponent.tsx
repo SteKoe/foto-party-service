@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PictureGalleryComponent } from "@/components/PictureGalleryComponent";
 import ToggleFullscreenButton from "@/components/ToggleFullscreen";
 import { useSearchParams } from "next/navigation";
@@ -81,7 +81,7 @@ export default function PollingPictureGalleryComponent() {
   }, []);
 
   return (
-    <Suspense>
+    <>
       <div className={"fixed bottom-1 right-1 z-40 flex gap-1 text-black"}>
         {isLoading ? (
           <div
@@ -109,6 +109,6 @@ export default function PollingPictureGalleryComponent() {
         <ToggleFullscreenButton />
       </div>
       <PictureGalleryComponent images={images} columnsCount={galleryColumns} />
-    </Suspense>
+    </>
   );
 }
