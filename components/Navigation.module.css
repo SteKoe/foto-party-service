@@ -1,16 +1,16 @@
 .navigation {
-    @apply sticky top-0 z-10 flex list-none justify-center gap-3 py-6 text-center transition-all md:py-12;
+  @apply sticky top-0 z-10 flex list-none justify-center gap-3 py-6 text-center transition-all md:py-12;
 }
 
 .navigation.scrolled {
-    @apply border-b border-white/20 bg-black/20 py-3 backdrop-blur md:py-4;
+  @apply border-b border-white/20 bg-black/20 py-3 backdrop-blur md:py-4;
 }
 
 .navigationItem {
-    @apply rounded-md px-2 py-1 hover:bg-white hover:bg-opacity-20 md:px-2.5 md:py-2;
-    border-color: rgb(var(--color-rgb));
+  @apply rounded-md px-2 py-1 hover:bg-white hover:bg-opacity-20 md:px-2.5 md:py-2;
+  border-color: rgb(var(--color-rgb));
 }
 
 .isActive {
-    @apply bg-white bg-opacity-20 font-bold;
+  @apply bg-white bg-opacity-20 font-bold;
 }

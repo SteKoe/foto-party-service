@@ -1,15 +1,15 @@
 .galleryImage {
-    @apply relative;
+  @apply relative;
 }
 
 .overlay {
-    @apply pointer-events-none absolute hidden h-full w-full;
+  @apply pointer-events-none absolute hidden h-full w-full;
 }
 
 .galleryImage:hover .overlay {
-    @apply flex items-start justify-end;
+  @apply flex items-start justify-end;
 }
 
 .btn {
-    @apply pointer-events-auto aspect-square bg-red-400 px-2 py-1;
+  @apply pointer-events-auto aspect-square bg-red-400 px-2 py-1;
 }

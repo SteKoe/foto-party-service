@@ -1,8 +1,8 @@
 .timeline-bar {
-    @apply absolute left-1/2 hidden h-full w-0.5 -translate-x-1/2 transform bg-white/20 backdrop-blur;
-    @apply sm:block;
+  @apply absolute left-1/2 hidden h-full w-0.5 -translate-x-1/2 transform bg-white/20 backdrop-blur;
+  @apply sm:block;
 }
 
 .timeline-bar__icon {
-    @apply absolute top-0 -translate-x-1/2 -translate-y-8 text-2xl text-white/20;
+  @apply absolute top-0 -translate-x-1/2 -translate-y-8 text-2xl text-white/20;
 }

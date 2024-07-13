@@ -6,12 +6,11 @@
         "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
-    "plugins": ["prettier", "@typescript-eslint"],
+    "plugins": ["@typescript-eslint"],
     "rules": {
         "@typescript-eslint/no-explicit-any": "warn",
         "@typescript-eslint/ban-ts-comment": "warn",
         "react/no-unescaped-entities": "off",
-        "prettier/prettier": "error",
         "prefer-const": "warn"
     }
 }
