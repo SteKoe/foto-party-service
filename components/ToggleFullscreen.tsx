@@ -11,25 +11,26 @@ export default function ToggleFullscreenButton() {
         if (
             !document.fullscreenElement &&
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+            // @ts-expect-error
             !document.mozFullScreenElement &&
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
+            // @ts-expect-error
             !document.webkitFullscreenElement
         ) {
             if (document.documentElement.requestFullscreen) {
                 document.documentElement.requestFullscreen();
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+                // @ts-expect-error
             } else if (document.documentElement.mozRequestFullScreen) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+                // @ts-expect-error
                 document.documentElement.mozRequestFullScreen();
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                 // @ts-ignore
             } else if (document.documentElement.webkitRequestFullscreen) {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-ignore
+                // @ts-expect-error
+
                 document.documentElement.webkitRequestFullscreen(
                     // @ts-ignore
                     Element.ALLOW_KEYBOARD_INPUT,

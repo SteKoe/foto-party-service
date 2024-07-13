@@ -7,8 +7,8 @@ import { Textarea } from '@nextui-org/input';
 type FieldProps = {
     option: InvitationGuestOption;
     guestId: string;
-    value: any;
-    onChange: (e: InvitationGuestOption & { value: any }) => void;
+    value: unknown;
+    onChange: (e: InvitationGuestOption & { value: unknown }) => void;
 };
 
 export function Field(props: FieldProps) {
@@ -18,7 +18,7 @@ export function Field(props: FieldProps) {
                 <BooleanField
                     guestId={props.guestId}
                     fieldDefinition={props.option}
-                    value={props.value}
+                    value={props.value as boolean}
                     onChange={props.onChange}
                 />
             );
@@ -28,7 +28,7 @@ export function Field(props: FieldProps) {
                     label={props.option.name}
                     color="secondary"
                     className="col-span-12"
-                    value={props.value ?? ''}
+                    value={(props.value ?? '') as string}
                     onValueChange={(value) => {
                         props.onChange({
                             ...props.option,

@@ -1,6 +1,10 @@
 import React, { PropsWithoutRef } from 'react';
 
-export const YesIcon = (props: PropsWithoutRef<any>) => (
+type Props = {
+    className?: string;
+};
+
+export const YesIcon = (props: PropsWithoutRef<Props>) => (
     <svg
         aria-hidden="true"
         height=".5em"
