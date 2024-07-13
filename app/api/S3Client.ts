@@ -1,4 +1,5 @@
 import {
+  _Object,
   DeleteObjectCommand,
   GetObjectCommand,
   ListObjectsCommand,
@@ -37,7 +38,12 @@ export async function listFiles() {
     Bucket: process.env.AWS_BUCKET,
   });
   const response = await client.send(command);
-  return response.Contents?.map((file) => file.Key) ?? [];
+  return (
+    response.Contents?.sort(
+      (a: _Object, b: _Object) =>
+        (b.LastModified?.getTime() ?? 0) - (a.LastModified?.getTime() ?? 0),
+    ).map((file) => file.Key) ?? []
+  );
 }
 
 export async function uploadImage(name: string, body: Buffer) {

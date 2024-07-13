@@ -58,6 +58,7 @@
         "@types/qrcode": "^1.5.4",
         "@types/ramda": "^0.29.7",
         "@types/react-responsive-masonry": "^2.1.0",
+        "@types/uuid": "^10.0.0",
         "@typescript-eslint/eslint-plugin": "^6.9.0",
         "@vitejs/plugin-react": "^4.1.0",
         "aws-crt": "^1.15.18",

@@ -5,6 +5,7 @@ import React, { ChangeEvent, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
+import { v4 as randomUUID } from "uuid";
 
 interface TakePictureProps {
   onPictureTaken?: () => Promise<void>;
@@ -19,21 +20,29 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
       setIsUploading(true);
 
       try {
-        const promises = images.map((image) => {
-          const formData = new FormData();
-          formData.append("file", image);
-
-          return fetch("/api/pictures/upload", {
-            method: "POST",
-            body: formData,
-          });
-        });
+        const promises = [];
+        for (const image of images) {
+          promises.push(
+            fetch(
+              `https://fne8flz07j.execute-api.eu-central-1.amazonaws.com/prod/kiste-hochzeit/${randomUUID()}.${image.name.split(".").pop()}`,
+              {
+                method: "PUT",
+                headers: {
+                  "Content-Type": image.type,
+                },
+                body: await image.arrayBuffer(),
+              },
+            ),
+          );
+        }
 
         const results = await Promise.allSettled(promises);
 
         if (results.every((result) => result.status === "fulfilled")) {
           toast("Alle Bilder hochgeladen! :)");
-          typeof onPictureTaken === "function" ? onPictureTaken() : void 0;
+          typeof onPictureTaken === "function"
+            ? await onPictureTaken()
+            : void 0;
         } else {
           toast.error(
             "Es gab Fehler beim Hochladen einiger Bilder! Bitte nochmal versuchen.",
@@ -47,6 +56,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         console.error("Upload failed.", e);
       } finally {
         setIsUploading(false);
+        setImages(null);
       }
     }
   }
@@ -58,10 +68,10 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
   function previewImage(event: ChangeEvent<HTMLInputElement>) {
     const files = event.target.files;
     if (files) {
-      const validFiles = [...files].filter((file) => file.size / 1e6 <= 4.5);
+      const validFiles = [...files].filter((file) => file.size / 1e6 <= 20);
 
       if (validFiles.length !== files.length) {
-        toast("Einige Bilder sind zu groß! Maximal 4.5 MB. Erlaubt.");
+        toast("Einige Bilder sind zu groß! Maximal 20 MB. Erlaubt.");
       }
 
       setImages(validFiles);
