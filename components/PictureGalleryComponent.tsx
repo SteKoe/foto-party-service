@@ -35,6 +35,8 @@ export function PictureGalleryComponent({
               <Image
                 src={"/api/pictures/" + img}
                 alt={img}
+                blurDataURL={"/api/pictures/" + img + "?preview"}
+                placeholder="blur"
                 width={500}
                 height={250}
                 loading="lazy"

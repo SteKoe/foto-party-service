@@ -22,7 +22,7 @@ export async function getFile(name: string) {
     Key: name,
   });
   const response = await client.send(command);
-  return response.Body?.transformToWebStream();
+  return response.Body?.transformToByteArray();
 }
 
 export async function deleteFile(name: string) {
