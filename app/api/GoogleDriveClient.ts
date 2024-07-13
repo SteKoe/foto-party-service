@@ -42,7 +42,14 @@ export async function listFiles(): Promise<
     return res.data?.files?.map((f) => f.id);
 }
 
+const imageCache: { [id: string]: ArrayBuffer } = {};
+
 export async function getFile(fileId: string): Promise<ArrayBuffer> {
+    if (imageCache[fileId]) {
+        console.info('File cache hit', fileId);
+        return imageCache[fileId];
+    }
+
     const drive = google.drive({ version: 'v3', auth: jwtClient });
 
     const res = await drive.files.get(
@@ -53,7 +60,9 @@ export async function getFile(fileId: string): Promise<ArrayBuffer> {
         { responseType: 'arraybuffer' },
     );
 
-    return res.data as ArrayBuffer;
+    imageCache[fileId] = res.data as ArrayBuffer;
+
+    return imageCache[fileId];
 }
 
 export async function deleteFile(fileId: string) {
