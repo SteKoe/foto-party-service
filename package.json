@@ -19,6 +19,9 @@
         "@fortawesome/react-fontawesome": "^0.2.0",
         "@googleapis/drive": "^8.0.0",
         "@nextui-org/react": "^2.1.13",
+        "@nextui-org/switch": "^2.0.31",
+        "@nextui-org/system": "^2.2.2",
+        "@nextui-org/theme": "^2.2.6",
         "@prisma/client": "^5.4.2",
         "@types/react": "18.2.78",
         "@types/react-dom": "18.2.25",
@@ -45,7 +48,7 @@
         "remove": "^0.1.5",
         "sass": "^1.68.0",
         "sharp": "^0.32.6",
-        "tailwindcss": "3.3.5",
+        "tailwindcss": "3.4.4",
         "typescript": "5.2.2",
         "uuid": "^9.0.1",
         "zod": "^3.22.4"
