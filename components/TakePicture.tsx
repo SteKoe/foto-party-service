@@ -101,13 +101,15 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
               "grid-cols-2": images.length > 1,
             })}
           >
-            {images.map((image) => (
-              <img
-                key={image.name}
-                src={URL.createObjectURL(image)}
-                alt="Preview"
-              />
-            ))}
+            {images.map((image) => {
+              return (
+                <img
+                  key={image.name}
+                  src={URL.createObjectURL(image)}
+                  alt="Preview"
+                />
+              );
+            })}
           </div>
         ) : (
           labelText
