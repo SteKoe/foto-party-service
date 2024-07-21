@@ -101,15 +101,23 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
               "grid-cols-2": images.length > 1,
             })}
           >
-            {images.map((image) => {
-              return (
-                <img
-                  key={image.name}
-                  src={URL.createObjectURL(image)}
-                  alt="Preview"
-                />
-              );
-            })}
+            {images
+              .filter((image) => !isVideoFile(image.name))
+              .map((image) => {
+                return (
+                  <img
+                    key={image.name}
+                    src={URL.createObjectURL(image)}
+                    alt="Preview"
+                  />
+                );
+              })}
+            {images.filter((image) => !isVideoFile(image.name)).length > 0 && (
+              <div>
+                {images.filter((image) => !isVideoFile(image.name)).length}
+                Video
+              </div>
+            )}
           </div>
         ) : (
           labelText
@@ -133,7 +141,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         )}
         <input
           type="file"
-          accept="image/png, image/jpeg"
+          accept="image/png, image/jpeg, video/mp4"
           multiple
           onChange={previewImage}
         />
@@ -185,4 +193,30 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
       )}
     </form>
   );
+}
+
+function isVideoFile(file: string) {
+  const videoExtensions: string[] = [
+    ".mp4",
+    ".avi",
+    ".mkv",
+    ".mov",
+    ".wmv",
+    ".flv",
+    ".webm",
+    ".mpeg",
+    ".mpg",
+    ".m4v",
+    ".3gp",
+    ".3g2",
+    ".m2ts",
+    ".mts",
+    ".ts",
+    ".vob",
+    ".ogv",
+    ".rm",
+    ".rmvb",
+  ];
+
+  return videoExtensions.some((ext) => file.endsWith(ext));
 }
