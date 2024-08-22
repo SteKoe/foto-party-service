@@ -13,7 +13,6 @@ const authorizedPaths = [
   "/story",
   "/gifts",
   "/location",
-  "/programm",
   "/pictures",
   "/pictures/take",
   "/pictures/gallery",
