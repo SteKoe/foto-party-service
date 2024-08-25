@@ -49,7 +49,7 @@ export default function PollingPictureGalleryComponent() {
   }, [width]);
 
   async function getData() {
-    const res = await fetch(`/api/pictures?count=${galleryColumns * 10}`);
+    const res = await fetch(`/api/pictures`);
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
