@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import { v4 as randomUUID } from "uuid";
+import resizeImage from "@/components/ResizeImage";
 
 interface TakePictureProps {
   onPictureTaken?: () => Promise<void>;
@@ -14,6 +15,7 @@ interface TakePictureProps {
 export function TakePicture({ onPictureTaken }: TakePictureProps) {
   const [images, setImages] = useState<File[] | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   async function submitForm() {
     if (Array.isArray(images) && images.length > 0 && !isUploading) {
@@ -65,16 +67,34 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
     setImages(null);
   }
 
-  function previewImage(event: ChangeEvent<HTMLInputElement>) {
-    const files = event.target.files;
-    if (files) {
-      const validFiles = [...files].filter((file) => file.size / 1e6 <= 20);
+  async function previewImage(event: ChangeEvent<HTMLInputElement>) {
+    setIsProcessing(true);
+    try {
+      const files = event.target.files;
+      if (files) {
+        const filesToProcess: File[] = [];
+        for (let i = 0; i < files.length; i++) {
+          let file = files[i];
+          if (file.type === "image/heic") {
+            file = await convertHeicToJPG(file);
+          }
+          filesToProcess.push(file);
+        }
 
-      if (validFiles.length !== files.length) {
-        toast("Einige Bilder sind zu groß! Maximal 20 MB. Erlaubt.");
+        console.log(filesToProcess);
+
+        const validFiles = [...filesToProcess].filter(
+          (file) => file.size / 1e6 <= 20,
+        );
+
+        if (validFiles.length !== filesToProcess.length) {
+          toast("Einige Bilder sind zu groß! Maximal 20 MB. Erlaubt.");
+        }
+
+        setImages(validFiles);
       }
-
-      setImages(validFiles);
+    } finally {
+      setIsProcessing(false);
     }
   }
 
@@ -102,7 +122,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
             })}
           >
             {images
-              .filter((image) => !isVideoFile(image.name))
+              .filter((image) => !isUnsupportedFile(image.name))
               .map((image) => {
                 return (
                   <img
@@ -112,17 +132,19 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
                   />
                 );
               })}
-            {images.filter((image) => !isVideoFile(image.name)).length > 0 && (
+            {images.filter((image) => isUnsupportedFile(image.name)).length >
+              0 && (
               <div>
-                {images.filter((image) => !isVideoFile(image.name)).length}
-                Video
+                {images.filter((image) => isUnsupportedFile(image.name)).length}
+                nicht unterstütze Formate! Nur .jpg, .jpeg, .png und .mp4 können
+                auch angezeigt werden. Hochladen kannst du aber alles! 🚀
               </div>
             )}
           </div>
         ) : (
           labelText
         )}
-        {isUploading ? (
+        {isUploading && (
           <div className={styles.loadingOverlay}>
             <div>
               <svg
@@ -133,16 +155,30 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
               >
                 <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
               </svg>
-              {images?.length === 1 ? "Bild" : "Bilder"} wird hochgeladen!
+              {images?.length === 1 ? "Bild wird " : "Bilder werden "}
+              hochgeladen!
             </div>
           </div>
-        ) : (
-          ""
+        )}
+        {isProcessing && (
+          <div className={styles.loadingOverlay}>
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="white"
+                className={"m-2 animate-spin"}
+                viewBox="0 0 512 512"
+              >
+                <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
+              </svg>
+              {images?.length === 1 ? "Bild wird " : "Bilder werden "}
+              vorbereitet!
+            </div>
+          </div>
         )}
         <input
           type="file"
-          accept="image/png, image/jpeg, video/mp4"
-          multiple
+          accept="image/png,image/jpeg,image/heic,video/mp4"
           onChange={previewImage}
         />
       </label>
@@ -195,6 +231,10 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
   );
 }
 
+function isUnsupportedFile(file: string) {
+  return isVideoFile(file) || !file.match(/\.(jpe?g|png)$/i);
+}
+
 function isVideoFile(file: string) {
   const videoExtensions: string[] = [
     ".mp4",
@@ -219,4 +259,46 @@ function isVideoFile(file: string) {
   ];
 
   return videoExtensions.some((ext) => file.endsWith(ext));
+}
+
+async function convertHeicToJPG(imageToConvert: File) {
+  const heic2any = (await import("heic2any")).default;
+
+  const convertedBlob = await heic2any({
+    blob: imageToConvert,
+    toType: "image/jpg",
+    quality: 0.9,
+  });
+
+  const { filename } = extractFilenameAndExtension(imageToConvert.name);
+  const a = await resizeImage(
+    new File([convertedBlob as Blob], `${filename}.jpg`, {
+      type: "image/jpg",
+    }),
+  );
+
+  return new File([a as Blob], `${filename}.jpg`, {
+    type: "image/jpg",
+  });
+}
+
+function extractFilenameAndExtension(filePath: string): {
+  filename: string;
+  extension: string;
+} {
+  // Extract the last part after the last slash
+  const lastSegment = filePath.split("/").pop() || "";
+
+  // Split the filename and extension
+  const parts = lastSegment.split(".");
+
+  // If there is no dot, it means there's no extension
+  if (parts.length === 1) {
+    return { filename: parts[0], extension: "" };
+  }
+
+  const extension = parts.pop() || "";
+  const filename = parts.join(".");
+
+  return { filename, extension };
 }
