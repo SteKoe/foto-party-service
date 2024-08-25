@@ -61,6 +61,7 @@
         "@types/formidable": "^3.0.0",
         "@types/luxon": "^3.3.2",
         "@types/node": "^20.8.6",
+        "@types/pica": "^9.0.4",
         "@types/qrcode": "^1.5.4",
         "@types/ramda": "^0.30.0",
         "@types/react-responsive-masonry": "^2.1.0",

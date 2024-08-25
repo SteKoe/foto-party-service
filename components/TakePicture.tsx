@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import { v4 as randomUUID } from "uuid";
-import resizeImage from "@/components/ResizeImage";
+import resizeImage from "./ResizeImage";
 
 interface TakePictureProps {
   onPictureTaken?: () => Promise<void>;
