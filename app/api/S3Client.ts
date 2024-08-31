@@ -37,13 +37,16 @@ export async function listFiles() {
   const command = new ListObjectsCommand({
     Bucket: process.env.AWS_BUCKET,
   });
+  console.log("Listing files start");
   const response = await client.send(command);
-  return (
+  console.log("Listing files end");
+  const newVar =
     response.Contents?.sort(
       (a: _Object, b: _Object) =>
         (b.LastModified?.getTime() ?? 0) - (a.LastModified?.getTime() ?? 0),
-    ).map((file) => file.Key) ?? []
-  );
+    ).map((file) => file.Key) ?? [];
+  console.log("sort files end");
+  return newVar;
 }
 
 export async function uploadImage(name: string, body: Buffer) {
