@@ -36,6 +36,7 @@ export async function deleteFile(name: string) {
 export async function listFiles() {
   const command = new ListObjectsCommand({
     Bucket: process.env.AWS_BUCKET,
+    MaxKeys: 50,
   });
   console.log("Listing files start");
   const response = await client.send(command);
