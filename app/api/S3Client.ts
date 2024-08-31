@@ -2,7 +2,7 @@ import {
   _Object,
   DeleteObjectCommand,
   GetObjectCommand,
-  ListObjectsCommand,
+  ListObjectsV2Command,
   PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
@@ -34,9 +34,8 @@ export async function deleteFile(name: string) {
 }
 
 export async function listFiles() {
-  const command = new ListObjectsCommand({
+  const command = new ListObjectsV2Command({
     Bucket: process.env.AWS_BUCKET,
-    MaxKeys: 50,
   });
   console.log("Listing files start");
   const response = await client.send(command);
