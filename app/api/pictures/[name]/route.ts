@@ -1,18 +1,12 @@
 import { NextResponse } from "next/server";
 import { deleteFile, getFile } from "@/app/api/PictureProvider";
-import sharp from "sharp";
 
 export async function GET(
   request: Request,
   { params }: { params: { name: string } },
 ) {
-  const preview = new URL(request.url).searchParams.get("preview");
   try {
-    let response = await getFile(params.name);
-
-    if (preview !== null && response) {
-      response = await sharp(response).resize(240).blur(20).toBuffer();
-    }
+    const response = await getFile(params.name);
 
     return new NextResponse(response);
   } catch (e) {
