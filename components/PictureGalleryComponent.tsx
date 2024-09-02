@@ -33,7 +33,7 @@ export function PictureGalleryComponent({
       >
         <Masonry columnsCount={columnsCount} gutter="0.6em" className={"p-2"}>
           {children}
-          {images.map((img) => {
+          {images.filter(supportedFile).map((img) => {
             return (
               <div key={img} className={classNames(styles.galleryImage)}>
                 {!isVideoFile(img) && (
@@ -92,5 +92,16 @@ function isVideoFile(file: string) {
     ".rm",
     ".rmvb",
   ];
-  return videoExtensions.some((ext) => file.endsWith(ext));
+  return videoExtensions.some((ext) => file.toLowerCase().endsWith(ext));
+}
+
+function supportedFile(file: string) {
+  const supportedExtensions: string[] = [
+    ".jpg",
+    ".jpeg",
+    ".png",
+    ".mp4",
+    ".mov",
+  ];
+  return supportedExtensions.some((ext) => file.toLowerCase().endsWith(ext));
 }
