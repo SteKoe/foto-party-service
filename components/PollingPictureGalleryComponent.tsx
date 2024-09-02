@@ -46,7 +46,9 @@ export default function PollingPictureGalleryComponent({
   );
 
   useEffect(() => {
-    setGalleryColumns(width < 640 ? 1 : width < 1024 ? 2 : 4);
+    const columnsCount = width >= 800 ? 4 : width >= 600 ? 3 : 2;
+
+    setGalleryColumns(columnsCount);
   }, [width]);
 
   async function getData() {
