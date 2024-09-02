@@ -5,9 +5,11 @@ import React, { useEffect, useState } from "react";
 import { useCurrentWidth } from "react-breakpoints-hook";
 import { TakePicture } from "@/components/TakePicture";
 import { ToastContainer } from "react-toastify";
+import { useTranslations } from "next-intl";
 
 export default function PicturesPageComponent() {
   const [images, setImages] = useState([]);
+  const t = useTranslations();
 
   const width = useCurrentWidth();
   const columnsCount =

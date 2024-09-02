@@ -7,7 +7,7 @@
 
 :root {
     --color-rgb: 255, 255, 255;
-    --background-color: linear-gradient(#090f3a, #03092c);
+    --background-color: linear-gradient(#400101, #8C0303);
     --white: 255, 255, 255;
 }
 
@@ -88,4 +88,10 @@ footer {
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     font-weight: normal;
     font-size: 0.75rem !important;
+}
+
+.tartan {
+    background-image: url('/img/tartan.jpg');
+    background-repeat: repeat-y;
+    background-size: 100%;
 }

@@ -1,0 +1,9 @@
+{
+  "take_picture": {
+    "button": "Klick mich, mach ein Foto und lade es hoch!",
+    "uploading": "{count, plural, =1 {Das Bild wird hochgeladen...} other {Deine Bilder werden hochgeladen...}}",
+    "processing": "{count, plural, =1 {Dein Bild wird verarbeitet...} other {Deine Bilder werden verarbeitet...}}",
+    "upload_failed": "Es gab Fehler beim Hochladen der Bilder! Bitte nochmal versuchen.",
+    "upload_successful": "{count, plural, =1 {Das Bild wurde hochgeladen!} other {Deine Bilder wurden hochgeladen!}}"
+  }
+}

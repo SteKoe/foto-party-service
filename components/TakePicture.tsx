@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
 import { v4 as randomUUID } from "uuid";
 import resizeImage from "./ResizeImage";
+import { useTranslations } from "next-intl";
 
 interface TakePictureProps {
   onPictureTaken?: () => Promise<void>;
@@ -16,6 +17,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
   const [images, setImages] = useState<File[] | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const t = useTranslations();
 
   async function submitForm() {
     if (Array.isArray(images) && images.length > 0 && !isUploading) {
@@ -41,20 +43,18 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         const results = await Promise.allSettled(promises);
 
         if (results.every((result) => result.status === "fulfilled")) {
-          toast("Alle Bilder hochgeladen! :)");
+          toast(t("take_picture.upload_successful", { count: images.length }));
           typeof onPictureTaken === "function"
             ? await onPictureTaken()
             : void 0;
         } else {
-          toast.error(
-            "Es gab Fehler beim Hochladen einiger Bilder! Bitte nochmal versuchen.",
-          );
+          toast.error(t("take_picture.upload_failed"));
           console.error("Upload failed.");
         }
 
         resetForm();
       } catch (e) {
-        toast.error("Fehler beim Hochladen! Bitte nochmal versuchen.");
+        toast.error(t("take_picture.upload_failed"));
         console.error("Upload failed.", e);
       } finally {
         setIsUploading(false);
@@ -107,7 +107,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
       >
         <path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z" />
       </svg>
-      Klick mich, mach ein Foto und lade es hoch!
+      {t("take_picture.button")}
     </div>
   );
 
@@ -155,8 +155,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
               >
                 <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
               </svg>
-              {images?.length === 1 ? "Bild wird " : "Bilder werden "}
-              hochgeladen!
+              {t("take_picture.uploading", { count: images?.length })}
             </div>
           </div>
         )}
@@ -171,8 +170,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
               >
                 <path d="M304 48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zm0 416a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM48 304a48 48 0 1 0 0-96 48 48 0 1 0 0 96zm464-48a48 48 0 1 0 -96 0 48 48 0 1 0 96 0zM142.9 437A48 48 0 1 0 75 369.1 48 48 0 1 0 142.9 437zm0-294.2A48 48 0 1 0 75 75a48 48 0 1 0 67.9 67.9zM369.1 437A48 48 0 1 0 437 369.1 48 48 0 1 0 369.1 437z" />
               </svg>
-              {images?.length === 1 ? "Bild wird " : "Bilder werden "}
-              vorbereitet!
+              {t("take_picture.processing", { count: images?.length })}
             </div>
           </div>
         )}
