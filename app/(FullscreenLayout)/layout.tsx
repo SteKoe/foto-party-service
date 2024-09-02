@@ -1,28 +1,28 @@
-import '../globals.css';
-import '../fonts/Marcellus/index.css';
-import { Metadata, Viewport } from 'next';
-import React from 'react';
+import "../globals.css";
+import "../fonts/Marcellus/index.css";
+import { Metadata, Viewport } from "next";
+import React from "react";
 
 export const metadata: Metadata = {
-    title: 'Kim & Stephan',
-    description: 'Wir heiraten dann wohl!',
+  title: "Katharina & Kevin",
+  description: "",
 };
 
 export const viewport: Viewport = {
-    width: 'device-width',
-    initialScale: 1.0,
+  width: "device-width",
+  initialScale: 1.0,
 };
 
 export default function RootLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <html lang="de" className={'h-full'}>
-            <body className={'flex min-h-full flex-col justify-between'}>
-                {children}
-            </body>
-        </html>
-    );
+  return (
+    <html lang="de" className={"h-full"}>
+      <body className={"flex min-h-full flex-col justify-between"}>
+        {children}
+      </body>
+    </html>
+  );
 }
