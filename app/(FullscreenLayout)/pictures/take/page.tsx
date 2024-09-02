@@ -1,10 +1,10 @@
-import { Metadata } from 'next';
-import PicturesPageComponent from '@/components/PicturesPageComponent';
+import { Metadata } from "next";
+import PicturesPageComponent from "@/components/PicturesPageComponent";
 
 export const metadata: Metadata = {
-    title: 'Kim & Stephan | Mach ein Foto!',
+  title: "Katharina & Kevin | Mache ein Foto und teiles es!",
 };
 
 export default function Page() {
-    return <PicturesPageComponent />;
+  return <PicturesPageComponent />;
 }

@@ -3,7 +3,6 @@ import {
   DeleteObjectCommand,
   GetObjectCommand,
   ListObjectsV2Command,
-  PutObjectCommand,
   S3Client,
 } from "@aws-sdk/client-s3";
 
@@ -46,18 +45,4 @@ export async function listFiles() {
         (b.LastModified?.getTime() ?? 0) - (a.LastModified?.getTime() ?? 0),
     ).map((file) => file.Key) ?? []
   );
-}
-
-export async function uploadImage(name: string, body: Buffer) {
-  console.log(process.env.AWS_BUCKET);
-  console.log(process.env.AWS_SECRET_ACCESS_KEY);
-  console.log(process.env.AWS__ACCESS_KEY);
-  console.log(name);
-  const command = new PutObjectCommand({
-    Bucket: process.env.AWS_BUCKET,
-    Key: name,
-    Body: body,
-  });
-
-  //return client.send(command);
 }
