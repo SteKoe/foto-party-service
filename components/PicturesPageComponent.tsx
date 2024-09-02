@@ -14,7 +14,7 @@ export default function PicturesPageComponent() {
     images.length === 0 ? 1 : width >= 800 ? 4 : width >= 600 ? 3 : 2;
 
   async function getData() {
-    const res = await fetch(`/api/pictures`);
+    const res = await fetch(`/api/pictures`, { cache: "no-store" });
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }
