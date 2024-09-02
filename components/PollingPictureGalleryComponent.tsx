@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { PropsWithChildren, useEffect, useState } from "react";
 import { PictureGalleryComponent } from "@/components/PictureGalleryComponent";
 import { useSearchParams } from "next/navigation";
 import prettyMilliseconds from "pretty-ms";
@@ -32,7 +32,9 @@ function Countdown(props: { time: number }) {
   );
 }
 
-export default function PollingPictureGalleryComponent() {
+export default function PollingPictureGalleryComponent({
+  children,
+}: PropsWithChildren) {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
@@ -111,7 +113,9 @@ export default function PollingPictureGalleryComponent() {
           </div>
         )}
       </div>
-      <PictureGalleryComponent images={images} columnsCount={galleryColumns} />
+      <PictureGalleryComponent images={images} columnsCount={galleryColumns}>
+        {children}
+      </PictureGalleryComponent>
     </>
   );
 }

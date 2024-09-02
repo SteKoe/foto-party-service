@@ -1,10 +1,10 @@
 "use client";
 
-import { PictureGalleryComponent } from "@/components/PictureGalleryComponent";
 import React, { useEffect, useState } from "react";
 import { useCurrentWidth } from "react-breakpoints-hook";
 import { TakePicture } from "@/components/TakePicture";
 import { ToastContainer } from "react-toastify";
+import PollingPictureGalleryComponent from "@/components/PollingPictureGalleryComponent";
 
 export default function PicturesPageComponent() {
   const [images, setImages] = useState([]);
@@ -31,9 +31,9 @@ export default function PicturesPageComponent() {
     <>
       <ToastContainer position={"top-center"} hideProgressBar={true} />
 
-      <PictureGalleryComponent images={images} columnsCount={columnsCount}>
+      <PollingPictureGalleryComponent>
         <TakePicture onPictureTaken={getData} />
-      </PictureGalleryComponent>
+      </PollingPictureGalleryComponent>
     </>
   );
 }
