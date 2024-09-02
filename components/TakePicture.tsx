@@ -88,7 +88,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         );
 
         if (validFiles.length !== filesToProcess.length) {
-          toast("Einige Bilder sind zu groß! Maximal 20 MB. Erlaubt.");
+          toast(t("take_picture.file_too_large"));
         }
 
         setImages(validFiles);
@@ -133,13 +133,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
                 );
               })}
             {images.filter((image) => isUnsupportedFile(image.name)).length >
-              0 && (
-              <div>
-                {images.filter((image) => isUnsupportedFile(image.name)).length}
-                nicht unterstütze Formate! Nur .jpg, .jpeg, .png und .mp4 können
-                auch angezeigt werden. Hochladen kannst du aber alles! 🚀
-              </div>
-            )}
+              0 && <div>{t("take_picture.unsupported_files")}</div>}
           </div>
         ) : (
           labelText

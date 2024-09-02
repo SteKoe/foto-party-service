@@ -1,9 +1,11 @@
 {
   "take_picture": {
+    "file_too_large": "Some pictures are too large! Max 20 MB allowed.",
     "button": "Tap me, take a picture and upload it!",
     "uploading": "{count, plural, =1 {Your picture is being uploaded...} other {Pictures are being uploaded...}}",
     "processing": "{count, plural, =1 {Your picture is being processed...} other {Pictures are being processed...}}",
     "upload_failed": "Oh snap! There was an error uploading your pictures. Please try again.",
-    "upload_successful": "{count, plural, =1 {You picture has been uploaded!} other {Pictures have been uploaded!}}"
+    "upload_successful": "{count, plural, =1 {You picture has been uploaded!} other {Pictures have been uploaded!}}",
+    "unsupported_files": "Some formats are not supported! Only .jpg, .jpeg, .png and .mp4 can be displayed. You can upload anything though!"
   }
 }

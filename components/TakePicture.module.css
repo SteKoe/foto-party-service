@@ -5,7 +5,7 @@
 }
 
 .cameraButtonLabel {
-  @apply flex flex-col;
+  @apply flex flex-col px-20;
 }
 
 .cameraButtonLabel svg {
