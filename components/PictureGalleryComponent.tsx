@@ -47,7 +47,7 @@ export function PictureGalleryComponent({
                     unoptimized={true}
                     height={250}
                     loading="lazy"
-                    className={"rounded light-gallery"}
+                    className={"rounded-xl light-gallery"}
                   />
                 )}
 
@@ -57,7 +57,7 @@ export function PictureGalleryComponent({
                     autoPlay={true}
                     controls={false}
                     loop={true}
-                    className={"rounded"}
+                    className={"rounded-xl"}
                     src={"/api/pictures/" + img}
                   />
                 )}
