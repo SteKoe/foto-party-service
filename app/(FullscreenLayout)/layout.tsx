@@ -34,7 +34,7 @@ export default async function RootLayout({
           <img
             src={"/img/macpherson.png"}
             alt={"Clan MacPherson"}
-            className={"p-2 self-end"}
+            className={"p-2 self-end clan-crest"}
           />
         </div>
         <div className={"ml-10 flex min-h-full flex-col justify-between"}>
