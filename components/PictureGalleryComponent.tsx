@@ -44,6 +44,7 @@ export function PictureGalleryComponent({
                     blurDataURL={"/api/pictures/" + img + "?preview"}
                     placeholder="blur"
                     width={500}
+                    unoptimized={true}
                     height={250}
                     loading="lazy"
                     className={"rounded light-gallery"}
