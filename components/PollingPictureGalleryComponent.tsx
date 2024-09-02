@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { PictureGalleryComponent } from "@/components/PictureGalleryComponent";
-import ToggleFullscreenButton from "@/components/ToggleFullscreen";
 import { useSearchParams } from "next/navigation";
 import prettyMilliseconds from "pretty-ms";
 import useWindowDimensions from "@/app/hooks/useWindowDimensions";
@@ -73,6 +72,11 @@ export default function PollingPictureGalleryComponent() {
       const data = await getData();
       setImages(data);
       setIsLoading(false);
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
     }, 1000 * POLLING_INTERVAL_IN_SECONDS);
 
     return () => {
@@ -100,13 +104,12 @@ export default function PollingPictureGalleryComponent() {
         ) : (
           <div
             className={
-              "flex h-7 items-center justify-center rounded bg-white bg-opacity-50 text-center text-xs md:h-10 md:w-10 md:text-base"
+              "flex h-7 px-2 items-center justify-center rounded bg-white bg-opacity-50 text-center text-xs md:h-10 md:w-10 md:text-base"
             }
           >
             <Countdown time={POLLING_INTERVAL_IN_SECONDS} />
           </div>
         )}
-        <ToggleFullscreenButton />
       </div>
       <PictureGalleryComponent images={images} columnsCount={galleryColumns} />
     </>

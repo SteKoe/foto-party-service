@@ -8,18 +8,7 @@ export function readToken(request: NextRequest) {
   return request.nextUrl.searchParams.get(TOKEN_PARAM_NAME) || cookie?.value;
 }
 
-const authorizedPaths = [
-  "/invitation",
-  "/story",
-  "/gifts",
-  "/location",
-  "/pictures",
-  "/pictures/take",
-  "/pictures/gallery",
-  "/api/pictures",
-];
-
-const forbiddenPathsOnServer = ["/qrcodes"];
+const authorizedPaths: Array<string> = [];
 
 export async function checkIsAuthorized(
   pathname: string,
@@ -47,10 +36,6 @@ export async function checkIsAuthorized(
 
 export async function middleware(request: NextRequest) {
   const pathname = new URL(request.url).pathname;
-
-  if (process.env.VERCEL && forbiddenPathsOnServer.includes(pathname)) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
 
   const authToken = readToken(request);
 

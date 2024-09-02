@@ -37,23 +37,27 @@ export async function listFiles() {
   const command = new ListObjectsV2Command({
     Bucket: process.env.AWS_BUCKET,
   });
-  console.log("Listing files start");
+
   const response = await client.send(command);
-  console.log("Listing files end");
-  const newVar =
+
+  return (
     response.Contents?.sort(
       (a: _Object, b: _Object) =>
         (b.LastModified?.getTime() ?? 0) - (a.LastModified?.getTime() ?? 0),
-    ).map((file) => file.Key) ?? [];
-  console.log("sort files end");
-  return newVar;
+    ).map((file) => file.Key) ?? []
+  );
 }
 
 export async function uploadImage(name: string, body: Buffer) {
+  console.log(process.env.AWS_BUCKET);
+  console.log(process.env.AWS_SECRET_ACCESS_KEY);
+  console.log(process.env.AWS__ACCESS_KEY);
+  console.log(name);
   const command = new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET,
     Key: name,
     Body: body,
   });
-  return client.send(command);
+
+  //return client.send(command);
 }
