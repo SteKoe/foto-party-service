@@ -5,6 +5,7 @@ import { PictureGalleryComponent } from "@/components/PictureGalleryComponent";
 import { useSearchParams } from "next/navigation";
 import prettyMilliseconds from "pretty-ms";
 import useWindowDimensions from "@/app/hooks/useWindowDimensions";
+import { useMitt } from "@/components/provider/mitt";
 
 const POLLING_INTERVAL_IN_SECONDS = 60;
 
@@ -38,6 +39,7 @@ export default function PollingPictureGalleryComponent({
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const searchParams = useSearchParams();
+  const { emitter } = useMitt();
 
   const { width } = useWindowDimensions();
 
@@ -50,6 +52,17 @@ export default function PollingPictureGalleryComponent({
 
     setGalleryColumns(columnsCount);
   }, [width]);
+
+  useEffect(() => {
+    emitter.on("picture.uploaded", async () => {
+      setIsLoading(true);
+      const data = await getData();
+      setImages(data);
+      setIsLoading(false);
+    });
+
+    return () => emitter.off("picture.uploaded");
+  });
 
   async function getData() {
     const res = await fetch(`/api/pictures`);

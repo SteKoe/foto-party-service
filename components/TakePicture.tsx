@@ -8,6 +8,7 @@ import classNames from "classnames";
 import { v4 as randomUUID } from "uuid";
 import resizeImage from "./ResizeImage";
 import { useTranslations } from "next-intl";
+import { useMitt } from "@/components/provider/mitt";
 
 interface TakePictureProps {
   onPictureTaken?: () => Promise<void>;
@@ -18,13 +19,14 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const t = useTranslations();
+  const { emitter } = useMitt();
 
   async function submitForm() {
     if (Array.isArray(images) && images.length > 0 && !isUploading) {
       setIsUploading(true);
 
       try {
-        const promises = [];
+        const promises: Array<Promise<Response>> = [];
         for (const image of images) {
           promises.push(
             fetch(
@@ -44,6 +46,8 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
 
         if (results.every((result) => result.status === "fulfilled")) {
           toast(t("take_picture.upload_successful", { count: images.length }));
+          emitter.emit("picture.uploaded");
+
           typeof onPictureTaken === "function"
             ? await onPictureTaken()
             : void 0;

@@ -4,6 +4,7 @@ import { Metadata, Viewport } from "next";
 import React from "react";
 import { getLocale, getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { MittProvider } from "@/components/provider/mitt";
 
 export const metadata: Metadata = {
   title: "Katharina & Kevin",
@@ -38,9 +39,11 @@ export default async function RootLayout({
           />
         </div>
         <div className={"ml-10 flex min-h-full flex-col justify-between"}>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
+          <MittProvider>
+            <NextIntlClientProvider messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+          </MittProvider>
         </div>
       </body>
     </html>
