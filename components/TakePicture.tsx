@@ -88,7 +88,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         console.log(filesToProcess);
 
         const validFiles = [...filesToProcess].filter(
-          (file) => file.size / 1e6 <= 20,
+          (file) => file.size / 1e6 < 10,
         );
 
         if (validFiles.length !== filesToProcess.length) {

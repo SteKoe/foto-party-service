@@ -1,6 +1,6 @@
 {
   "take_picture": {
-    "file_too_large": "Einige Bilder sind zu groß! Maximal 20 MB. Erlaubt.",
+    "file_too_large": "Einige Bilder sind zu groß! Maximal 10 MB. Erlaubt.",
     "button": "Klick mich, mach ein Foto und lade es hoch!",
     "uploading": "{count, plural, =1 {Das Bild wird hochgeladen...} other {Deine Bilder werden hochgeladen...}}",
     "processing": "{count, plural, =1 {Dein Bild wird verarbeitet...} other {Deine Bilder werden verarbeitet...}}",
