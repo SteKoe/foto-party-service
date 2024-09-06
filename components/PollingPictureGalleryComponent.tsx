@@ -54,14 +54,22 @@ export default function PollingPictureGalleryComponent({
   }, [width]);
 
   useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
     emitter.on("picture.uploaded", async () => {
       setIsLoading(true);
-      const data = await getData();
-      setImages(data);
-      setIsLoading(false);
+
+      timeout = setTimeout(async () => {
+        const data = await getData();
+        setImages(data);
+        setIsLoading(false);
+      }, 1500);
     });
 
-    return () => emitter.off("picture.uploaded");
+    return () => {
+      emitter.off("picture.uploaded");
+      clearTimeout(timeout);
+    };
   });
 
   async function getData() {

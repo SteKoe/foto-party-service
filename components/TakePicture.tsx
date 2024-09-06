@@ -62,7 +62,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         console.error("Upload failed.", e);
       } finally {
         setIsUploading(false);
-        setImages(null);
+        resetForm();
       }
     }
   }
