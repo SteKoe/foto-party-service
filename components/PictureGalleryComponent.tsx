@@ -41,8 +41,11 @@ export function PictureGalleryComponent({
                     data-src={"/api/pictures/" + img}
                     src={"/api/pictures/" + img}
                     alt={img}
-                    width={400}
-                    height={400}
+                    blurDataURL={"/api/pictures/" + img + "?preview"}
+                    placeholder="blur"
+                    width={500}
+                    unoptimized={true}
+                    height={250}
                     loading="lazy"
                     className={"rounded-xl light-gallery"}
                   />
