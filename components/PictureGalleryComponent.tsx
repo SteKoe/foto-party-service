@@ -38,11 +38,13 @@ export function PictureGalleryComponent({
               <div key={img} className={classNames(styles.galleryImage)}>
                 {!isVideoFile(img) && (
                   <Image
-                    data-src={"/api/pictures/" + img}
-                    src={"/api/pictures/" + img}
+                    data-src={
+                      "https://fuchs-und-baer.kloedwig.de/image.php?f=" + img
+                    }
+                    src={
+                      "https://fuchs-und-baer.kloedwig.de/image.php?f=" + img
+                    }
                     alt={img}
-                    blurDataURL={"/api/pictures/" + img + "?preview"}
-                    placeholder="blur"
                     width={500}
                     unoptimized={true}
                     height={250}
