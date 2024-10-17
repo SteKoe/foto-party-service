@@ -39,10 +39,10 @@ export function PictureGalleryComponent({
                 {!isVideoFile(img) && (
                   <Image
                     data-src={
-                      "https://fuchs-und-baer.kloedwig.de/image.php?f=" + img
+                      "https://classic-tanzparty.stekoe.de/image.php?f=" + img
                     }
                     src={
-                      "https://fuchs-und-baer.kloedwig.de/image.php?f=" + img
+                      "https://classic-tanzparty.stekoe.de/image.php?f=" + img
                     }
                     alt={img}
                     width={500}
