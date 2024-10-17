@@ -27,18 +27,7 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={"h-full"}>
       <body className={"flex flex-col min-h-full"}>
-        <div
-          className={
-            "fixed flex h-full bg-red-200 w-10 tartan border-r-1 border-[#025939]"
-          }
-        >
-          <img
-            src={"/img/macpherson.png"}
-            alt={"Clan MacPherson"}
-            className={"p-2 self-end clan-crest"}
-          />
-        </div>
-        <div className={"ml-10 flex min-h-full flex-col justify-between"}>
+        <div className={"flex h-full flex-col justify-between"}>
           <MittProvider>
             <NextIntlClientProvider messages={messages}>
               {children}
