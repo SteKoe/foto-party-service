@@ -30,7 +30,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         for (const image of images) {
           promises.push(
             fetch(
-              `https://fne8flz07j.execute-api.eu-central-1.amazonaws.com/prod/fuchs-baer-hochzeit/${randomUUID()}.${image.name.split(".").pop()}`,
+              `https://wk3133cmub.execute-api.eu-central-1.amazonaws.com/prod/geburtstag-lena-mutter/${randomUUID()}.${image.name.split(".").pop()}`,
               {
                 method: "PUT",
                 headers: {
