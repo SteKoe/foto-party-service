@@ -7,7 +7,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { MittProvider } from "@/components/provider/mitt";
 
 export const metadata: Metadata = {
-  title: "Katharina & Kevin",
+  title: process.env.APP_NAME || "Foto Gallery App",
   description: "",
 };
 

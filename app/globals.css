@@ -6,9 +6,9 @@
 @tailwind utilities;
 
 :root {
-    --color-rgb: 255, 255, 255;
-    --background-color: linear-gradient(#dfba8f, #d67a11);
+    --color-rgb: 0, 0, 0;
     --white: 255, 255, 255;
+    --background-color: linear-gradient(#fff, #fff);
 }
 
 body {

@@ -1,5 +1,5 @@
 .galleryImage {
-  @apply relative;
+  @apply relative w-full h-full;
 }
 
 .overlay {

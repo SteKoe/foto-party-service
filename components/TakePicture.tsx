@@ -1,14 +1,13 @@
 "use client";
 
 import styles from "./TakePicture.module.css";
-import React, { ChangeEvent, useState } from "react";
-import { toast } from "react-toastify";
+import React, {ChangeEvent, useState} from "react";
+import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classNames from "classnames";
-import { v4 as randomUUID } from "uuid";
 import resizeImage from "./ResizeImage";
-import { useTranslations } from "next-intl";
-import { useMitt } from "@/components/provider/mitt";
+import {useTranslations} from "next-intl";
+import {useMitt} from "@/components/provider/mitt";
 
 interface TakePictureProps {
   onPictureTaken?: () => Promise<void>;
@@ -30,7 +29,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         for (const image of images) {
           promises.push(
             fetch(
-              `https://wk3133cmub.execute-api.eu-central-1.amazonaws.com/prod/geburtstag-lena-mutter/${randomUUID()}.${image.name.split(".").pop()}`,
+                `/api/media`,
               {
                 method: "PUT",
                 headers: {
@@ -85,8 +84,6 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
           filesToProcess.push(file);
         }
 
-        console.log(filesToProcess);
-
         const validFiles = [...filesToProcess].filter(
           (file) => file.size / 1e6 < 10,
         );
@@ -108,8 +105,9 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         xmlns="http://www.w3.org/2000/svg"
         height="1em"
         viewBox="0 0 512 512"
+        fill="currentColor"
       >
-        <path d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z" />
+        <path fill="currentColor" d="M149.1 64.8L138.7 96H64C28.7 96 0 124.7 0 160V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H373.3L362.9 64.8C356.4 45.2 338.1 32 317.4 32H194.6c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z" />
       </svg>
       {t("take_picture.button")}
     </div>

@@ -73,7 +73,7 @@ export default function PollingPictureGalleryComponent({
   });
 
   async function getData() {
-    const res = await fetch(`/api/pictures`);
+    const res = await fetch(`/api/media`);
     if (!res.ok) {
       throw new Error("Failed to fetch data");
     }

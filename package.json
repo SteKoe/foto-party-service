@@ -34,6 +34,7 @@
         "heic-convert": "^2.1.0",
         "heic2any": "^0.0.4",
         "i18next": "^23.14.0",
+        "jimp": "^1.6.0",
         "lightgallery": "^2.7.2",
         "luxon": "^3.4.3",
         "mitt": "^3.0.1",

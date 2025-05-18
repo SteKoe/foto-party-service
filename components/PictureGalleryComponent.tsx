@@ -38,18 +38,14 @@ export function PictureGalleryComponent({
               <div key={img} className={classNames(styles.galleryImage)}>
                 {!isVideoFile(img) && (
                   <Image
-                    data-src={
-                      "https://classic-tanzparty.stekoe.de/image.php?f=" + img
-                    }
-                    src={
-                      "https://classic-tanzparty.stekoe.de/image.php?f=" + img
-                    }
+                    data-src={`/api/media/${img}`}
+                    src={`/api/media/thumb/${img}`}
                     alt={img}
                     width={500}
                     unoptimized={true}
                     height={250}
                     loading="lazy"
-                    className={"rounded-xl light-gallery"}
+                    className={"rounded-xl light-gallery w-full h-full object-cover"}
                   />
                 )}
 
@@ -60,7 +56,7 @@ export function PictureGalleryComponent({
                     controls={false}
                     loop={true}
                     className={"rounded-xl"}
-                    src={"/api/pictures/" + img}
+                    src={"/api/media/" + img}
                   />
                 )}
               </div>
