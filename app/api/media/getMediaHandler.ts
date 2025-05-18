@@ -15,7 +15,7 @@ export async function getMediaHandler(fileName: string, size: number) {
                 w: size,
                 h: size,
             });
-            responseBody = await image.getBuffer(contentType);
+            responseBody = await image.getBuffer(contentType as any);
         }
 
         return new NextResponse(responseBody, {
