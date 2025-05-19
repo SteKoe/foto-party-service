@@ -3,7 +3,15 @@ import {listFiles, uploadFile} from "@/app/api/PictureProvider";
 import { extension } from "mime-types";
 import { v4 as uuidv4 } from "uuid";
 
-export const revalidate = 1;
+const corsHeaders = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, PUT, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type",
+};
+
+export async function OPTIONS() {
+  return NextResponse.json(null, { headers: corsHeaders });
+}
 
 export async function GET() {
   try {
