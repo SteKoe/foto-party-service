@@ -38,3 +38,4 @@ next-env.d.ts
 
 /app/api/decrypt
 /app/api/encrypt
+/.fotos/
