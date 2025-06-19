@@ -118,7 +118,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
       <label className={styles.cameraButton} id="preview">
         {images ? (
           <div
-            className={classNames("grid", {
+            className={classNames("grid h-full", {
               "grid-cols-1": images.length <= 1,
               "grid-cols-2": images.length > 1,
             })}
@@ -130,6 +130,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
                   <img
                     key={image.name}
                     src={URL.createObjectURL(image)}
+                    className="h-full w-full object-cover object-center"
                     alt="Preview"
                   />
                 );
@@ -145,7 +146,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="white"
+                fill="currentColor"
                 className={"m-2 animate-spin"}
                 viewBox="0 0 512 512"
               >
@@ -160,7 +161,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="white"
+                fill="currentColor"
                 className={"m-2 animate-spin"}
                 viewBox="0 0 512 512"
               >
@@ -173,9 +174,11 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
         <input
           type="file"
           accept="image/png,image/jpeg,image/heic,video/mp4"
+          multiple
           onChange={previewImage}
         />
       </label>
+      
       {images ? (
         <div className={styles.controls}>
           <button
@@ -187,7 +190,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
             {isUploading ? (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="white"
+                fill="currentColor"
                 className={"m-2 animate-spin"}
                 viewBox="0 0 512 512"
               >
@@ -196,7 +199,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
             ) : (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                fill="white"
+                fill="currentColor"
                 viewBox="0 0 448 512"
               >
                 <path d="M246.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 109.3V320c0 17.7 14.3 32 32 32s32-14.3 32-32V109.3l73.4 73.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-128-128zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 53 43 96 96 96H352c53 0 96-43 96-96V352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V352z" />
@@ -211,7 +214,7 @@ export function TakePicture({ onPictureTaken }: TakePictureProps) {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              fill="white"
+              fill="currentColor"
               viewBox="0 0 384 512"
             >
               <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />

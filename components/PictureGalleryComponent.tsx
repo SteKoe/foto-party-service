@@ -55,7 +55,7 @@ export function PictureGalleryComponent({
                     autoPlay={true}
                     controls={false}
                     loop={true}
-                    className={"rounded-xl"}
+                    className={"rounded-xl w-full h-full object-cover"}
                     src={"/api/media/" + img}
                   />
                 )}

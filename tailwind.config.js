@@ -15,6 +15,15 @@ module.exports = {
                 'gradient-conic':
                     'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
             },
+            animation: {
+                indeterminate: "indeterminate 1.5s infinite linear",
+            },
+            keyframes: {
+                indeterminate: {
+                    "0%": { left: "-50%" },
+                    "100%": { left: "100%" },
+                },
+            },
         },
     },
     darkMode: 'class',

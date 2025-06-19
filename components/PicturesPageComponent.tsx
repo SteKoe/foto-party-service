@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import { TakePicture } from "@/components/TakePicture";
-import { ToastContainer } from "react-toastify";
+import {ToastContainer} from "react-toastify";
 import PollingPictureGalleryComponent from "@/components/PollingPictureGalleryComponent";
+import {DropZone} from "@/components/DropZone";
 
 export default function PicturesPageComponent() {
   return (
@@ -11,7 +11,7 @@ export default function PicturesPageComponent() {
       <ToastContainer position={"top-center"} hideProgressBar={true} />
 
       <PollingPictureGalleryComponent>
-        <TakePicture />
+          <DropZone/>
       </PollingPictureGalleryComponent>
     </>
   );

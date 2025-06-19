@@ -1,11 +1,12 @@
 {
   "take_picture": {
-    "file_too_large": "Einige Bilder sind zu groß! Maximal 10 MB. Erlaubt.",
+    "file_too_large": "Einige Medien sind zu groß! Maximal 10 MB. Erlaubt.",
     "button": "Klick mich, mach ein Foto und lade es hoch!",
-    "uploading": "{count, plural, =1 {Das Bild wird hochgeladen...} other {Deine Bilder werden hochgeladen...}}",
-    "processing": "{count, plural, =1 {Dein Bild wird verarbeitet...} other {Deine Bilder werden verarbeitet...}}",
-    "upload_failed": "Es gab Fehler beim Hochladen der Bilder! Bitte nochmal versuchen.",
-    "upload_successful": "{count, plural, =1 {Das Bild wurde hochgeladen!} other {Deine Bilder wurden hochgeladen!}}",
+    "button_info": "Hängen Sie beliebig viele Dateien an, jede Datei darf 10 MB nicht überschreiten!",
+    "uploading": "{count, plural, =1 {Das Medium wird hochgeladen...} other {Deine Medien werden hochgeladen...}}",
+    "processing": "{count, plural, =1 {Dein Medium wird verarbeitet...} other {Deine Medien werden verarbeitet...}}",
+    "upload_failed": "Es gab Fehler beim Hochladen der Medien! Bitte nochmal versuchen.",
+    "upload_successful": "{count, plural, =1 {Das Medium wurde hochgeladen!} other {Deine Medien wurden hochgeladen!}}",
     "unsupported_files": "Einige Formate werden nicht unterstützt! Nur .jpg, .jpeg, .png und .mp4 können auch angezeigt werden. Hochladen kannst du aber alles!"
   }
 }

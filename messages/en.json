@@ -2,6 +2,7 @@
   "take_picture": {
     "file_too_large": "Some pictures are too large! Max 10 MB allowed.",
     "button": "Tap me, take a picture and upload it!",
+    "button_info": "Attach as many files as you like, each file should not exceed 5mb",
     "uploading": "{count, plural, =1 {Your picture is being uploaded...} other {Pictures are being uploaded...}}",
     "processing": "{count, plural, =1 {Your picture is being processed...} other {Pictures are being processed...}}",
     "upload_failed": "Oh snap! There was an error uploading your pictures. Please try again.",

@@ -49,6 +49,7 @@ export async function uploadFile(name: string, contentType: string, file: Buffer
 export async function listFiles() {
   const command = new ListObjectsV2Command({
     Bucket: process.env.AWS__BUCKET_NAME,
+    Prefix: "thumbnails/",
   });
 
   const response = await client.send(command);
@@ -57,6 +58,6 @@ export async function listFiles() {
     response.Contents?.sort(
       (a: _Object, b: _Object) =>
         (b.LastModified?.getTime() ?? 0) - (a.LastModified?.getTime() ?? 0),
-    ).map((file) => file.Key) ?? []
+    ).map((file) => file.Key?.replace("thumbnails/", "")) ?? []
   );
 }
