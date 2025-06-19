@@ -1,6 +1,7 @@
 .cameraButton {
-  @apply relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-xl border-2 border-dashed bg-cover bg-center bg-no-repeat text-sm md:text-base;
+  @apply relative flex aspect-[3/4] items-center justify-center overflow-hidden rounded-xl border bg-cover bg-center bg-no-repeat text-sm md:text-base;
   @apply text-center;
+  
   border-color: rgb(var(--color-rgb));
   color: rgb(var(--color-rgb));
 }
@@ -27,14 +28,14 @@
 }
 
 .controls {
-  @apply mx-5 flex gap-2 py-5;
+  @apply flex gap-2 py-2;
 }
 
 .controls .btn {
   @apply flex flex-1 justify-center rounded-xl bg-white bg-opacity-50 p-4 disabled:bg-opacity-10 md:p-8;
+  border: 1px solid rgb(var(--color-rgb));
 }
 
 .controls .btn svg {
-  fill: #fff;
   @apply h-5 md:h-10;
 }

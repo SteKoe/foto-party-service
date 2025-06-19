@@ -1,7 +1,8 @@
-import { NextResponse } from "next/server";
+import {NextResponse} from "next/server";
 import {listFiles, uploadFile} from "@/app/api/PictureProvider";
-import { extension } from "mime-types";
-import { v4 as uuidv4 } from "uuid";
+import {extension} from "mime-types";
+import {v4 as uuidv4} from "uuid";
+import {Jimp} from "jimp";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -48,9 +49,22 @@ export async function PUT(request: Request) {
     
     // Upload the file
     await uploadFile(
-        fileName,
+        `originals/${fileName}`,
         contentType,
         Buffer.from(fileBuffer)
+    );
+
+    const image = await Jimp.read(fileBuffer);
+    const size = Number.isInteger(process.env.IMAGE_SCALED_MAX_SIZE) ? Number(process.env.IMAGE_SCALED_MAX_SIZE) : 512;
+    image.scaleToFit({
+      w: size,
+      h: size,
+    });
+    // Upload the file
+    await uploadFile(
+        `thumbnails/${fileName}`,
+        contentType,
+        await image.getBuffer(contentType as any)
     );
 
     return NextResponse.json({ success: true, fileName });
