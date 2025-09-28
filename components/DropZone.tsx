@@ -110,7 +110,7 @@ export function DropZone(props: Partial<DropzoneProps>) {
 
             {images.length > 0 && (
                 <Button fullWidth mt="lg" onClick={onUploadHandler} loading={isUploading}>
-                    {t('take_picture.upload')}
+                    {t('take_picture.upload', {count: images.length})}
                 </Button>
             )}
         </div>
