@@ -19,7 +19,7 @@ export async function GET() {
     const contents = await listFiles();
     return NextResponse.json(contents);
   } catch (err) {
-    console.error(err);
+    console.error("Error listing files", err);
     return NextResponse.json({ error: 404 }, { status: 404 });
   }
 }

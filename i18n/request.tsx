@@ -7,7 +7,8 @@ const ALLOWED_LANGUAGES = ["de", "en"];
 export default getRequestConfig(async () => {
   let locale = "de";
 
-  const lang = headers().get("accept-language");
+    const header = await headers();
+    const lang = header.get("accept-language");
   if (lang) {
     const languages = parser.parse(lang);
     console.log(languages);
