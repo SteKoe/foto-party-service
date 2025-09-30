@@ -34,7 +34,7 @@
         "classnames": "^2.5.1",
         "cryptr": "^6.4.0",
         "framer-motion": "^12.23.22",
-        "googleapis": "^160.0.0",
+        "googleapis": "^161.0.0",
         "heic-convert": "^2.1.0",
         "heic2any": "^0.0.4",
         "i18next": "^25.5.2",
